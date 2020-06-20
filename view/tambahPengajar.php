@@ -42,7 +42,7 @@
         <PRE>
         Id Pengajar   : <input type="text" name="id_pengajar" size="25pt">
          
-        Jenis Kelamin : <input type="radio" name="status" value="freelance"> Freelance 
+        Status        : <input type="radio" name="status" value="freelance"> Freelance 
                         <input type="radio" name="status" value="tetap"> Tetap
      
         Email         : <input type="text" name="email" size="25pt">
