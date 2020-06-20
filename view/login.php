@@ -22,6 +22,8 @@
           }
         ?>
           <h2> LOGIN </h2>
+          <h3> Selamat Datang di Website ReboTeach </h3>
+          <img
           <hr size="2" color="#000">  
           <table align="center" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF"> 
             <tr align="left"> 
@@ -40,12 +42,7 @@
                 <input type="reset" name="reset" value="Reset">
               <hr size="2" color="#000">
               </td> 
-            </tr>
-            <tr colspan="3" align="center">
-              <td colspan="3">
-                Lupa Password...? <a href="lupaPassword.php">Klik Disini...</a>
-              </td> 
-            </tr>  
+            </tr> 
           </table> 
       </form>
   </div> 

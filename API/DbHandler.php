@@ -93,11 +93,9 @@ class DbHandler
         }
     }
 
-    public function tambahpengajar($id, $nama_l, $nama_p, $status, $jk, $tempat_lahir, $tgl_lahir, $kontak, $alamat, $email, 
-                                    $tahun_join, $password, $foto, $level, $foto_temp)
+    public function tambahpengajar($username, $password, $id_user)
     {
-      if ( $id==NULL || $nama_l==NULL || $nama_p==NULL || $status==NULL || $jk==NULL || $tempat_lahir==NULL || $tgl_lahir==NULL || $kontak==NULL || $alamat==NULL || 
-          $email==NULL || $tahun_join==NULL || $password=NULL || $foto==NULL || $level==NULL) {
+      if ( $username==NULL || $password==NULL || $id_user==NULL ) {
              header('Content-Type: application/json');
             echo '{"message" : "Semua Field Harus Terisi"}';
         }else{   
@@ -107,11 +105,12 @@ class DbHandler
             $token=substr($yy, $xx, $panjang);
             $aktivasi = "T";
 
-            $sql = "INSERT INTO data_pengajar 
-    				(pengajar_id, pengajar_nama_l, pengajar_nama_p, pengajar_status, pengajar_jk, pengajar_tempat_lahir, pengajar_tgl_lahir, pengajar_kontak, pengajar_alamat, pengajar_email, pengajar_password, pengajar_foto, pengajar_level, pengajar_aktivasi,pengajar_token) 
-    				VALUES ('".$id."','".$nama_l."','".$nama_p."','".$status."', '".$jk."', '".$keahlian."', '".$agama."', '".$kontak."', '".$email."', '".md5($password)."', '".$foto."', '".$level."', '".$aktivasi."', '".md5($token)."')";
+          
+            $sql = "UPDATE user 
+    				SET username='$username', password=md5('$password')
+                    WHERE id_user='$id_user'";
+            // echo "$sql";
             if ($this->conn->query($sql) == TRUE) {
-    			move_uploaded_file($foto_temp, '../foto/'.$foto); //upload file
                 header('Content-Type: application/json');
                 echo '{"message" : "Berhasil Menyimpan"}';
             } else {

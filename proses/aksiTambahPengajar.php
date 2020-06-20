@@ -3,9 +3,10 @@
     $db 	= new DbConnection();
     $conn 	= $db->connect();
 	
-	$id      = $_POST["id_pengajar"];
-    $status  = $_POST["status"];
-    $email     = $_POST["email"];
+	$id       = $_POST["id_pengajar"];
+    $status   = $_POST["status"];
+    $email    = $_POST["email"];
+    $hakakses = "PENGAJAR";
 
 
 	$acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
@@ -13,10 +14,12 @@
     $yy=str_shuffle($acak);
     $token=substr($yy, $xx, $panjang);
     $aktivasi = "T";
-   	
-   	$sql = "INSERT INTO pengajar 
-				(id_pengajar, status ,email) 
-				VALUES ('".$id."','".$status."','".$email."')";
+       
+    $sqluser = "INSERT INTO user
+                (level)
+                VALUES ('".$hakakses."')";
+
+   
             
     //proses kirim email
     include("../PHPMailer/class.phpmailer.php");
@@ -24,7 +27,7 @@
         $mail             = new PHPMailer();
         $body             = 
             "<body style='margin: 10px;'>
-                <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
+                <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'><a href='https://www.roboteach.com/token/1234'>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
                 </div>
             </body>";
  
@@ -53,12 +56,22 @@
             //   header("location:../view/beranda.php?pesan=terkirim");
             }
     //akhir kirim email
-    if ($conn->query($sql) == TRUE) {
-        echo "Data berhasil disimpan";
-		// move_uploaded_file($foto_temp, '../foto/'.$foto); //upload file
+    if ($conn->query($sqluser) == TRUE) {
+        $iduser = $conn->insert_id;
+        $sqlpengajar = "INSERT INTO pengajar 
+        (id_pengajar, status ,email, id_user) 
+        VALUES ('".$id."','".$status."','".$email."','".$iduser."')";
+        echo "Data user berhasil disimpan";
+
+        if ($conn->query($sqlpengajar) == TRUE){
+            echo "Data pengajar berhasil disimpan";
+        } else {
+            echo "Data pengajar gagal disimpan";
+        }
+        // move_uploaded_file($foto_temp, '../foto/'.$foto); //upload file
         // header("location:../view/tambahPengajar.php?pesan=sukses");
     } else {
-        echo "Data gagal disimpan";
+        echo "Data user gagal disimpan";
         // header("location:../view/tambahPengajar.php?pesan=gagal");
     }
  ?>
