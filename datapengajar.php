@@ -34,36 +34,52 @@
                   <th>Nama Lengkap</th>
                   <th>Nama Panggilan</th>
                   <th>Status</th>
-                  <th>Jenis_Kelamin</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Tempat Lahir</th>
+                  <th>Tanggal Lahir</th>
+                  <th>No Hp</th>
+                  <th>Alamat</th>
+                  <th>Email</th>
+                  <th>Tahun Join</th>
+                  <th>Foto</th>
+
                 </tr>
                 </thead>
                 <tbody>
 
 <?php
-require_once '../config/koneksi.php';
+require_once './config/koneksi.php';
 
 $db = new DbConnection();
 $conn = $db->connect();
 
 $sql = "SELECT * from pengajar";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
+$sql = $conn->query($query);
+$no = 1;
+while($row = $sql->fetch_assoc())
 {
 ?>
                 <tr>
                   <td><?php echo $no; $no++;?></td>
                   <td><?php echo $row['id_pengajar']?></td>
-                  <td><?php echo $row['nama_l']?></td>
-                  <td><?php echo $row['nama_p']?></td>
+                  <td><?php echo $row['nama_lengkap']?></td>
+                  <td><?php echo $row['nama_panggilan']?></td>
                   <td><?php echo $row['status']?></td>
                   <td><?php echo $row['jenis_kelamin']?></td>
+                  <td><?php echo $row['tempat_lahir']?></td>
+                  <td><?php echo $row['tgl_lahir']?></td>
+                  <td><?php echo $row['no_hp']?></td>
+                  <td><?php echo $row['alamat']?></td>
+                  <td><?php echo $row['email']?></td>
+                  <td><?php echo $row['tahun_join']?></td>
+                  <td><?php echo $row['foto']?></td>
                   
                   <td><a href="index.php?hal=edit_siswa&nis=<?php echo $row['nis']?>"><button type="button" class="btn btn-warning" name=""> <i class="fa fa-pencil"></i> Edit</button></a>
                     <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis']?>">
                     <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> Hapus</button></a>
                   </td>
                 </tr>
-<?php } ?>
+      <?php $no++; } ?>
                 </tfoot>
               </table>
             </div>
