@@ -1,4 +1,10 @@
+<?php
+require_once './config/koneksi.php';
 
+$db = new DbConnection();
+$conn = $db->connect();
+$datapengajar = $db ->lihat_pengajar();
+?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -48,16 +54,7 @@
                 <tbody>
 
 <?php
-require_once './config/koneksi.php';
-
-$db = new DbConnection();
-$conn = $db->connect();
-
-$sql = "SELECT * from pengajar";
-$sql = $conn->query($query);
-$no = 1;
-while($row = $sql->fetch_assoc())
-{
+foreach($datapengajar as $row){
 ?>
                 <tr>
                   <td><?php echo $no; $no++;?></td>
@@ -79,7 +76,7 @@ while($row = $sql->fetch_assoc())
                     <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> Hapus</button></a>
                   </td>
                 </tr>
-      <?php $no++; } ?>
+      <?php  } ?>
                 </tfoot>
               </table>
             </div>

@@ -22,5 +22,14 @@ class DbConnection {
 		$this->url = "http://localhost/Roboteach/config/";
 	    return $this->url;
 	}
+
+	function lihat_pengajar()
+	{
+		$data = mysqli_query($this->koneksi,"select * from pengajar");
+		while($row = mysqli_fetch_array($data)){
+			$hasil[] = $row;
+		}
+		return $hasil;
+	}
 }
 ?>
