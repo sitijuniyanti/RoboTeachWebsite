@@ -3,17 +3,17 @@ require_once './config/koneksi.php';
 
 $db = new DbConnection();
 $conn = $db->connect();
-$datapengajar = $db ->lihat_pengajar();
+$datasekolah = $db ->lihat_sekolah();
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Pengajar
+        Data Sekolah
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Data Pengajar</a></li>
+        <li><a href="#">Data Sekolah</a></li>
       </ol>
     </section>
 
@@ -26,7 +26,7 @@ $datapengajar = $db ->lihat_pengajar();
 
           <div class="box">
             <div class="box-header">
-              <a href="index.php?hal=tambahPengajar2">
+              <a href="index.php?hal=">
               <input type="button" value="Tambah" class="btn btn-primary" name="">
               </a>
             </div>
@@ -36,36 +36,29 @@ $datapengajar = $db ->lihat_pengajar();
               <div class="table-responsive-sm">  
               <thead>
                 <tr>
-                  <th>Id Pengajar</th>
-                  <th>Nama Lengkap</th>
-                  <th>Nama Panggilan</th>
-                  <th>Status</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Tempat Tanggal Lahir</th>
-                  <th>No Hp</th>
+                  <th>Id Sekolah</th>
+                  <th>Nama Sekolah</th>
                   <th>Alamat</th>
-                  <th>Email</th>
-                  <th>Tahun Join</th>
-                  <th>Aksi</th>
+                  <th>Latitude</th>
+                  <th>Longitude</th>
+                  <th>Nama Penanggungjawab</th>
+                  <th>No Hp</th>
 
                 </tr>
                 </thead>
                 <tbody>
 
 <?php
-foreach($datapengajar as $row){
+foreach($datasekolah as $row){
 ?>
                 <tr>
-                  <td><?php echo $row['id_pengajar']?></td>
-                  <td><?php echo $row['nama_lengkap']?></td>
-                  <td><?php echo $row['nama_panggilan']?></td>
-                  <td><?php echo $row['status']?></td>
-                  <td><?php echo $row['jenis_kelamin']?></td>
-                  <td><?php echo $row['tempat_lahir']?> <?php echo $row['tgl_lahir']?></td>
-                  <td><?php echo $row['no_hp']?></td>
-                  <td><?php echo $row['alamat']?></td>
-                  <td><?php echo $row['email']?></td>
-                  <td><?php echo $row['tahun_join']?></td>
+                  <td><?php echo $row['id_sekolah']?></td>
+                  <td><?php echo $row['nama_sekolah']?></td>
+                  <td><?php echo $row['alamat_sekolah']?></td>
+                  <td><?php echo $row['lat_sekolah']?></td>
+                  <td><?php echo $row['long_sekolah']?></td>
+                  <td><?php echo $row['nama_penanggungjawab']?></td>
+                  <td><?php echo $row['no_hp_pj']?></td>
                   
                   <td><a href="index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar']?>"><button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
                     <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis']?>">

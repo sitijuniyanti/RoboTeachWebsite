@@ -5,7 +5,7 @@
           include "datapengajar.php";
         }
         elseif ($_GET['hal']=='datasekolah') {
-          include "datasekolah.php";
+          include "./view/datasekolah.php";
         }
         elseif ($_GET['hal']=='datapenjadwalan') {
           include "datapenjadwalan.php";
@@ -18,6 +18,9 @@
         }
         elseif ($_GET['hal']=='tambahPengajar2') {
           include "./view/tambahPengajar2.php";
+        }
+        elseif ($_GET['hal']=='ubahPengajar') {
+          include "./view/ubahPengajar.php";
         }
         else
         {

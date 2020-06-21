@@ -290,7 +290,7 @@ include "style/pilih_style.php";
 <!-- ./wrapper -->
 
 <?php
-include "content.php";
+include "js/pilih_js.php";
 ?>
 </body>
 </html>

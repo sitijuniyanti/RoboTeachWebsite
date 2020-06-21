@@ -27,7 +27,7 @@
         </li>
 
         <li>
-          <a href="index.php?hal=siswa">
+          <a href="index.php?hal=datasekolah">
             <i class="fa fa-users"></i> <span>Data Sekolah</span>
           </a>
         </li>

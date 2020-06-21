@@ -31,5 +31,14 @@ class DbConnection {
 		}
 		return $hasil;
 	}
+
+	function lihat_sekolah()
+	{
+		$data = mysqli_query($this->connect(),"select * from sekolah");
+		while($row = mysqli_fetch_array($data)){
+			$hasil[] = $row;
+		}
+		return $hasil;
+	}
 }
 ?>
