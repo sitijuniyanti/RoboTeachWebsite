@@ -16,6 +16,9 @@
         elseif ($_GET['hal']=='monitoringpengajar') {
           include "monitoringpengajar.php";
         }
+        elseif ($_GET['hal']=='tambahPengajar2') {
+          include "./view/tambahPengajar2.php";
+        }
         else
         {
           include "home.php";

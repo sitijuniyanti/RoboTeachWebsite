@@ -26,28 +26,27 @@ $datapengajar = $db ->lihat_pengajar();
 
           <div class="box">
             <div class="box-header">
-              <a href="index.php?hal=tambah_siswa">
+              <a href="index.php?hal=tambahPengajar2">
               <input type="button" value="Tambah" class="btn btn-primary" name="">
               </a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
+              <table id="example1" class="table-responsive-sm table-bordered table-striped">
+              <div class="table-responsive-sm">  
+              <thead>
                 <tr>
-                  <th>No</th>
                   <th>Id Pengajar</th>
                   <th>Nama Lengkap</th>
                   <th>Nama Panggilan</th>
                   <th>Status</th>
                   <th>Jenis Kelamin</th>
-                  <th>Tempat Lahir</th>
-                  <th>Tanggal Lahir</th>
+                  <th>Tempat Tanggal Lahir</th>
                   <th>No Hp</th>
                   <th>Alamat</th>
                   <th>Email</th>
                   <th>Tahun Join</th>
-                  <th>Foto</th>
+                  <th>Aksi</th>
 
                 </tr>
                 </thead>
@@ -57,23 +56,20 @@ $datapengajar = $db ->lihat_pengajar();
 foreach($datapengajar as $row){
 ?>
                 <tr>
-                  <td><?php echo $no; $no++;?></td>
                   <td><?php echo $row['id_pengajar']?></td>
                   <td><?php echo $row['nama_lengkap']?></td>
                   <td><?php echo $row['nama_panggilan']?></td>
                   <td><?php echo $row['status']?></td>
                   <td><?php echo $row['jenis_kelamin']?></td>
-                  <td><?php echo $row['tempat_lahir']?></td>
-                  <td><?php echo $row['tgl_lahir']?></td>
+                  <td><?php echo $row['tempat_lahir']?> <?php echo $row['tgl_lahir']?></td>
                   <td><?php echo $row['no_hp']?></td>
                   <td><?php echo $row['alamat']?></td>
                   <td><?php echo $row['email']?></td>
                   <td><?php echo $row['tahun_join']?></td>
-                  <td><?php echo $row['foto']?></td>
                   
-                  <td><a href="index.php?hal=edit_siswa&nis=<?php echo $row['nis']?>"><button type="button" class="btn btn-warning" name=""> <i class="fa fa-pencil"></i> Edit</button></a>
+                  <td><a href="index.php?hal=edit_siswa&nis=<?php echo $row['nis']?>"><button type="button" class="btn btn-warning" name=""> <i class="fa fa-pencil"></i></button></a>
                     <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis']?>">
-                    <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> Hapus</button></a>
+                    <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> </button></a>
                   </td>
                 </tr>
       <?php  } ?>
