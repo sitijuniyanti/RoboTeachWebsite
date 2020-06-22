@@ -36,9 +36,18 @@ class DbConnection {
 	{
 		$data = mysqli_query($this->connect(),"select * from sekolah");
 		while($row = mysqli_fetch_array($data)){
-			$hasil[] = $row;
+			$hasil_sekolah[] = $row;
 		}
-		return $hasil;
+		return $hasil_sekolah;
+	}
+
+	function lihat_jadwal()
+	{
+		$data = mysqli_query($this->connect(),"select * from jadwal");
+		while($row = mysqli_fetch_array($data)){
+			$hasil_jadwal[] = $row;
+		}
+		return $hasil_jadwal;
 	}
 }
 ?>

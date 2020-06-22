@@ -3,17 +3,17 @@ require_once './config/koneksi.php';
 
 $db = new DbConnection();
 $conn = $db->connect();
-$datasekolah = $db ->lihat_sekolah();
+$datajadwal = $db ->lihat_jadwal();
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Sekolah
+        Data Jadwal
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Data Sekolah</a></li>
+        <li><a href="#">Data Jadwal</a></li>
       </ol>
     </section>
 
@@ -33,16 +33,16 @@ $datasekolah = $db ->lihat_sekolah();
             <!-- /.box-header -->
             <div class="box-body">
                 <div class="table-responsive-md ">
-              <table id="tabelsekolah" class="table table-hover table-bordered table-striped"">
+              <table id="tabeljadwal" class="table table-hover table-bordered table-striped"">
               <thead>
                 <tr>
+                  <th>Id Jadwal</th>
                   <th>Id Sekolah</th>
                   <th>Nama Sekolah</th>
-                  <th>Alamat</th>
-                  <th>Latitude</th>
-                  <th>Longitude</th>
-                  <th>Nama Penanggungjawab</th>
-                  <th>No Hp</th>
+                  <th>Hari</th>
+                  <th>Tanggal</th>
+                  <th>Waktu Mulai</th>
+                  <th>Waktu Selesai</th>
                   <th>Aksi</th>
 
                 </tr>
@@ -50,16 +50,16 @@ $datasekolah = $db ->lihat_sekolah();
                 <tbody>
 
 <?php
-foreach($datasekolah as $row){
+foreach($datajadwal as $row){
 ?>
                 <tr>
+                  <td><?php echo $row['id_jadwal']?></td>
                   <td><?php echo $row['id_sekolah']?></td>
-                  <td><?php echo $row['nama_sekolah']?></td>
-                  <td><?php echo $row['alamat_sekolah']?></td>
-                  <td><?php echo $row['lat_sekolah']?></td>
-                  <td><?php echo $row['long_sekolah']?></td>
-                  <td><?php echo $row['nama_penanggungjawab']?></td>
-                  <td><?php echo $row['no_hp_pj']?></td>
+                  <td>nama sekolah</td>
+                  <td><?php echo $row['hari']?></td>
+                  <td><?php echo $row['tanggal']?></td>
+                  <td><?php echo $row['waktu_mulai']?></td>
+                  <td><?php echo $row['waktu_selesai']?></td>
                   
                   <td><a href="index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar']?>"><button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
                     <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis']?>">

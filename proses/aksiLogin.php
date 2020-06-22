@@ -17,7 +17,7 @@
        
         $_SESSION['id'] = $row['id_user']; 
 		$_SESSION['level'] = $row['level']; 
-    	header("location:../view/beranda.php");
+    	header("location:../view/index.php");
     	die();
     } else{
     	header("location:../view/login.php?pesan=gagal");
