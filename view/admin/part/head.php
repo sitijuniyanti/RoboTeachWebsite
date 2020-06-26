@@ -7,7 +7,7 @@ $linkcss['core'] = [
                     "all-skins"=>"css/skins/_all-skins.min.css",
                     "select2"=>"select2/dist/css/select2.min.css"];
 $linkcss['plugin'] = [
-                    "wysihtml5"=>"plugin/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"];
+                    "wysihtml5"=>"plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"];
 foreach($linkcss['core'] as $key=>$value){?>
     <link rel='stylesheet' href='<?=baseUrl("assets/$value")?>'>
 

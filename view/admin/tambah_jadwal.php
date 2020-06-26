@@ -74,6 +74,13 @@
                 <!-- /.input group -->
               </div>
 
+              <div class="colorpicker dropdown-menu colorpicker-hidden colorpicker-with-alpha colorpicker-right">
+                  <div class="colorpicker-saturation"><i><b></b></i></div>
+                  <div class="colorpicker-hue"><i></i></div>
+                  <div class="colorpicker-alpha"><i></i></div>
+                  <div class="colorpicker-color"><div></div></div>
+                  <div class="colorpicker-selectors"></div></div>
+
 
 
                 <div class="form-group">

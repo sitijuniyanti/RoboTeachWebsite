@@ -4,7 +4,7 @@ $linkjs['core'] = [
                     "jquery-ui"=>"jquery-ui/jquery-ui.min.js",
                     "bootstrap"=>"bootstrap/dist/js/bootstrap.min.js",
                     "adminlte"=>"adminlte/js/adminlte.min.js",
-                    "moment"=>"moment/min/moment.min.js",
+                    "moment"=>"moment/moment.min.js",
                     "daterangepicker"=>"bootstrap-daterangepicker/daterangepicker.js",
                     "datepicker"=>"bootstrap-datepicker/bootstrap-datepicker.min.js"];
 $linkjs['plugin'] = [
@@ -17,7 +17,7 @@ foreach($linkjs['core'] as $key=>$value){?>
 }
 
 foreach($linkjs['plugin'] as $key=>$value){?>
-    <script src="<?=baseUrl("assets/js/$value")?>">
+    <script src="<?=baseUrl("assets/$value")?>">
     </script>
 
 <?php
