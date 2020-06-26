@@ -1,4 +1,5 @@
 <?php 
+    session_start();
 	require_once '../config/koneksi.php';	
     $db 	= new DbConnection();
     $conn 	= $db->connect();
@@ -49,29 +50,40 @@
             $mail->AddAddress($email);
             $mail->IsHTML(true); // send as HTML
 
-            if(!$mail->Send()) {
-              echo "Mailer Error: " . $mail->ErrorInfo;
-            } else {     
-                echo "Berhasil kirim email";
-            //   header("location:../view/beranda.php?pesan=terkirim");
-            }
+            // if(!$mail->Send()) {
+            //   echo "Mailer Error: " . $mail->ErrorInfo;
+            // } else {     
+            //     echo "Berhasil kirim email";
+            // //   header("location:../view/beranda.php?pesan=terkirim");
+            // }
     //akhir kirim email
     if ($conn->query($sqluser) == TRUE) {
         $iduser = $conn->insert_id;
         $sqlpengajar = "INSERT INTO pengajar 
         (id_pengajar, status ,email, id_user) 
         VALUES ('".$id."','".$status."','".$email."','".$iduser."')";
-        echo "Data user berhasil disimpan";
 
         if ($conn->query($sqlpengajar) == TRUE){
-            echo "Data pengajar berhasil disimpan";
+            $_SESSION['message']['msg_status']="success";
+            $_SESSION['message']['msg_title']="Data Pengajar";
+            $_SESSION['message']['message']="Berhasil di Tambahkan";
+            $_SESSION['message']['msg_type']="alert";
+            header("location:../view/admin/index.php?hal=tambah_pengajar");
         } else {
-            echo "Data pengajar gagal disimpan";
+            $_SESSION['message']['msg_status']="warning";
+            $_SESSION['message']['msg_title']="Data Pengajar";
+            $_SESSION['message']['message']="Gagal di Simpan";
+            $_SESSION['message']['msg_type']="alert";
+            header("location:../view/admin/index.php?hal=tambah_pengajar");
         }
         // move_uploaded_file($foto_temp, '../foto/'.$foto); //upload file
         // header("location:../view/tambahPengajar.php?pesan=sukses");
     } else {
-        echo "Data user gagal disimpan";
+            $_SESSION['message']['msg_status']="warning";
+            $_SESSION['message']['msg_title']="Data Pengajar";
+            $_SESSION['message']['message']="Gagal di Simpan";
+            $_SESSION['message']['msg_type']="alert";
+            header("location:../view/admin/index.php?hal=tambah_pengajar");
         // header("location:../view/tambahPengajar.php?pesan=gagal");
     }
  ?>
