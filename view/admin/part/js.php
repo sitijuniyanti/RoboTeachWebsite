@@ -1,31 +1,22 @@
+<script src="<?= assets('jquery/jquery.min.js') ?>"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
+<script src="<?= assets('bootstrap-3-3-7/js/bootstrap.min.js') ?>"></script>
+<script src="<?= assets('fastclick/lib/fastclick.js') ?>"></script>
+<script src="<?= assets('admin-lte/js/adminlte.min.js') ?>"></script>
+<script src="<?= assets('jquery-sparkline/dist/jquery.sparkline.min.js') ?>"></script>
+<script src="<?= assets('jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <?php
-$linkjs['core'] = [
-                    "jquery3"=>"jquery/dist/jquery.min.js",
-                    "jquery-ui"=>"jquery-ui/jquery-ui.min.js",
-                    "bootstrap"=>"bootstrap/dist/js/bootstrap.min.js",
-                    "adminlte"=>"adminlte/js/adminlte.min.js",
-                    "moment"=>"moment/moment.min.js",
-                    "daterangepicker"=>"bootstrap-daterangepicker/daterangepicker.js",
-                    "datepicker"=>"bootstrap-datepicker/bootstrap-datepicker.min.js",
-                    "tempusdominus"=>"tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-                    "custom"=>"bootstrap-datepicker/custom.js"];
-$linkjs['plugin'] = [
-                    "wysihtml5"=>"plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
-                    "timepicker"=>"plugins/timepicker/bootstrap-timepicker.min.js"];
-foreach($linkjs['core'] as $key=>$value){?>
-    <script src="<?=baseUrl("assets/js/$value")?>">
-    </script>
-<?php
-}
+$link_js["tambah_jadwal"] = [
+  "moment/min/moment.min.js",
+  "bootstrap-daterangepicker/daterangepicker.js",
+  "bootstrap-datepicker/js/bootstrap-datepicker.min.js"
+];
 
-foreach($linkjs['plugin'] as $key=>$value){?>
-    <script src="<?=baseUrl("assets/$value")?>">
-    </script>
-
-<?php
-}
-
+if (isset($link_js[$_GET['hal']])) {
+  foreach ($link_js[$_GET['hal']] as $value) {
 ?>
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
+    <script src="<?= assets($value) ?>"></script>
+<?php
+  }
+}
+?>
