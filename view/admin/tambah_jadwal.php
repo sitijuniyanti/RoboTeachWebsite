@@ -64,24 +64,24 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Tanggal</label>
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right" id="datepicker">
+                <label class="col-sm-2 control-label">Tanggal</label>
+                    <div class="col-sm-8">
+                    <input type="text" class="form-control datepicker datetimepicker-input" data-toggle="datetimepicker" data-target=".datepicker" />
                 </div>
+            </div>
                 <!-- /.input group -->
-              </div>
+                
+                <div class="form-group">
+                <label class="col-sm-2 control-label">Tanggal</label>
+                    <div class="col-sm-8">
+                    <input type="text" class="form-control datepicker datetimepicker-input" data-toggle="datetimepicker" data-target=".datepicker" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar">
+                    </span>
+                    </span>
 
-              <div class="colorpicker dropdown-menu colorpicker-hidden colorpicker-with-alpha colorpicker-right">
-                  <div class="colorpicker-saturation"><i><b></b></i></div>
-                  <div class="colorpicker-hue"><i></i></div>
-                  <div class="colorpicker-alpha"><i></i></div>
-                  <div class="colorpicker-color"><div></div></div>
-                  <div class="colorpicker-selectors"></div></div>
-
-
+                </div>
+                </div>
 
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Latitude</label>

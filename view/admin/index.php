@@ -129,21 +129,13 @@ include_once "part/js.php";
 ?>
 
 <script>
-  $(function () {
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-
-    //Date picker
-    $('#datepicker').datepicker({
-      autoclose: true
+ $(document).ready(function(){
+        setDatePicker()
+        $('#datetimepicker11').datetimepicker({
+                daysOfWeekDisabled: [0, 6]
+            });
     })
 
-    //Timepicker
-    $('.timepicker').timepicker({
-      showInputs: false
-    })
-  })
 </script>
 
 <div class="colorpicker dropdown-menu colorpicker-hidden colorpicker-with-alpha colorpicker-right">
