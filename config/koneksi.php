@@ -22,5 +22,35 @@ class DbConnection {
 		$this->url = "http://localhost/Roboteach/config/";
 	    return $this->url;
 	}
+
+	function lihat_pengajar()
+	{
+		$data = mysqli_query($this->connect(),"select * from pengajar");
+		while($row = mysqli_fetch_array($data)){
+			$hasil_pengajar[] = $row;
+		}
+		return $hasil_pengajar;
+	}
+
+	function lihat_sekolah()
+	{
+		$data = mysqli_query($this->connect(),"select * from sekolah");
+		while($row = mysqli_fetch_array($data)){
+			$hasil_sekolah[] = $row;
+		}
+		return $hasil_sekolah;
+	}
+
+	function lihat_jadwal()
+	{
+		$data = mysqli_query($this->connect(),
+		"select jadwal.id_jadwal, jadwal.id_sekolah, sekolah.nama_sekolah, jadwal.hari, jadwal.tanggal, jadwal.waktu_mulai, jadwal.waktu_selesai
+			from jadwal, sekolah
+			where jadwal.id_sekolah=sekolah.id_sekolah");
+		while($row = mysqli_fetch_array($data)){
+			$hasil_jadwal[] = $row;
+		}
+		return $hasil_jadwal;
+	}
 }
 ?>

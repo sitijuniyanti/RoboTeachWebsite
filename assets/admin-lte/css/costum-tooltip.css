@@ -1,0 +1,28 @@
+/* Tooltip */
+.pop {
+	color: inherit;
+}
+.pop + .tooltip > .tooltip-inner {
+	border-radius: 0;
+	background-color: #00ACD6;
+	color: white;
+	border: 1px solid #00ACD6;
+	padding: 1px;
+	font-size: 15px;
+}
+/* Tooltip on top */
+.pop + .tooltip.top > .tooltip-arrow {
+	border-top: 5px solid #00ACD6;
+}
+/* Tooltip on bottom */
+.pop + .tooltip.bottom > .tooltip-arrow {
+	border-top: 5px solid #00ACD6;
+}
+/* Tooltip on left */
+.pop + .tooltip.left > .tooltip-arrow {
+	border-top: 5px solid #00ACD6;
+}
+/* Tooltip on right */
+.pop + .tooltip.right > .tooltip-arrow {
+	border-top: 5px solid #00ACD6;
+}
