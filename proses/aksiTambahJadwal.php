@@ -17,7 +17,7 @@
 
         $sqljadwal = "INSERT INTO jadwal 
         (id_jadwal,hari,tanggal,waktu_mulai,waktu_selesai) 
-        VALUES ('".$id_jawdal."','".$hari."','".$tanggal."','".$waktu_mulai."','".$waktu_selesai."')";
+        VALUES ('".$id_jadwal."','".$hari."','".$tanggal."','".$waktu_mulai."','".$waktu_selesai."')";
 
         
         if($conn->query($sqljadwal) == TRUE){
