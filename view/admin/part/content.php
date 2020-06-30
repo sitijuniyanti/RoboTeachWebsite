@@ -6,27 +6,27 @@
               include_once "dashboard.php";
           break;
         case 'data_pengajar':
-              include_once "data_pengajar.php";
+              include_once "pengajar/data_pengajar.php";
           break;
         
         case 'tambah_pengajar':
-            include_once "tambah_pengajar.php";
+            include_once "pengajar/tambah_pengajar.php";
         break;
 
         case 'data_sekolah':
-            include_once "data_sekolah.php";
+            include_once "sekolah/data_sekolah.php";
         break;
 
         case 'tambah_sekolah':
-          include_once "tambah_sekolah.php";
+          include_once "sekolah/tambah_sekolah.php";
         break;
 
         case 'data_jadwal':
-          include_once "data_jadwal.php";
+          include_once "jadwal/data_jadwal.php";
         break;
 
         case 'tambah_jadwal':
-          include_once "tambah_jadwal.php";
+          include_once "jadwal/tambah_jadwal.php";
         break;
 
         

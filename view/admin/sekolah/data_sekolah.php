@@ -1,5 +1,4 @@
 <?php
-
 $db = new DbConnection();
 $conn = $db->connect();
 $datasekolah = $db ->lihat_sekolah();

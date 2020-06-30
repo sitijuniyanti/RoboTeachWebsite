@@ -11,6 +11,7 @@
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="<?= assets('admin-lte/css/skins/_all-skins.min.css') ?>">
 
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -23,10 +24,11 @@
 <?php
 $link_CSS["tambah_jadwal"] = [
     "bootstrap-daterangepicker/daterangepicker.css",
-    "bootstrap-datepicker/css/bootstrap-datepicker.min.css"
+    "bootstrap-datepicker/css/bootstrap-datepicker.min.css",
+    "select2/dist/css/select2.min.css"
 ];
 
-if (isset($link_CSS[$_GET['hal']])) {
+if (isset($link_CSS[@$_GET['hal']])) {
     foreach ($link_CSS[$_GET['hal']] as $value) {
 ?>
         <link rel="stylesheet" href="<?= assets($value) ?>">

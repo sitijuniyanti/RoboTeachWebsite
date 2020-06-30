@@ -9,10 +9,11 @@
 $link_js["tambah_jadwal"] = [
   "moment/min/moment.min.js",
   "bootstrap-daterangepicker/daterangepicker.js",
-  "bootstrap-datepicker/js/bootstrap-datepicker.min.js"
+  "bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+  "select2/dist/js/select2.full.min.js"
 ];
 
-if (isset($link_js[$_GET['hal']])) {
+if (isset($link_js[@$_GET['hal']])) {
   foreach ($link_js[$_GET['hal']] as $value) {
 ?>
     <script src="<?= assets($value) ?>"></script>

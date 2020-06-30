@@ -1,3 +1,8 @@
+<?php
+$db = new DbConnection();
+$conn = $db->connect();
+$datasekolah = $db ->lihat_sekolah();
+?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -28,43 +33,40 @@
             <div class="box-body">
               <?php
               require_once "../../helper/flash_message.php";
+              foreach($datasekolah as $row){
               ?>
-
               <div class="form-group">
-                <label type="text" class="col-sm-2 control-label">Id Sekolah</label>
-
-                <div class="col-sm-8">
-                  <input type="text" id="idsekolah" name="id_sekolah" class="form-control" placeholder="Id Sekolah">
+              <label type="text" class="col-sm-2 control-label">Nama Sekolah</label>
+              <div class="col-sm-8">
+                <select class="form-control select2" style="width: 100%;" name="idnamasekolah" id="idnamasekolah">
+                  <option value="" selected="selected">Pilih Nama Sekolah</option>
+                  <option value="idnama"><?php echo $row['id_sekolah']?> - <?php echo $row['nama_sekolah']?></option>
+                </select>
+              
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Nama Sekolah</label>
-
-                <div class="col-sm-8">
-                  <input type="text" id="namasekolah" name="nama_sekolah" class="form-control" placeholder="Nama Sekolah" disabled>
-                </div>
-              </div>
-
+              <?php }?>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Alamat</label>
-
-                <div class="col-sm-8">
-                  <textarea type="text" id="alamat" name="alamat_sekolah" class="form-control" placeholder="Alamat" disabled> </textarea>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Hari</label>
-
-                <div class="col-sm-8">
-                  <input type="text" id="hari" name="hari" class="form-control" placeholder="Hari">
+              <label type="text" class="col-sm-2 control-label">Hari</label>
+              <div class="col-sm-8">
+                <select class="form-control select2" style="width: 100%;" name="hari" id="hari">
+                  <option value="" selected="selected">Pilih Hari</option>
+                  <option value="senin">Senin</option>
+                  <option value="selasa">Selasa</option>
+                  <option value="rabu">Rabu</option>
+                  <option value="kamis">Kamis</option>
+                  <option value="jumat">Jumat</option>
+                  <option value="sabtu">Sabtu</option>
+                  <option value="minggu">Minggu</option>
+                </select>
+              
                 </div>
               </div>
               <!-- aaf -->
               <div class="form-group">
-                <label class="col-sm-2 control-label">Date</label>
+                <label class="col-sm-2 control-label">Tanggal</label>
                 <div class="col-sm-8">
                   <div class="input-group date">
                     <div class="input-group-addon">
@@ -76,7 +78,7 @@
                 <!-- /.input group -->
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label">Date & time range</label>
+                <label class="col-sm-2 control-label">Waktu Mulai - Selesai</label>
                 <div class="col-sm-8">
                   <div class="input-group">
                     <div class="input-group-addon">
@@ -89,12 +91,6 @@
               </div>
               <!-- end aaf -->
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Tanggal</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control datepicker datetimepicker-input" data-toggle="datetimepicker" data-target=".datepicker" />
-                </div>
-              </div>
               <!-- /.input group -->
 
               <!-- kayanya ini harus dihapus sih -->
@@ -108,39 +104,6 @@
                 </div>
               </div> -->
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Latitude</label>
-
-                <div class="col-sm-8">
-                  <input type="text" id="latitude" name="lat_sekolah" class="form-control" placeholder="">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Longitude</label>
-
-                <div class="col-sm-8">
-                  <input type="text" id="longitude" name="long_sekolah" class="form-control" placeholder="">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Username</label>
-
-                <div class="col-sm-8">
-                  <input type="text" id="username" name="username" class="form-control" placeholder="Username">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Password</label>
-
-                <div class="col-sm-8">
-                  <input type="text" id="password" name="password" class="form-control" placeholder="Password">
-                </div>
-              </div>
-
-
 
             </div>
             <!-- /.box-body -->
@@ -153,6 +116,3 @@
       </form>
     </div>
     <!-- /.box -->
-</div>
-</section>
-</div>

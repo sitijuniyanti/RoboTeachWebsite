@@ -127,24 +127,10 @@ if (isset($_SESSION['level']) && $_SESSION['level'] == "ADMIN") {
 
   <?php
   include_once "part/js.php";
+  include_once "part/script.php";
   ?>
 
-  <script>
-    $(document).ready(function() {
-      $('#datepicker').datepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true
-      });
-
-      $('#reservationtime').daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        locale: {
-          format: 'MM/DD/YYYY hh:mm A'
-        }
-      })
-    })
-  </script>
+  
 
   <div class="colorpicker dropdown-menu colorpicker-hidden colorpicker-with-alpha colorpicker-right">
     <div class="colorpicker-saturation"><i><b></b></i></div>
