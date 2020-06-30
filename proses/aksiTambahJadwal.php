@@ -5,6 +5,7 @@
     $conn 	= $db->connect();
     
     $id_jadwal            = $_POST["id_jadwal"];
+    $id_sekolah        = $_POST["id_sekolah"];
     $hari                 = $_POST["hari"];
     $tanggal              = $_POST["tanggal"];
     $waktu_mulai          = $_POST["waktu_mulai"];
@@ -16,8 +17,8 @@
 
 
         $sqljadwal = "INSERT INTO jadwal 
-        (id_jadwal,hari,tanggal,waktu_mulai,waktu_selesai) 
-        VALUES ('".$id_jadwal."','".$hari."','".$tanggal."','".$waktu_mulai."','".$waktu_selesai."')";
+        (id_jadwal,id_sekolah,hari,tanggal,waktu_mulai,waktu_selesai) 
+        VALUES ('".$id_jadwal."','".$id_sekolah."','".$hari."','".$tanggal."','".$waktu_mulai."','".$waktu_selesai."')";
 
         
         if($conn->query($sqljadwal) == TRUE){
