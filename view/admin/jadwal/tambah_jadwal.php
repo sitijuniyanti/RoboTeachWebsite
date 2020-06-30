@@ -40,7 +40,7 @@ $datasekolah = $db ->lihat_sekolah();
               <div class="col-sm-8">
                 <select class="form-control select2" style="width: 100%;" name="id_sekolah" id="id_sekolah">
                   <option value="" selected="selected">Pilih Nama Sekolah</option>
-                  <option value="idnama"><?php echo $row['id_sekolah']?> - <?php echo $row['nama_sekolah']?></option>
+                  <option value="<?php echo $row['id_sekolah']?>"><?php echo $row['id_sekolah']?> - <?php echo $row['nama_sekolah']?></option>
                 </select>
               
                 </div>
@@ -109,7 +109,7 @@ $datasekolah = $db ->lihat_sekolah();
             <!-- /.box-body -->
             <div class="box-footer">
               <label class="col-sm-2 control-label"></label>
-              <button type="submit" name="simpan" class="btn btn-primary">Simpan Data</button>
+              <button type="submit" name="simpan" class="btn btn-primary" id="btnsimpan">Simpan Data</button>
             </div>
         </div>
       </div>
