@@ -38,7 +38,7 @@ $datasekolah = $db ->lihat_sekolah();
               <div class="form-group">
               <label type="text" class="col-sm-2 control-label">Nama Sekolah</label>
               <div class="col-sm-8">
-                <select class="form-control select2" style="width: 100%;" name="idnamasekolah" id="id_sekolah">
+                <select class="form-control select2" style="width: 100%;" name="id_sekolah" id="id_sekolah">
                   <option value="" selected="selected">Pilih Nama Sekolah</option>
                   <option value="idnama"><?php echo $row['id_sekolah']?> - <?php echo $row['nama_sekolah']?></option>
                 </select>
@@ -72,7 +72,7 @@ $datasekolah = $db ->lihat_sekolah();
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" id="datepicker" value="tanggal">
+                    <input type="text" class="form-control pull-right" id="datepicker" name="tanggal">
                   </div>
                 </div>
                 <!-- /.input group -->
@@ -84,7 +84,7 @@ $datasekolah = $db ->lihat_sekolah();
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
                     </div>
-                    <input type="text" class="form-control pull-right" id="reservationtime" value="waktumulaiselesai">
+                    <input type="text" class="form-control pull-right" id="reservationtime" name="waktu_mulai_selesai">
                   </div>
                 </div>
                 <!-- /.input group -->
