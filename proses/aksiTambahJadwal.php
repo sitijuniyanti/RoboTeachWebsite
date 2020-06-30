@@ -6,16 +6,21 @@
     
     $id_sekolah           = $_POST["id_sekolah"];
     $hari                 = $_POST["hari"];
-    $tgl                  = $_POST["tanggal"];
+    $tanggal              = $_POST["tanggal"];
     $waktu_mulai_selesai  = $_POST["waktu_mulai_selesai"];
 
-    $tanggal = date('Y-m-d', strtotime($tgl));
+    // $tanggal = strtr($_REQUEST['date'], '/', '-');
+    // echo date('Y-m-d', strtotime($tgl));
+    // $tanggal = date('Y-m-d', strtotime($tgl. " 00:00"));
+    // $tanggal = new DateTime($tgl);
+    // echo $tanggal->format('Y-m-d');
+    // $tanggal = DateTime::createFromFormat('Y-m-d', $tgl);
+    // $tanggal = date('Y-m-d', strtotime($tgl));
     list ($waktu_m, $waktu_s) = explode('-', $waktu_mulai_selesai);
     $waktu_mulai = date('Y-m-d h:i:s', strtotime($waktu_m));
     $waktu_selesai = date('Y-m-d h:i:s', strtotime($waktu_s));
     
-    
-   
+  
 
 
     // $sqljadwal = "INSERT INTO jadwal
