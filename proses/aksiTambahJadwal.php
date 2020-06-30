@@ -9,6 +9,8 @@
     $tanggal              = $_POST["tanggal"];
     $waktu_mulai_selesai  = $_POST["waktu_mulai_selesai"];
 
+    
+
     echo $id_sekolah;
     echo "<br>";
 
@@ -20,6 +22,15 @@
 
     echo $waktu_mulai_selesai;
     echo "<br>";
+
+    list ($waktu_mulai, $waktu_selesai) = explode('-', $waktu_mulai_selesai);
+
+    echo "$waktu_mulai"; 
+    echo "<br>";
+
+    echo "$waktu_selesai";
+    echo "<br>";
+
 
     // $sqljadwal = "INSERT INTO jadwal
     // (id_jadwal,id_sekolah,nama_sekolah,alamat_sekolah,hari,tanggal,waktu_mulai,waktu_selesai)
