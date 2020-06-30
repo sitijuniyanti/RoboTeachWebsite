@@ -6,12 +6,14 @@
     
     $id_sekolah           = $_POST["id_sekolah"];
     $hari                 = $_POST["hari"];
-    $tanggal              = $_POST["tanggal"];
+    $tgl                  = $_POST["tanggal"];
     $waktu_mulai_selesai  = $_POST["waktu_mulai_selesai"];
 
+    $tanggal = date('Y-m-d', strtotime($tgl));
     list ($waktu_m, $waktu_s) = explode('-', $waktu_mulai_selesai);
     $waktu_mulai = date('Y-m-d h:i:s', strtotime($waktu_m));
     $waktu_selesai = date('Y-m-d h:i:s', strtotime($waktu_s));
+    
     
    
 
