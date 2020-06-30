@@ -9,27 +9,11 @@
     $tanggal              = $_POST["tanggal"];
     $waktu_mulai_selesai  = $_POST["waktu_mulai_selesai"];
 
+    list ($waktu_m, $waktu_s) = explode('-', $waktu_mulai_selesai);
+    $waktu_mulai = date('Y-m-d h:i:s', strtotime($waktu_m));
+    $waktu_selesai = date('Y-m-d h:i:s', strtotime($waktu_s));
     
-
-    echo $id_sekolah;
-    echo "<br>";
-
-    echo $hari;
-    echo "<br>";
-
-    echo $tanggal;
-    echo "<br>";
-
-    echo $waktu_mulai_selesai;
-    echo "<br>";
-
-    list ($waktu_mulai, $waktu_selesai) = explode('-', $waktu_mulai_selesai);
-
-    echo "$waktu_mulai"; 
-    echo "<br>";
-
-    echo "$waktu_selesai";
-    echo "<br>";
+   
 
 
     // $sqljadwal = "INSERT INTO jadwal
@@ -41,9 +25,13 @@
     //     (id_jadwal,id_sekolah,hari,tanggal,waktu_mulai,waktu_selesai) 
     //     VALUES ('".$id_jadwal."','".$id_sekolah."','".$hari."','".$tanggal."','".$waktu_mulai."','".$waktu_selesai."')";
 
-        
-    //     if($conn->query($sqljadwal) == TRUE){
+    $sqljadwal = "INSERT INTO jadwal 
+    (id_sekolah,hari,tanggal,waktu_mulai,waktu_selesai) 
+    VALUES ('".$id_sekolah."','".$hari."','".$tanggal."','".$waktu_mulai."','".$waktu_selesai."')";
 
+    echo $sqljadwal;
+    //     if($conn->query($sqljadwal) == TRUE){
+           
     //         $_SESSION['message']['msg_status']="success";
     //         $_SESSION['message']['msg_title']="Data Jadwal";
     //         $_SESSION['message']['message']="Berhasil di Tambahkan";
