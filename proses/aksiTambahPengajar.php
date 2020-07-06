@@ -86,4 +86,3 @@
             header("location:../view/admin/index.php?hal=tambah_pengajar");
         // header("location:../view/tambahPengajar.php?pesan=gagal");
     }
- ?>

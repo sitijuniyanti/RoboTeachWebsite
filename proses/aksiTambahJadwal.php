@@ -36,20 +36,20 @@
     (id_sekolah,hari,tanggal,waktu_mulai,waktu_selesai) 
     VALUES ('".$id_sekolah."','".$hari."','".$tanggal."','".$waktu_mulai."','".$waktu_selesai."')";
 
-    echo $sqljadwal;
-    //     if($conn->query($sqljadwal) == TRUE){
+    // echo $sqljadwal;
+        if($conn->query($sqljadwal) == TRUE){
            
-    //         $_SESSION['message']['msg_status']="success";
-    //         $_SESSION['message']['msg_title']="Data Jadwal";
-    //         $_SESSION['message']['message']="Berhasil di Tambahkan";
-    //         $_SESSION['message']['msg_type']="alert";
-    //         header("location:../view/admin/index.php?hal=tambah_jadwal");
+            $_SESSION['message']['msg_status']="success";
+            $_SESSION['message']['msg_title']="Data Jadwal";
+            $_SESSION['message']['message']="Berhasil di Tambahkan";
+            $_SESSION['message']['msg_type']="alert";
+            header("location:../view/admin/index.php?hal=tambah_jadwal");
 
-    //     } else {
-    //         $_SESSION['message']['msg_status']="warning";
-    //         $_SESSION['message']['msg_title']="Data Jadwal";
-    //         $_SESSION['message']['message']="Gagal di Simpan";
-    //         $_SESSION['message']['msg_type']="alert";
-    //         header("location:../view/admin/index.php?hal=tambah_jadwal");
-    // }
+        } else {
+            $_SESSION['message']['msg_status']="warning";
+            $_SESSION['message']['msg_title']="Data Jadwal";
+            $_SESSION['message']['message']="Gagal di Simpan";
+            $_SESSION['message']['msg_type']="alert";
+            header("location:../view/admin/index.php?hal=tambah_jadwal");
+    }
  ?>

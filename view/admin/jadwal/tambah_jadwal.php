@@ -1,7 +1,7 @@
 <?php
 $db = new DbConnection();
 $conn = $db->connect();
-$datasekolah = $db ->lihat_sekolah();
+$datasekolah = $db->lihat_sekolah();
 ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -33,35 +33,36 @@ $datasekolah = $db ->lihat_sekolah();
             <div class="box-body">
               <?php
               require_once "../../helper/flash_message.php";
-              foreach($datasekolah as $row){
               ?>
               <div class="form-group">
-              <label type="text" class="col-sm-2 control-label">Nama Sekolah</label>
-              <div class="col-sm-8">
-                <select class="form-control select2" style="width: 100%;" name="id_sekolah" id="id_sekolah">
-                  <option value="" selected="selected">Pilih Nama Sekolah</option>
-                  <option value="<?php echo $row['id_sekolah']?>"><?php echo $row['id_sekolah']?> - <?php echo $row['nama_sekolah']?></option>
-                </select>
-              
+                <label type="text" class="col-sm-2 control-label">Nama Sekolah</label>
+                <div class="col-sm-8">
+                  <select class="form-control select2" style="width: 100%;" name="id_sekolah" id="id_sekolah">
+                    <option value="" selected="selected">Pilih Nama Sekolah</option>
+                    <?php foreach ($datasekolah as $row) { ?>
+                      <option value="<?php echo $row['id_sekolah'] ?>"><?php echo $row['id_sekolah'] ?> - <?php echo $row['nama_sekolah'] ?></option>
+                    <?php } ?>
+                  </select>
+
                 </div>
               </div>
 
-              <?php }?>
+
 
               <div class="form-group">
-              <label type="text" class="col-sm-2 control-label">Hari</label>
-              <div class="col-sm-8">
-                <select class="form-control select2" style="width: 100%;" name="hari" id="hari">
-                  <option value="" selected="selected">Pilih Hari</option>
-                  <option value="senin">Senin</option>
-                  <option value="selasa">Selasa</option>
-                  <option value="rabu">Rabu</option>
-                  <option value="kamis">Kamis</option>
-                  <option value="jumat">Jumat</option>
-                  <option value="sabtu">Sabtu</option>
-                  <option value="minggu">Minggu</option>
-                </select>
-              
+                <label type="text" class="col-sm-2 control-label">Hari</label>
+                <div class="col-sm-8">
+                  <select class="form-control select2" style="width: 100%;" name="hari" id="hari">
+                    <option value="" selected="selected">Pilih Hari</option>
+                    <option value="senin">Senin</option>
+                    <option value="selasa">Selasa</option>
+                    <option value="rabu">Rabu</option>
+                    <option value="kamis">Kamis</option>
+                    <option value="jumat">Jumat</option>
+                    <option value="sabtu">Sabtu</option>
+                    <option value="minggu">Minggu</option>
+                  </select>
+
                 </div>
               </div>
               <!-- aaf -->
