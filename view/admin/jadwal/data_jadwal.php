@@ -31,6 +31,9 @@ $datajadwal = $db->lihat_jadwal();
           </div>
           <!-- /.box-header -->
           <div class="box-body">
+            <?php
+            require_once "../../helper/flash_message.php";
+            ?>
             <div class="table-responsive-md ">
               <table id="tabeljadwal" class="table table-hover table-bordered table-striped"">
               <thead>
@@ -60,7 +63,9 @@ foreach ($datajadwal as $row) {
                   <td><?php echo $row['waktu_mulai'] ?></td>
                   <td><?php echo $row['waktu_selesai'] ?></td>
                   
-                  <td><a href=" index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar'] ?>"><button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
+                  <td><a href=" index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar'] ?>"></a>
+                <a href="../../Notif/send_notification.php?id_jadwal=<?php echo $row['id_jadwal'] ?>"><button type="button" class="btn btn-bell-plus" name="btnpushnotif"><i class="fa fa-bell"></i></button>
+                  <button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
                 <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis'] ?>">
                   <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> </button></a>
                 </td>
