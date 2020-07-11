@@ -15,7 +15,8 @@ class DbHandler
 
     public function login($username,$password)
     {
-        $sql = "SELECT * FROM user WHERE username='".$username."' AND password='".md5($password)."'";
+        $sql = "SELECT * FROM user INNER JOIN pengajar ON user.id_user=pengajar.id_user
+         WHERE username='".$username."' AND password='".md5($password)."'";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
             
@@ -26,6 +27,7 @@ class DbHandler
             if($row['level']=="PENGAJAR"){
                 $temp['id']             = $row['id_user'];
                 $temp['level']          = $row['level'];  
+                $temp['id_pengajar']    = $row['id_pengajar'];
                 $data[]                 = $temp;
                 header('Content-Type: application/json');
 
@@ -413,4 +415,3 @@ class DbHandler
     }
     
 }
-?>

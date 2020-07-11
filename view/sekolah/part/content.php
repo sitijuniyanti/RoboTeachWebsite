@@ -39,3 +39,4 @@
     else{
       include_once "dashboard.php";
     }
+?>
