@@ -13,32 +13,29 @@ class DbHandler
         $this->url = $db->url();
     }
 
-    public function login($username,$password)
+    public function login($username, $password)
     {
         $sql = "SELECT * FROM user INNER JOIN pengajar ON user.id_user=pengajar.id_user
-         WHERE username='".$username."' AND password='".md5($password)."'";
+         WHERE username='" . $username . "' AND password='" . md5($password) . "'";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
-            
+
             $data = array();
             $row = $result->fetch_assoc();
 
-         
-            if($row['level']=="PENGAJAR"){
-                $temp['id']             = $row['id_user'];
-                $temp['level']          = $row['level'];  
+
+            if ($row['level'] == "PENGAJAR") {
+                $temp['id_user']        = $row['id_user'];
+                $temp['level']          = $row['level'];
                 $temp['id_pengajar']    = $row['id_pengajar'];
                 $data[]                 = $temp;
                 header('Content-Type: application/json');
 
-                echo '{ "message" : "Berhasil" ,"results":'.json_encode($data).'}';
-            }
-            else {
+                echo '{ "message" : "Berhasil" ,"results":' . json_encode($data) . '}';
+            } else {
                 header('Content-Type: application/json');
                 echo '{ "message" : "Username atau password salah"}';
             }
-
-           
         } else {
             header('Content-Type: application/json');
             echo '{"message" : "Username atau password salah"}';
@@ -47,7 +44,7 @@ class DbHandler
 
     public function lupa_password($email)
     {
-        $sql = "SELECT * FROM pengajar WHERE email='".$email."'";
+        $sql = "SELECT * FROM pengajar WHERE email='" . $email . "'";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -60,7 +57,7 @@ class DbHandler
                 <body style='margin: 10px;'>
                 <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'>
                     Anda baru saja merequest untuk proses lupa password, silahkan klik link berikut, apabila memang Anda menginginkan perseubahan tersebut : <br> 
-                        <a href='".$this->url."API/passwordBaru.php?id=".$row['token']."'> LAKUKAN AKTIVASI </a>
+                        <a href='" . $this->url . "API/passwordBaru.php?id=" . $row['token'] . "'> LAKUKAN AKTIVASI </a>
                 </div>
                 </body>";
 
@@ -83,10 +80,10 @@ class DbHandler
             $mail->AddAddress($row['pengajar_email']);
             $mail->IsHTML(true); // send as HTML
 
-            if(!$mail->Send()) {
-              echo "Mailer Error: " . $mail->ErrorInfo;
+            if (!$mail->Send()) {
+                echo "Mailer Error: " . $mail->ErrorInfo;
             } else {
-                header('Content-Type: application/json');           
+                header('Content-Type: application/json');
                 echo '{ "message" : "Cek Email"}';
             }
         } else {
@@ -97,17 +94,20 @@ class DbHandler
 
     public function tambahpengajar($username, $password, $id_user)
     {
-      if ( $username==NULL || $password==NULL || $id_user==NULL ) {
-             header('Content-Type: application/json');
+        if ($username == NULL || $password == NULL || $id_user == NULL) {
+            header('Content-Type: application/json');
             echo '{"message" : "Semua Field Harus Terisi"}';
-        }else{   
-            $acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
-            $start=$len-$panjang; $xx=rand('0',$start);
-            $yy=str_shuffle($acak);
-            $token=substr($yy, $xx, $panjang);
+        } else {
+            $acak = "1933FAasdsk25kwBjakjDlff1988";
+            $panjang = '8';
+            $len = strlen($acak);
+            $start = $len - $panjang;
+            $xx = rand('0', $start);
+            $yy = str_shuffle($acak);
+            $token = substr($yy, $xx, $panjang);
             $aktivasi = "T";
 
-          
+
             $sql = "UPDATE user 
     				SET username='$username', password=md5('$password')
                     WHERE id_user='$id_user'";
@@ -124,7 +124,7 @@ class DbHandler
 
     public function getpengajar($id)
     {
-        $sql = "SELECT * FROM data_pengajar WHERE pengajar_id!='".$id."'";
+        $sql = "SELECT * FROM data_pengajar WHERE pengajar_id!='" . $id . "'";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
             header('Content-Type: application/json');
@@ -141,13 +141,13 @@ class DbHandler
                 $temp['alamat']         = $row['pengajar_alamat'];
                 $temp['email']          = $row['pengajar_email'];
                 $temp['tahun_join']     = $row['pengajar_tahun_join'];
-                $temp['foto']           = $row['pengajar_foto']; 
-                $temp['level']          = $row['pengajar_level'];            
-                $temp['aktivasi']       = $row['pengajar_aktivasi'];             
-                $temp['token']          = $row['pengajar_token'];             
+                $temp['foto']           = $row['pengajar_foto'];
+                $temp['level']          = $row['pengajar_level'];
+                $temp['aktivasi']       = $row['pengajar_aktivasi'];
+                $temp['token']          = $row['pengajar_token'];
                 $data[]                 = $temp;
             }
-            echo '{"message" : "Berhasil","results":'.json_encode($data).'}';
+            echo '{"message" : "Berhasil","results":' . json_encode($data) . '}';
         } else {
             header('Content-Type: application/json');
             echo '{"results" : "0"}';
@@ -156,7 +156,7 @@ class DbHandler
 
     public function selectpengajar($id)
     {
-        $sql = "SELECT * FROM data_pengajar WHERE pengajar_id='".$id."'";
+        $sql = "SELECT * FROM data_pengajar WHERE pengajar_id='" . $id . "'";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
             header('Content-Type: application/json');
@@ -173,45 +173,62 @@ class DbHandler
             $temp['alamat']         = $row['pengajar_alamat'];
             $temp['email']          = $row['pengajar_email'];
             $temp['tahun_join']     = $row['pengajar_tahun_join'];
-            $temp['foto']           = $row['pengajar_foto'];   
-            $temp['level']          = $row['pengajar_level'];          
-            $temp['aktivasi']       = $row['pengajar_aktivasi'];             
-            $temp['token']          = $row['pengajar_token'];             
+            $temp['foto']           = $row['pengajar_foto'];
+            $temp['level']          = $row['pengajar_level'];
+            $temp['aktivasi']       = $row['pengajar_aktivasi'];
+            $temp['token']          = $row['pengajar_token'];
             $data[]                 = $temp;
-            
+
             echo json_encode($data);
         } else {
             header('Content-Type: application/json');
             echo '{"results" : "0"}';
         }
     }
-	
-	public function ubahpengajar($id, $nama_l, $nama_p, $status, $jk, $tempat_lahir, $tgl_lahir, $kontak, $alamat, $email, 
-    $tahun_join, $password, $foto, $level, $foto_temp)
-    {   
-        if($foto==NULL){
-           /* header('Content-Type: application/json');
+
+    public function ubahpengajar(
+        $id,
+        $nama_l,
+        $nama_p,
+        $status,
+        $jk,
+        $tempat_lahir,
+        $tgl_lahir,
+        $kontak,
+        $alamat,
+        $email,
+        $tahun_join,
+        $password,
+        $foto,
+        $level,
+        $foto_temp
+    ) {
+        if ($foto == NULL) {
+            /* header('Content-Type: application/json');
             echo '{"message" :"Foto tidak ada"}';
     */
-            $acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
-            $start=$len-$panjang; $xx=rand('0',$start);
-            $yy=str_shuffle($acak);
-            $token=substr($yy, $xx, $panjang);
+            $acak = "1933FAasdsk25kwBjakjDlff1988";
+            $panjang = '8';
+            $len = strlen($acak);
+            $start = $len - $panjang;
+            $xx = rand('0', $start);
+            $yy = str_shuffle($acak);
+            $token = substr($yy, $xx, $panjang);
 
             $sql = "UPDATE data_pengajar 
-                    SET pengajar_nama_l        = '".$nama_l."',
-                        pengajar_nama_p        = '".$nama_p."',
-                        pengajar_status        = '".$status."',
-                        pengajar_jk            = '".$jk."',
-                        pengajar_tempat_lahir  = '".$tempat_lahir."',
-                        pengajar_tgl_lahir     = '".$tgl_lahir."',
-                        pengajar_kontak        = '".$kontak."',
-                        pengajar_alamat        = '".$alamat."',
-                        pengajar_email         = '".$email."',
-                        pengajar_tahun_join    = '".$tahun_join."',
-                        pengajar_level         = '".$level."',
-                        pengajar_token         = '".md5($token)."'
-                    WHERE pengajar_id = '".$id."'";
+                    SET pengajar_nama_l        = '" . $nama_l . "',
+                        pengajar_nama_p        = '" . $nama_p . "',
+                        pengajar_status        = '" . $status . "',
+                        pengajar_jk            = '" . $jk . "',
+                        pengajar_tempat_lahir  = '" . $tempat_lahir . "',
+                        pengajar_tgl_lahir     = '" . $tgl_lahir . "',
+                        pengajar_kontak        = '" . $kontak . "',
+                        pengajar_alamat        = '" . $alamat . "',
+                        pengajar_email         = '" . $email . "',
+                        pengajar_tahun_join    = '" . $tahun_join . "',
+                        pengajar_level         = '" . $level . "',
+                        pengajar_token         = '" . md5($token) . "'
+                    WHERE pengajar_id = '" . $id . "'";
 
             if ($this->conn->query($sql) == TRUE) {
                 header('Content-Type: application/json');
@@ -220,86 +237,107 @@ class DbHandler
                 header('Content-Type: application/json');
                 echo '{"message" : "Tidak Mengubah"}';
             }
-
-        }elseif($foto!=NULL){
+        } elseif ($foto != NULL) {
             /*header('Content-Type: application/json');
             echo '{"message" :"Foto ada"}';*/
-    
-            $acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
-            $start=$len-$panjang; $xx=rand('0',$start);
-            $yy=str_shuffle($acak);
-            $token=substr($yy, $xx, $panjang);
+
+            $acak = "1933FAasdsk25kwBjakjDlff1988";
+            $panjang = '8';
+            $len = strlen($acak);
+            $start = $len - $panjang;
+            $xx = rand('0', $start);
+            $yy = str_shuffle($acak);
+            $token = substr($yy, $xx, $panjang);
 
             $sql = "UPDATE pengajar 
-                    SET pengajar_nama_l        = '".$nama_l."',
-                        pengajar_nama_p        = '".$nama_p."',
-                        pengajar_status        = '".$status."',
-                        pengajar_jk            = '".$jk."',
-                        pengajar_tempat_lahir  = '".$tempat_lahir."',
-                        pengajar_tgl_lahir     = '".$tgl_lahir."',
-                        pengajar_kontak        = '".$kontak."',
-                        pengajar_alamat        = '".$alamat."',
-                        pengajar_email         = '".$email."',
-                        pengajar_tahun_join    = '".$tahun_join."',
-                        pengajar_level         = '".$level."',
-                        pengajar_token         = '".md5($token)."'
-                    WHERE pengajar_id = '".$id."'";
+                    SET pengajar_nama_l        = '" . $nama_l . "',
+                        pengajar_nama_p        = '" . $nama_p . "',
+                        pengajar_status        = '" . $status . "',
+                        pengajar_jk            = '" . $jk . "',
+                        pengajar_tempat_lahir  = '" . $tempat_lahir . "',
+                        pengajar_tgl_lahir     = '" . $tgl_lahir . "',
+                        pengajar_kontak        = '" . $kontak . "',
+                        pengajar_alamat        = '" . $alamat . "',
+                        pengajar_email         = '" . $email . "',
+                        pengajar_tahun_join    = '" . $tahun_join . "',
+                        pengajar_level         = '" . $level . "',
+                        pengajar_token         = '" . md5($token) . "'
+                    WHERE pengajar_id = '" . $id . "'";
 
-                if ($this->conn->query($sql) == TRUE) {
-                    move_uploaded_file($foto_temp, '../foto/'.$foto); //upload file
-                    header('Content-Type: application/json');
-                    echo '{"message" : "Berhasil Mengubah"}';
-                } else {
-                    header('Content-Type: application/json');
-                    echo '{"message" : "Tidak Mengubah"}';
-                }
+            if ($this->conn->query($sql) == TRUE) {
+                move_uploaded_file($foto_temp, '../foto/' . $foto); //upload file
+                header('Content-Type: application/json');
+                echo '{"message" : "Berhasil Mengubah"}';
+            } else {
+                header('Content-Type: application/json');
+                echo '{"message" : "Tidak Mengubah"}';
+            }
         }
     }
 
     public function hapuspengajar($id)
-    {   
-        $sqlcek = "SELECT * FROM data_pengajar WHERE pengajar_id = '".$id."'";
-        
+    {
+        $sqlcek = "SELECT * FROM data_pengajar WHERE pengajar_id = '" . $id . "'";
+
         if ($this->conn->query($sqlcek)->num_rows > 0) {
-            $sql = "DELETE FROM data_pengajar WHERE pengajar_id = '".$id."'";
+            $sql = "DELETE FROM data_pengajar WHERE pengajar_id = '" . $id . "'";
             $this->conn->query($sql);
 
             header('Content-Type: application/json');
             echo '{"message" : "Berhasil Terhapus"}';
-        }else{
+        } else {
             header('Content-Type: application/json');
             echo '{"message" : "Tidak Menghapus"}';
         }
     }
 
-    public function profilpengajar($id, $nama_l, $nama_p, $status, $jk, $tempat_lahir, $tgl_lahir, $kontak, $alamat, $email, 
-    $tahun_join, $foto, $level, $foto_temp,$passwordLama,$passwordBaru,$passwordUlang)
-    {    
-        $sql    = "SELECT * FROM data_pengajar WHERE pengajar_id='".$id."'";
+    public function profilpengajar(
+        $id,
+        $nama_l,
+        $nama_p,
+        $status,
+        $jk,
+        $tempat_lahir,
+        $tgl_lahir,
+        $kontak,
+        $alamat,
+        $email,
+        $tahun_join,
+        $foto,
+        $level,
+        $foto_temp,
+        $passwordLama,
+        $passwordBaru,
+        $passwordUlang
+    ) {
+        $sql    = "SELECT * FROM data_pengajar WHERE pengajar_id='" . $id . "'";
         $result = $this->conn->query($sql);
         $row = $result->fetch_assoc();
-        
 
-        if ($foto==NULL && $passwordLama==NULL) {
-            $acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
-            $start=$len-$panjang; $xx=rand('0',$start);
-            $yy=str_shuffle($acak);
-            $token=substr($yy, $xx, $panjang);
-            
+
+        if ($foto == NULL && $passwordLama == NULL) {
+            $acak = "1933FAasdsk25kwBjakjDlff1988";
+            $panjang = '8';
+            $len = strlen($acak);
+            $start = $len - $panjang;
+            $xx = rand('0', $start);
+            $yy = str_shuffle($acak);
+            $token = substr($yy, $xx, $panjang);
+
             $sql = "UPDATE data_pengajar
-                         SET pengajar_nama_l        = '".$nama_l."',
-                        pengajar_nama_p        = '".$nama_p."',
-                        pengajar_status        = '".$status."',
-                        pengajar_jk            = '".$jk."',
-                        pengajar_tempat_lahir  = '".$tempat_lahir."',
-                        pengajar_tgl_lahir     = '".$tgl_lahir."',
-                        pengajar_kontak        = '".$kontak."',
-                        pengajar_alamat        = '".$alamat."',
-                        pengajar_email         = '".$email."',
-                        pengajar_tahun_join    = '".$tahun_join."',
-                        pengajar_level         = '".$level."',
-                        pengajar_token         = '".md5($token)."'
-                    WHERE pengajar_id = '".$id."'";
+                         SET pengajar_nama_l        = '" . $nama_l . "',
+                        pengajar_nama_p        = '" . $nama_p . "',
+                        pengajar_status        = '" . $status . "',
+                        pengajar_jk            = '" . $jk . "',
+                        pengajar_tempat_lahir  = '" . $tempat_lahir . "',
+                        pengajar_tgl_lahir     = '" . $tgl_lahir . "',
+                        pengajar_kontak        = '" . $kontak . "',
+                        pengajar_alamat        = '" . $alamat . "',
+                        pengajar_email         = '" . $email . "',
+                        pengajar_tahun_join    = '" . $tahun_join . "',
+                        pengajar_level         = '" . $level . "',
+                        pengajar_token         = '" . md5($token) . "'
+                    WHERE pengajar_id = '" . $id . "'";
 
             if ($this->conn->query($sql) == TRUE) {
                 header('Content-Type: application/json');
@@ -308,66 +346,72 @@ class DbHandler
                 header('Content-Type: application/json');
                 echo '{"message" : "Profil Gagal Diubah"}';
             }
-        }elseif($foto!=NULL && $passwordLama==NULL){
-            $acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
-            $start=$len-$panjang; $xx=rand('0',$start);
-            $yy=str_shuffle($acak);
-            $token=substr($yy, $xx, $panjang);
+        } elseif ($foto != NULL && $passwordLama == NULL) {
+            $acak = "1933FAasdsk25kwBjakjDlff1988";
+            $panjang = '8';
+            $len = strlen($acak);
+            $start = $len - $panjang;
+            $xx = rand('0', $start);
+            $yy = str_shuffle($acak);
+            $token = substr($yy, $xx, $panjang);
             $aktivasi = "T";
             $sql = "UPDATE data_pengajar
-                         SET pengajar_nama_l        = '".$nama_l."',
-                        pengajar_nama_p        = '".$nama_p."',
-                        pengajar_status        = '".$status."',
-                        pengajar_jk            = '".$jk."',
-                        pengajar_tempat_lahir  = '".$tempat_lahir."',
-                        pengajar_tgl_lahir     = '".$tgl_lahir."',
-                        pengajar_kontak        = '".$kontak."',
-                        pengajar_alamat        = '".$alamat."',
-                        pengajar_email         = '".$email."',
-                        pengajar_tahun_join    = '".$tahun_join."',
-                        pengajar_level         = '".$level."',
-                        pengajar_token         = '".md5($token)."'
-                    WHERE pengajar_id = '".$id."'";
-                    
+                         SET pengajar_nama_l        = '" . $nama_l . "',
+                        pengajar_nama_p        = '" . $nama_p . "',
+                        pengajar_status        = '" . $status . "',
+                        pengajar_jk            = '" . $jk . "',
+                        pengajar_tempat_lahir  = '" . $tempat_lahir . "',
+                        pengajar_tgl_lahir     = '" . $tgl_lahir . "',
+                        pengajar_kontak        = '" . $kontak . "',
+                        pengajar_alamat        = '" . $alamat . "',
+                        pengajar_email         = '" . $email . "',
+                        pengajar_tahun_join    = '" . $tahun_join . "',
+                        pengajar_level         = '" . $level . "',
+                        pengajar_token         = '" . md5($token) . "'
+                    WHERE pengajar_id = '" . $id . "'";
+
             if ($this->conn->query($sql) == TRUE) {
-                move_uploaded_file($foto_temp, '../foto/'.$foto); //upload file
+                move_uploaded_file($foto_temp, '../foto/' . $foto); //upload file
                 header('Content-Type: application/json');
                 echo '{"message" : "Profil Berhasil Diubah"}';
             } else {
                 header('Content-Type: application/json');
                 echo '{"message" : "Profil Gagal Diubah"}';
             }
-        }elseif($foto!=NULL && $passwordLama!=NULL){
-            if ($passwordBaru!=$passwordUlang) {
+        } elseif ($foto != NULL && $passwordLama != NULL) {
+            if ($passwordBaru != $passwordUlang) {
                 header('Content-Type: application/json');
                 echo '{"message" : "Password Baru dan Ulangi Password Berbeda"}';
-            }elseif (md5($passwordLama)!=$row['pengajar_password']) {
+            } elseif (md5($passwordLama) != $row['pengajar_password']) {
                 header('Content-Type: application/json');
                 echo '{"message" : "Password Lama Berbeda"}';
-            }else{
+            } else {
 
-                $acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
-                $start=$len-$panjang; $xx=rand('0',$start);
-                $yy=str_shuffle($acak);
-                $token=substr($yy, $xx, $panjang);
+                $acak = "1933FAasdsk25kwBjakjDlff1988";
+                $panjang = '8';
+                $len = strlen($acak);
+                $start = $len - $panjang;
+                $xx = rand('0', $start);
+                $yy = str_shuffle($acak);
+                $token = substr($yy, $xx, $panjang);
                 $aktivasi = "T";
                 $sql = "UPDATE data_pengajar
-                        SET pengajar_nama_l        = '".$nama_l."',
-                        pengajar_nama_p        = '".$nama_p."',
-                        pengajar_status        = '".$status."',
-                        pengajar_jk            = '".$jk."',
-                        pengajar_tempat_lahir  = '".$tempat_lahir."',
-                        pengajar_tgl_lahir     = '".$tgl_lahir."',
-                        pengajar_kontak        = '".$kontak."',
-                        pengajar_alamat        = '".$alamat."',
-                        pengajar_email         = '".$email."',
-                        pengajar_tahun_join    = '".$tahun_join."',
-                        pengajar_level         = '".$level."',
-                        pengajar_token         = '".md5($token)."'
-                        WHERE pengajar_id = '".$id."'";
-                        
+                        SET pengajar_nama_l        = '" . $nama_l . "',
+                        pengajar_nama_p        = '" . $nama_p . "',
+                        pengajar_status        = '" . $status . "',
+                        pengajar_jk            = '" . $jk . "',
+                        pengajar_tempat_lahir  = '" . $tempat_lahir . "',
+                        pengajar_tgl_lahir     = '" . $tgl_lahir . "',
+                        pengajar_kontak        = '" . $kontak . "',
+                        pengajar_alamat        = '" . $alamat . "',
+                        pengajar_email         = '" . $email . "',
+                        pengajar_tahun_join    = '" . $tahun_join . "',
+                        pengajar_level         = '" . $level . "',
+                        pengajar_token         = '" . md5($token) . "'
+                        WHERE pengajar_id = '" . $id . "'";
+
                 if ($this->conn->query($sql) == TRUE) {
-                    move_uploaded_file($foto_temp, '../foto/'.$foto); //upload file
+                    move_uploaded_file($foto_temp, '../foto/' . $foto); //upload file
                     header('Content-Type: application/json');
                     echo '{"message" : "logout"}';
                 } else {
@@ -375,34 +419,37 @@ class DbHandler
                     echo '{"message" : "Profil Gagal Diubah"}';
                 }
             }
-        }elseif($foto==NULL && $passwordLama!=NULL){
-            if ($passwordBaru!=$passwordUlang) {
+        } elseif ($foto == NULL && $passwordLama != NULL) {
+            if ($passwordBaru != $passwordUlang) {
                 header('Content-Type: application/json');
                 echo '{"message" : "Password Baru dan Ulangi Password Berbeda"}';
-            }elseif (md5($passwordLama)!=$row['pengajar_password']) {
+            } elseif (md5($passwordLama) != $row['pengajar_password']) {
                 header('Content-Type: application/json');
                 echo '{"message" : "Password Lama Berbeda"}';
-            }else{
-                $acak="1933FAasdsk25kwBjakjDlff1988"; $panjang='8'; $len=strlen($acak);
-                $start=$len-$panjang; $xx=rand('0',$start);
-                $yy=str_shuffle($acak);
-                $token=substr($yy, $xx, $panjang);
+            } else {
+                $acak = "1933FAasdsk25kwBjakjDlff1988";
+                $panjang = '8';
+                $len = strlen($acak);
+                $start = $len - $panjang;
+                $xx = rand('0', $start);
+                $yy = str_shuffle($acak);
+                $token = substr($yy, $xx, $panjang);
                 $aktivasi = "T";
                 $sql = "UPDATE data_pengajar
-                            SET pengajar_nama_l    = '".$nama_l."',
-                            pengajar_nama_p        = '".$nama_p."',
-                            pengajar_status        = '".$status."',
-                            pengajar_jk            = '".$jk."',
-                            pengajar_tempat_lahir  = '".$tempat_lahir."',
-                            pengajar_tgl_lahir     = '".$tgl_lahir."',
-                            pengajar_kontak        = '".$kontak."',
-                            pengajar_alamat        = '".$alamat."',
-                            pengajar_email         = '".$email."',
-                            pengajar_tahun_join    = '".$tahun_join."',
-                            pengajar_level         = '".$level."',
-                            pengajar_token         = '".md5($token)."'
-                    WHERE pengajar_id = '".$id."'";
-                        
+                            SET pengajar_nama_l    = '" . $nama_l . "',
+                            pengajar_nama_p        = '" . $nama_p . "',
+                            pengajar_status        = '" . $status . "',
+                            pengajar_jk            = '" . $jk . "',
+                            pengajar_tempat_lahir  = '" . $tempat_lahir . "',
+                            pengajar_tgl_lahir     = '" . $tgl_lahir . "',
+                            pengajar_kontak        = '" . $kontak . "',
+                            pengajar_alamat        = '" . $alamat . "',
+                            pengajar_email         = '" . $email . "',
+                            pengajar_tahun_join    = '" . $tahun_join . "',
+                            pengajar_level         = '" . $level . "',
+                            pengajar_token         = '" . md5($token) . "'
+                    WHERE pengajar_id = '" . $id . "'";
+
                 if ($this->conn->query($sql) == TRUE) {
                     header('Content-Type: application/json');
                     echo '{"message" : "logout"}';
@@ -413,5 +460,4 @@ class DbHandler
             }
         }
     }
-    
 }
