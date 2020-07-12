@@ -9,7 +9,7 @@ require_once './helper/path-helper.php';
 require_once './lib/mysql-database.php';
 
 $route_req = implode("/", $parseURL);
-$path = BASE_PATH . "/web" . "/";
+$path = BASE_PATH . "/view" . "/";
 
 $path .=  (array_key_exists($route_req, $route)) ? $route[$route_req] : $route['404'];
 

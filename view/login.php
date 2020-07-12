@@ -6,7 +6,7 @@
    <title><?= SITE_NAME ?> - Login</title>
    <!-- Tell the browser to be responsive to screen width -->
    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-   <?php require_once web_path('_part/head.php'); ?>
+   <?php require_once view_path('part/head.php'); ?>
 </head>
 
 <body class="hold-transition login-page">
@@ -51,7 +51,7 @@
 
    <!-- /.login-box -->
 
-   <?php require_once web_path('_part/scripts.php'); ?>
+   <?php require_once view_path('part/scripts.php'); ?>
 </body>
 
 </html>

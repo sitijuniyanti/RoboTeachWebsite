@@ -7,17 +7,12 @@ function base_path($path)
 
 function function_path($path)
 {
-   return BASE_PATH . "/" . "functions" . "/" . ltrim($path, "/");
+   return BASE_PATH . "/" . "function" . "/" . ltrim($path, "/");
 }
 
-function library_path($path)
+function lib_path($path)
 {
-   return BASE_PATH . "/" . "libraries" . "/" . ltrim($path, "/");
-}
-
-function process_path($path)
-{
-   return BASE_PATH . "/" . "process" . "/" . ltrim($path, "/");
+   return BASE_PATH . "/" . "lib" . "/" . ltrim($path, "/");
 }
 
 function api_path($path)
@@ -25,9 +20,9 @@ function api_path($path)
    return BASE_PATH . "/" . "api" . "/" . ltrim($path, "/");
 }
 
-function web_path($path)
+function view_path($path)
 {
 
    //$path = ltrim($path, "/");
-   return BASE_PATH . "/" . "web" . "/" . $path;
+   return BASE_PATH . "/" . "view" . "/" . $path;
 }
