@@ -11,7 +11,6 @@ function login_user($level)
 
 function set_user($user)
 {
-   $_SESSION['login'] = true;
    $_SESSION['user'] = $user;
 }
 

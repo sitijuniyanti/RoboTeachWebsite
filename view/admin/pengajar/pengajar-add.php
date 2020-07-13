@@ -1,3 +1,8 @@
+<?php
+require_once view_path('admin/admin.php');
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -6,6 +11,7 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <title><?= SITE_NAME ?> - Tambah pengajar</title>
    <?php include_once  view_path('part/head.php'); ?>
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

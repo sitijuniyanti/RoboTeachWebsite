@@ -5,18 +5,18 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <title><?= SITE_NAME ?> - Beranda</title>
-   <?php include_once  web_path('part/head.php'); ?>
+   <?php include_once  view_path('part/head.php'); ?>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
    <!-- wrapper start -->
    <div class="wrapper">
       <!-- header start -->
-      <?php include_once web_path('admin/part/header.php'); ?>
+      <?php include_once view_path('admin/part/header.php'); ?>
       <!-- header end -->
 
       <!--sidebar start -->
-      <?php include_once web_path('admin/part/sidebar.php'); ?>
+      <?php include_once view_path('admin/part/sidebar.php'); ?>
       <!--sidebar end -->
 
       <!-- content start -->
@@ -36,7 +36,7 @@
       <!-- content end -->
 
       <!-- footer start -->
-      <?php require_once web_path('admin/part/footer.php'); ?>
+      <?php require_once view_path('admin/part/footer.php'); ?>
       <!-- footer end -->
 
       <!-- Control Sidebar -->
@@ -46,7 +46,7 @@
    <!-- wrapper end -->
 
    <?php
-   require_once web_path('part/scripts.php');
+   require_once view_path('part/scripts.php');
    ?>
 </body>
 

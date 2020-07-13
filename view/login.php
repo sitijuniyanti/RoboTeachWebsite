@@ -1,4 +1,5 @@
 <?php
+
 require_once helper_path('form-helper.php');
 require_once function_path('login-function.php');
 
@@ -74,12 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          <?php require_once view_path('part/flash-message.php'); ?>
          <form action="<?= base_url('login') ?>" method="POST">
             <div class="form-group has-feedback <?= input_error('username') ? 'has-error' : null ?> ">
-               <input type="text" value="" name="username" class="form-control" placeholder="username">
+               <input type="text" value="<?= set_value('username') ?>" name="username" class="form-control" placeholder="username">
                <span class="glyphicon glyphicon-user form-control-feedback"></span>
                <span class="help-block"><?= show_input_error('username') ?></span>
             </div>
-            <div class="form-group has-feedback <?= input_error('username') ? 'has-error' : null ?>">
-               <input type="password" value="" name="password" class="form-control" placeholder="password">
+            <div class="form-group has-feedback <?= input_error('password') ? 'has-error' : null ?>">
+               <input type="password" value="<?= set_value('password') ?>" name="password" class="form-control" placeholder="password">
                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                <span class="help-block"><?= show_input_error('password') ?></span>
             </div>
