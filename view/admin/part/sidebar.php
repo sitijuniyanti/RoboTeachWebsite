@@ -27,7 +27,7 @@
          </li>
 
          <li>
-            <a href="index.php?hal=data_sekolah">
+            <a href="<?= base_url('admin/sekolah') ?>">
                <i class="fa fa-users"></i> <span>Data Sekolah</span>
             </a>
          </li>

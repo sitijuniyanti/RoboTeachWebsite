@@ -3,7 +3,7 @@ require_once view_path('admin/admin.php');
 require_once function_path('pengajar-function.php');
 require_once helper_path('form-helper.php');
 
-$datapengajar  = data_pengajar();
+$datapengajar  = mysqli_fetch_all(data_pengajar(), MYSQLI_ASSOC);
 
 // echo $datapengajar;
 // echo var_dump($datapengajar);
