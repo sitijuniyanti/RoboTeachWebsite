@@ -1,8 +1,10 @@
 <?php
 
-function data_pengajar()
+function data_pengajar($query = null)
 {
-   $query = "SELECT * FROM pengajar";
+   if ($query == null) {
+      $query = "SELECT * FROM pengajar";
+   }
    $conn = open_connection();
    $result = mysqli_query($conn, $query);
    if ($result) {

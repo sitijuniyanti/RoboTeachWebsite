@@ -1,5 +1,4 @@
 <?php
-
 require_once view_path('admin/admin.php');
 require_once function_path('pengajar-function.php');
 require_once helper_path('form-helper.php');
@@ -51,13 +50,14 @@ $datapengajar  = data_pengajar();
                   <!-- /.box -->
                   <div class="box">
                      <div class="box-header">
-                        <a href="index.php?hal=tambah_pengajar">
+                        <a href="<?= base_url('admin/pengajar/add') ?>">
                            <input type="button" value="Tambah" class="btn btn-primary" name="">
                         </a>
                      </div>
                      <!-- /.box-header -->
                      <div class="box-body">
-                        <table id="example1" class="table-responsive-sm table-bordered table-striped">
+                        <?php require_once view_path('part/flash-message.php'); ?>
+                        <table id="example1" class="table table-responsive-sm table-bordered table-striped">
                            <div class="table-responsive-sm">
                               <thead>
                                  <tr>
@@ -90,7 +90,7 @@ $datapengajar  = data_pengajar();
                                        <td><?php echo $row['email'] ?></td>
                                        <td><?php echo $row['tahun_join'] ?></td>
 
-                                       <td><a href="index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar'] ?>"><button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
+                                       <td><a href="<?= base_url("admin/penagajar/edit?idpengajar=" . $row['id_pengajar']) ?>"><button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
                                           <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis'] ?>">
                                              <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> </button></a>
                                        </td>
