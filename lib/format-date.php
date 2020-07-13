@@ -1,7 +1,17 @@
 <?php
 
-function format_date_ID($date)
+function format_date_ID($tanggal, $cetak_hari = false)
 {
+   $hari = array(
+      1 =>    'Senin',
+      'Selasa',
+      'Rabu',
+      'Kamis',
+      'Jumat',
+      'Sabtu',
+      'Minggu'
+   );
+
    $bulan = array(
       1 =>   'Januari',
       'Februari',
@@ -16,7 +26,16 @@ function format_date_ID($date)
       'November',
       'Desember'
    );
-   $pecahkan = explode('-', $date);
+   $split      = explode('-', $tanggal);
+   $tgl_indo = $split[2] . ' ' . $bulan[(int)$split[1]] . ' ' . $split[0];
 
-   return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
+   if ($cetak_hari) {
+      $num = date('N', strtotime($tanggal));
+      return $hari[$num] . ', ' . $tgl_indo;
+   }
+   return $tgl_indo;
+}
+
+function format_date_time($date_time)
+{
 }
