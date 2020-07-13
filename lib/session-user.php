@@ -15,10 +15,9 @@ function set_user($user)
    $_SESSION['user'] = $user;
 }
 
-function unset_user()
+function logout_user()
 {
    if (isset($_SESSION['user'])) {
       unset($_SESSION['user']);
-      return true;
    }
 }
