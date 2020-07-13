@@ -40,7 +40,7 @@
                </span>
             </a>
             <ul class="treeview-menu">
-               <li><a href="index.php?hal=data_jadwal"><i class="fa fa-circle-o"></i> Data Jadwal</a></li>
+               <li><a href="<?= base_url('admin/jadwal') ?>"><i class="fa fa-circle-o"></i> Data Jadwal</a></li>
                <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Data Jadwal Pengajar</a></li>
             </ul>
          </li>
