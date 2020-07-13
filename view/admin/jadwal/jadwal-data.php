@@ -44,60 +44,54 @@ $datajadwal = data_jadwal();
 
          <!-- Main content -->
          <section class="content">
-            [TO DO]
             <!-- aaaaa -->
             <div class="row">
                <div class="col-xs-12">
-
-                  <!-- /.box -->
-
                   <div class="box tools">
                      <div class="box-header">
                         <a href="index.php?hal=tambah_jadwal">
                            <input type="button" value="Tambah" class="btn btn-primary" name="">
                         </a>
                      </div>
-                     <!-- /.box-header -->
                      <div class="box-body">
-                        <?php
-                        require_once view_path('part/flash-message.php');
-                        ?>
+                        <?php require_once view_path('part/flash-message.php'); ?>
                         <div class="table-responsive-md ">
                            <table id="tabeljadwal" class="table table-hover table-bordered table-striped"">
-              <thead>
-                <tr>
-                  <th>Id Jadwal</th>
-                  <th>Id Sekolah</th>
-                  <th>Nama Sekolah</th>
-                  <th>Hari</th>
-                  <th>Tanggal</th>
-                  <th>Waktu Mulai</th>
-                  <th>Waktu Selesai</th>
-                  <th>Aksi</th>
+                              <thead>
+                                 <tr>
+                                    <th>Id Jadwal</th>
+                                    <th>Id Sekolah</th>
+                                    <th>Nama Sekolah</th>
+                                    <th>Hari</th>
+                                    <th>Tanggal</th>
+                                    <th>Waktu Mulai</th>
+                                    <th>Waktu Selesai</th>
+                                    <th>Aksi</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <?php foreach ($datajadwal as $row) : ?>
+                                    <tr>
+                                       <td><?= $row['id_jadwal']; ?></td>
+                                       <td><?= $row['id_sekolah']; ?></td>
+                                       <td><?= $row['nama_sekolah']; ?></td>
+                                       <td><?= $row['hari']; ?></td>
+                                       <td><?= $row['tanggal']; ?></td>
+                                       <td><?= $row['waktu_mulai']; ?></td> 
+                                       <td><?= $row['waktu_selesai']; ?></td>
+                                       <td>
+                                       <a href=" ../../Notif/send_notification.php?id_jadwal=<?php echo $row['id_jadwal'] ?>"> <button type="button" class="btn btn-bell-plus" name="btnpushnotif"><i class="fa fa-bell"></i></button>
+                              </a>
+                              <a href=" index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar'] ?>">
+                                 <button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button>
+                              </a>
 
-                </tr>
-                </thead>
-                <tbody>
-
-                <?php foreach ($datajadwal as $row) : ?>
-                <tr>
-                  <td><?= $row['id_jadwal']; ?></td>
-                  <td><?= $row['id_sekolah']; ?></td>
-                  <td><?= $row['nama_sekolah']; ?></td>
-                  <td><?= $row['hari']; ?></td>
-                  <td><?= $row['tanggal']; ?></td>
-                  <td><?= $row['waktu_mulai']; ?></td> 
-                  <td><?= $row['waktu_selesai']; ?></td>
-                  
-                  <td><a href=" index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar'] ?>"></a>
-                              <a href="../../Notif/send_notification.php?id_jadwal=<?php echo $row['id_jadwal'] ?>"><button type="button" class="btn btn-bell-plus" name="btnpushnotif"><i class="fa fa-bell"></i></button>
-                                 <button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
                               <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis'] ?>">
                                  <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> </button></a>
                               </td>
                               </tr>
                            <?php endforeach; ?>
-                           </tfoot>
+                           </tbody>
                            </table>
                         </div>
                         <!-- /.box-body -->
