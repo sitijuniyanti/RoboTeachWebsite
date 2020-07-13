@@ -7,7 +7,6 @@ define('BASE_PATH', __DIR__);
 $path = BASE_PATH . '/include/web-include.php';
 
 $parseURL = (isset($_GET['url'])) ? parseURL($_GET['url']) : $config['page_default'];
-
 if ($parseURL[0] == "rest-api") {
    $path = BASE_PATH . '/include/api-include.php';
 }

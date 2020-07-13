@@ -15,13 +15,13 @@
       <ul class="sidebar-menu" data-widget="tree">
 
          <li>
-            <a href="index.php?hal=dashboard">
+            <a href="<?= base_url('admin/dashboard'); ?>">
                <i class="fa fa-home"></i> <span>Dashboard</span>
             </a>
          </li>
 
          <li>
-            <a href="index.php?hal=data_pengajar">
+            <a href="<?= base_url('admin/pengajar'); ?>">
                <i class="fa fa-users"></i> <span>Data Pengajar</span>
             </a>
          </li>
