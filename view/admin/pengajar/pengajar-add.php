@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if ($result == TRUE) {
          //panggil fungsi email disini
 
-         if (kirim_email()) {
+         if (kirim_email($token)) {
             set_flash_message('success', 'Data Pengajar', 'Berhasil di Tambahkan. serta token sudah dikirm ke via email pengajar');
          } else {
             set_flash_message('warning', 'Data Pengajar', 'Berhasil di Tambahkan. tetapi token tidak dikirm ke via email pengajar');

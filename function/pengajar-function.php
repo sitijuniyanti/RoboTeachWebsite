@@ -72,5 +72,3 @@ function kirim_email($token)
    $mail->AddAddress($email);
    return $mail->IsHTML(true);
 }
-
-echo kirim_email($token);
