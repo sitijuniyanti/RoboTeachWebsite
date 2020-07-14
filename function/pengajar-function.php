@@ -50,10 +50,11 @@ function kirim_email($token)
    $mail             = new PHPMailer();
    $body             =
       "<body style='margin: 10px;'>
-            <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'><a href='https://www.roboteach.com/token/'" . $token . "''>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
+            <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'><a href='https://www.roboteach.com/token/" . $token . "'>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
             </div>
         </body>";
 
+   echo '<script>alert("' . $body . '")</script>';
 
    $mail->IsSMTP();
    $mail->SMTPAuth   = true;                  // enable SMTP authentication
