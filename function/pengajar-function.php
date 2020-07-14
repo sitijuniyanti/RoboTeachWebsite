@@ -24,7 +24,17 @@ function add_pengajar($id, $status, $email, $iduser)
    return $result;
 }
 
-function kirim_email()
+function get_token_to_db($token)
+{
+   $conn = open_connection();
+   $sqltoken = "INSERT INTO pengajar (token) 
+   VALUES ('" . $token . "')";
+   $result = mysqli_query($conn, $sqltoken);
+   close_connection($conn);
+   return $result;
+}
+
+function kirim_email($token)
 {
    require_once lib_path('PHPMailer/class.phpmailer.php');
    require_once lib_path('PHPMailer/class.smtp.php');
@@ -40,7 +50,7 @@ function kirim_email()
    $mail             = new PHPMailer();
    $body             =
       "<body style='margin: 10px;'>
-            <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'><a href='https://www.roboteach.com/token/1234'>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
+            <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'><a href='https://www.roboteach.com/token/'" . $token . "''>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
             </div>
         </body>";
 
@@ -62,3 +72,5 @@ function kirim_email()
    $mail->AddAddress($email);
    return $mail->IsHTML(true);
 }
+
+echo kirim_email($token);
