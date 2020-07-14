@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $message = "Token sudah Kedaluwarsa";
    }
 
-   if (count($data) > 1) {
+   if (count($data) > 0) {
       echo '{ "message" : ' . $message . ' ,"results":' . json_encode($data) . '}';
    } else {
       echo '{ "message" : ' . $message . ' }';

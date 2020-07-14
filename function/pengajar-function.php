@@ -69,3 +69,56 @@ function verifikasi_token($token)
    close_connection($conn);
    return $result;
 }
+
+
+function jadwal_by_id_pengajar($id_pengajar)
+{
+   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal, waktu_mulai, waktu_selesai
+    FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah INNER JOIN jadwal_pengajar
+    ON jadwal.id_jadwal=jadwal_pengajar.id_jadwal 
+    WHERE jadwal_pengajar.id_pengajar='" . $id_pengajar . "'";
+   $conn = open_connection();
+   $result = mysqli_query($conn, $sql);
+   $data = array();
+   if (mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+         $temp['id_jadwal']      = $row['id_jadwal'];
+         $temp['id_pengajar']    = $row['id_pengajar'];
+         $temp['nama_sekolah']   = $row['nama_sekolah'];
+         $temp['alamat_sekolah'] = $row['alamat_sekolah'];
+         $temp['hari']           = $row['hari'];
+         $temp['tanggal']        = $row['tanggal'];
+         $temp['waktu_mulai']    = $row['waktu_mulai'];
+         $temp['waktu_selesai']  = $row['waktu_selesai'];
+         $data[]                 = $temp;
+      }
+   }
+   close_connection($conn);
+   return $data;
+}
+
+function jadwal_by_id_jadwal($id_jadwal)
+{
+   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal, waktu_mulai, waktu_selesai
+    FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah INNER JOIN jadwal_pengajar
+    ON jadwal.id_jadwal=jadwal_pengajar.id_jadwal 
+    WHERE jadwal.id_jadwal='" . $id_jadwal . "'";
+   $conn = open_connection();
+   $result = mysqli_query($conn, $sql);
+   $data = array();
+   if (mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+         $temp['id_jadwal']      = $row['id_jadwal'];
+         $temp['id_pengajar']    = $row['id_pengajar'];
+         $temp['nama_sekolah']   = $row['nama_sekolah'];
+         $temp['alamat_sekolah'] = $row['alamat_sekolah'];
+         $temp['hari']           = $row['hari'];
+         $temp['tanggal']        = $row['tanggal'];
+         $temp['waktu_mulai']    = $row['waktu_mulai'];
+         $temp['waktu_selesai']  = $row['waktu_selesai'];
+         $data[]                 = $temp;
+      }
+   }
+   close_connection($conn);
+   return $data;
+}
