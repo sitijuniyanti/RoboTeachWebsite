@@ -45,7 +45,7 @@ $datasekolah  = data_sekolah();
                <div class="col-xs-12">
                   <div class="box tools">
                      <div class="box-header">
-                        <a href="index.php?hal=tambah_sekolah">
+                        <a href="<?= base_url('admin/sekolah/add') ?>">
                            <input type="button" value="Tambah" class="btn btn-primary" name="">
                         </a>
                      </div>

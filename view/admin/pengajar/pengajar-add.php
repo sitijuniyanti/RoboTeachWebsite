@@ -1,5 +1,51 @@
 <?php
 require_once view_path('admin/admin.php');
+require_once helper_path('form-helper.php');
+require_once function_path('pengajar-function.php');
+require_once function_path('user-function.php');
+require_once lib_path('PHPMailer/class.phpmailer.php');
+require_once lib_path('PHPMailer/class.smtp.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   $id_pengajar = (isset($_POST['id_pengajar'])) ? $_POST['id_pengajar'] : '';
+   $status = (isset($_POST['status'])) ? $_POST['status'] : '';
+   $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+   $errCount = 0;
+   $errMsg = [];
+
+   //validasi id pengajar
+   if (trim($id_pengajar) == false) {
+      $errMsg['id_pengajar'] = "Id pengajar tidak boleh kosong";
+      $errCount += 1;
+   }
+   //validasi status
+   if (trim($status) == false) {
+      $errMsg['status'] = "Status tidak boleh kosong";
+      $errCount += 1;
+   }
+
+   if (trim($status) == false) {
+      $errMsg['status'] = "Status tidak boleh kosong";
+      $errCount += 1;
+   }
+
+
+   //cek tambah data pengajar jika
+   if ($errCount == 0) {
+      $id_user = user_insert_with_last_id('PENGAJAR');
+      $result = add_pengajar($id_pengajar, $status, $email, $id_user);
+      if ($result == TRUE) {
+         //panggil fungsi email disini
+         set_flash_message('success', 'Data Pengajar', 'Berhasil di Tambahkan');
+         redirect_url('admin/pengajar');
+         die();
+      } else {
+         set_flash_message('error', 'Data Pengajar', 'Gagal di Tambahkan!');
+      }
+   } else {
+      set_input_error($errMsg);
+   }
+}
 
 
 ?>

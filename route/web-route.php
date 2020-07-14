@@ -14,4 +14,5 @@ $route = array(
    'admin/sekolah/edit' => 'admin/sekolah/sekolah-edit.php',
    'admin/sekolah/delete' => 'admin/sekolah/sekolah-delete.php',
    'admin/jadwal' => 'admin/jadwal/jadwal-data.php',
+   'admin/jadwal/add' => 'admin/jadwal/jadwal-add.php'
 );

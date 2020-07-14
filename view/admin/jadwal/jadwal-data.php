@@ -49,7 +49,7 @@ $datajadwal = data_jadwal();
                <div class="col-xs-12">
                   <div class="box tools">
                      <div class="box-header">
-                        <a href="index.php?hal=tambah_jadwal">
+                        <a href="<?= base_url('admin/jadwal/add') ?>">
                            <input type="button" value="Tambah" class="btn btn-primary" name="">
                         </a>
                      </div>
