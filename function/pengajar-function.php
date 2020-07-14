@@ -26,6 +26,8 @@ function add_pengajar($id, $status, $email, $iduser)
 
 function kirim_email()
 {
+   require_once lib_path('PHPMailer/class.phpmailer.php');
+   require_once lib_path('PHPMailer/class.smtp.php');
    $acak = "1933FAasdsk25kwBjakjDlff1988";
    $panjang = '8';
    $len = strlen($acak);
@@ -58,6 +60,5 @@ function kirim_email()
 
    $mail->MsgHTML($body);
    $mail->AddAddress($email);
-   $mail->IsHTML(true);
-   //COBAAA
+   return $mail->IsHTML(true);
 }
