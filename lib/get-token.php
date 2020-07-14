@@ -22,11 +22,3 @@ function get_token($panjang)
 
   return $token;
 }
-
-// panjang 15 karakter
-echo get_token(15);
-
-echo '<hr />';
-
-// panjang 50 karakter
-echo get_token(50);

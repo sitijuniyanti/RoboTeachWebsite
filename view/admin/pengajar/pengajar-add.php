@@ -5,16 +5,11 @@ require_once function_path('pengajar-function.php');
 require_once function_path('user-function.php');
 require_once lib_path('get-token.php');
 
-$token = get_token(20);
-get_token_to_db($token);
-kirim_email($token);
-
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $id_pengajar = (isset($_POST['id_pengajar'])) ? $_POST['id_pengajar'] : '';
    $status = (isset($_POST['status'])) ? $_POST['status'] : '';
    $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+   $token = get_token(50);
    $errCount = 0;
    $errMsg = [];
 
@@ -38,11 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    //cek tambah data pengajar jika
    if ($errCount == 0) {
       $id_user = user_insert_with_last_id('PENGAJAR');
-      $result = add_pengajar($id_pengajar, $status, $email, $id_user);
+      $result = add_pengajar($id_pengajar, $status, $email, $id_user, $token);
       if ($result == TRUE) {
          //panggil fungsi email disini
-
-         if (kirim_email($token)) {
+         if (kirim_email($email, $token)) {
             set_flash_message('success', 'Data Pengajar', 'Berhasil di Tambahkan. serta token sudah dikirm ke via email pengajar');
          } else {
             set_flash_message('warning', 'Data Pengajar', 'Berhasil di Tambahkan. tetapi token tidak dikirm ke via email pengajar');
