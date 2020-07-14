@@ -1,0 +1,27 @@
+<?php
+header('Content-Type: application/json');
+require_once function_path('login-function.php');
+$data = [];
+$message = "";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   $username = $_POST['username'];
+   $password = $_POST['password'];
+   $result = login($username, $password);
+   if (mysqli_num_rows($result) > 0) {
+      $user = mysqli_fetch_assoc($result);
+      if ($user['level'] == 'PENGAJAR') {
+         $data = $user;
+         $message = "Berhasil login";
+      } else {
+         $message = "Gagal login, Username atau password salah";
+      }
+   } else {
+      $message = "Gagal login, Username atau password salah";
+   }
+
+   if (count($data) > 1) {
+      echo '{ "message" : ' . $message . ' ,"results":' . json_encode($data) . '}';
+   } else {
+      echo '{ "message" : ' . $message . ' }';
+   }
+}
