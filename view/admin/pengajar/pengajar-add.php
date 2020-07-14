@@ -3,6 +3,12 @@ require_once view_path('admin/admin.php');
 require_once helper_path('form-helper.php');
 require_once function_path('pengajar-function.php');
 require_once function_path('user-function.php');
+require_once lib_path('get-token.php');
+
+$token = get_token(20);
+get_token_to_db($token);
+kirim_email($token);
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
