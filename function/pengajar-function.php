@@ -60,3 +60,12 @@ function kirim_email($email, $token)
    //    //   header("location:../view/beranda.php?pesan=terkirim");
    // }
 }
+
+function verifikasi_token($token)
+{
+   $conn = open_connection();
+   $sqlpengajar = "SELECT * FROM pengajar WHERE token='" . $token . "'";
+   $result = mysqli_query($conn, $sqlpengajar);
+   close_connection($conn);
+   return $result;
+}

@@ -8,7 +8,11 @@ require_once lib_path('mysql-database.php');
 require_once route_path('api-route.php');
 
 $route_req = implode("/", $parseURL);
+
+// echo $route_req;
+
 $path =  (array_key_exists($route_req, $route)) ? $route[$route_req] : $route['404'];
+
 
 if (file_exists(api_path($path))) {
    require_once api_path($path);
