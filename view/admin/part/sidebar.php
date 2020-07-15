@@ -41,7 +41,7 @@
             </a>
             <ul class="treeview-menu">
                <li><a href="<?= base_url('admin/jadwal') ?>"><i class="fa fa-circle-o"></i> Data Jadwal</a></li>
-               <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Data Jadwal Pengajar</a></li>
+               <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Jadwal Pengajar</a></li>
             </ul>
          </li>
 
@@ -61,3 +61,7 @@
    </section>
    <!-- /.sidebar -->
 </aside>
+<!-- 
+$(function() {
+	$('#nav a[href~="' + location.href + '"]').parents('li').addClass('active');
+}); -->
