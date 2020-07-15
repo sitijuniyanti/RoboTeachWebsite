@@ -1,6 +1,6 @@
 <?php
 require_once view_path('admin/admin.php');
-
+require_once helper_path('form-helper.php');
 
 ?>
 <!DOCTYPE html>

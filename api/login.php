@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    }
 
    if (count($data) > 1) {
-      echo '{ "message" : ' . $message . ' ,"results":' . json_encode($data) . '}';
+      echo '{ "message" : ' . json_encode($message) . ' ,"results":' . json_encode($data) . '}';
    } else {
-      echo '{ "message" : ' . $message . ' }';
+      echo '{ "message" : ' . json_encode($message) . ' }';
    }
 }
