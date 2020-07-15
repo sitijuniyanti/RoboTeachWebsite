@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          $temp['level'] = $user['level'];
          $temp['id_pengajar'] = $user['id_pengajar'];
          $data[] = $temp;
-         $message = "Berhasil login";
+         $message = "Berhasil";
       } else {
          $message = "Gagal login, Username atau password salah";
       }
