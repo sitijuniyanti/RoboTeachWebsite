@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $message = "Gagal login, Username atau password salah";
    }
 
-   if (count($data) > 0) {
+   if (count($data) > 1) {
       echo '{ "message" : ' . json_encode($message) . ' ,"results":' . json_encode($data) . '}';
    } else {
       echo '{ "message" : ' . json_encode($message) . ' }';
