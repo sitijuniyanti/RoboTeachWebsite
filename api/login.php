@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: application/json');
 require_once function_path('login-function.php');
 $data = [];
 $message = "";
@@ -10,9 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    if (mysqli_num_rows($result) > 0) {
       $user = mysqli_fetch_assoc($result);
       if ($user['level'] == 'PENGAJAR') {
-         $data['id_user'] = $user['id_user'];
-         $data['level'] = $user['level'];
-         $data['id_pengajar'] = $user['id_pengajar'];
+         $temp['id_user'] = $user['id_user'];
+         $temp['level'] = $user['level'];
+         $temp['id_pengajar'] = $user['id_pengajar'];
+         $data[] = $temp;
          $message = "Berhasil login";
       } else {
          $message = "Gagal login, Username atau password salah";
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $message = "Gagal login, Username atau password salah";
    }
 
-   if (count($data) > 1) {
+   if (count($data) > 0) {
       echo '{ "message" : ' . json_encode($message) . ' ,"results":' . json_encode($data) . '}';
    } else {
       echo '{ "message" : ' . json_encode($message) . ' }';
