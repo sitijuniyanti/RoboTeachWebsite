@@ -3,7 +3,7 @@
 function user_insert_with_last_id($level)
 {
   $conn = open_connection();
-  $sqluser = "INSERT INTO user (level) VALUES ('".$level."')";
+  $sqluser = "INSERT INTO user (level) VALUES ('" . $level . "')";
   if (mysqli_query($conn, $sqluser)) {
     $last_id = mysqli_insert_id($conn);
     close_connection($conn);
@@ -13,4 +13,13 @@ function user_insert_with_last_id($level)
     close_connection($conn);
     return $error;
   }
+}
+
+function user_update($id_user, $username, $password)
+{
+  $conn = open_connection();
+  $sql_user = "UPDATE user SET username='" . $username . "', password=md5('" . $password . "') WHERE id_user='" . $id_user . "'";
+  $result = mysqli_query($conn, $sql_user);
+  close_connection($conn);
+  return $result;
 }

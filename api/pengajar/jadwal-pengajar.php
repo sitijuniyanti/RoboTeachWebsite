@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    }
 
    if (count($data) > 0) {
-      echo '{ "message" : ' . $message . ' ,"results":' . json_encode($data) . '}';
+      echo '{ "message" : ' . json_encode($message) . ' ,"results":' . json_encode($data) . '}';
    } else {
-      echo '{ "message" : ' . $message . ' ,"results":"0"}';
+      echo '{ "message" : ' . json_encode($message) . ' ,"results":"0"}';
    }
 }

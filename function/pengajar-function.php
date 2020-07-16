@@ -122,3 +122,12 @@ function jadwal_by_id_jadwal($id_jadwal)
    close_connection($conn);
    return $data;
 }
+
+function update_token($id_user, $token)
+{
+   $conn = open_connection();
+   $sql_token = "UPDATE pengajar SET token='" . $token . "' WHERE id_user='" . $id_user . "'";
+   $result = mysqli_query($conn, $sql_token);
+   close_connection($conn);
+   return $result;
+}
