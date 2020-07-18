@@ -23,3 +23,10 @@ function user_update($id_user, $username, $password)
   close_connection($conn);
   return $result;
 }
+
+function user_sekolah($username, $password, $hakakses)
+{
+  $sqluser = "INSERT INTO user
+    (username,password,level)
+    VALUES ('" . $username . "','" . md5($password) . "','" . $hakakses . "')";
+}

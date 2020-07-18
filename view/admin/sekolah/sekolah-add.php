@@ -1,8 +1,61 @@
 <?php
 require_once view_path('admin/admin.php');
 require_once helper_path('form-helper.php');
+require_once function_path('sekolah-function.php');
+require_once function_path('user-function.php');
 
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   $id_sekolah = (isset($_POST['id_sekolah'])) ? $_POST['id_sekolah'] : '';
+   $nama_sekolah = (isset($_POST['nama_sekolah'])) ? $_POST['nama_sekolah'] : '';
+   $alamat_sekolah = (isset($_POST['alamat_sekolah'])) ? $_POST['alamat_sekolah'] : '';
+   $lat_sekolah = (isset($_POST['lat_sekolah'])) ? $_POST['lat_sekolah'] : '';
+   $long_sekolah = (isset($_POST['long_sekolah'])) ? $_POST['long_sekolah'] : '';
+   $nama_penanggungjawab = (isset($_POST['nama_penanggungjawab'])) ? $_POST['nama_penanggungjawab'] : '';
+   $no_hp_pj = (isset($_POST['no_hp_pj'])) ? $_POST['no_hp_pj'] : '';
+   $errCount = 0;
+   $errMsg = [];
+
+   //validasi id pengajar
+   if (trim($id_pengajar) == false) {
+      $errMsg['id_pengajar'] = "Id pengajar tidak boleh kosong";
+      $errCount += 1;
+   }
+   //validasi status
+   if (trim($status) == false) {
+      $errMsg['status'] = "Status tidak boleh kosong";
+      $errCount += 1;
+   }
+
+   if (trim($status) == false) {
+      $errMsg['status'] = "Status tidak boleh kosong";
+      $errCount += 1;
+   }
+
+
+   //cek tambah data pengajar jika
+   if ($errCount == 0) {
+      $id_user = user_sekolah($username, $password, 'SEKOLAH');
+      $result = add_pengajar($id_pengajar, $status, $email, $id_user, $token);
+      if ($result == TRUE) {
+         //panggil fungsi email disini
+         if (kirim_email($email, $token)) {
+            set_flash_message('success', 'Data Pengajar', 'Berhasil di Tambahkan. serta token sudah dikirm ke via email pengajar');
+         } else {
+            set_flash_message('warning', 'Data Pengajar', 'Berhasil di Tambahkan. tetapi token tidak dikirm ke via email pengajar');
+         }
+         redirect_url('admin/pengajar');
+         die();
+      } else {
+         set_flash_message('error', 'Data Pengajar', 'Gagal di Tambahkan!');
+      }
+   } else {
+      set_input_error($errMsg);
+   }
+}
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -57,7 +110,7 @@ require_once helper_path('form-helper.php');
 
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal" name="form" action="../../proses/aksiTambahSekolah.php" method="POST">
+                        <form class="form-horizontal" name="form" action="" method="POST">
                            <div class="box-body">
                               <?php
                               require_once view_path('part/flash-message.php');

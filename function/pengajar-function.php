@@ -73,7 +73,8 @@ function verifikasi_token($token)
 
 function jadwal_by_id_pengajar($id_pengajar)
 {
-   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal, waktu_mulai, waktu_selesai
+   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal,
+    waktu_mulai, waktu_selesai
     FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah INNER JOIN jadwal_pengajar
     ON jadwal.id_jadwal=jadwal_pengajar.id_jadwal 
     WHERE jadwal_pengajar.id_pengajar='" . $id_pengajar . "'";
@@ -99,7 +100,8 @@ function jadwal_by_id_pengajar($id_pengajar)
 
 function jadwal_by_id_jadwal($id_jadwal)
 {
-   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal, waktu_mulai, waktu_selesai
+   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal, waktu_mulai, waktu_selesai,
+   sekolah.lat_sekolah, sekolah.long_sekolah
     FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah INNER JOIN jadwal_pengajar
     ON jadwal.id_jadwal=jadwal_pengajar.id_jadwal 
     WHERE jadwal.id_jadwal='" . $id_jadwal . "'";
@@ -116,6 +118,8 @@ function jadwal_by_id_jadwal($id_jadwal)
          $temp['tanggal']        = $row['tanggal'];
          $temp['waktu_mulai']    = $row['waktu_mulai'];
          $temp['waktu_selesai']  = $row['waktu_selesai'];
+         $temp['lat_sekolah']    = $row['lat_sekolah'];
+         $temp['long_sekolah']   = $row['long_sekolah'];
          $data[]                 = $temp;
       }
    }

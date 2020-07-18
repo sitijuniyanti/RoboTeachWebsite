@@ -25,3 +25,16 @@ function get_sekolah_id_jadwal($id_jadwal)
    close_connection($conn);
    return $result;
 }
+
+function add_sekolah($id_sekolah, $iduser, $nama_sekolah, $alamat_sekolah, $lat_sekolah, $long_sekolah, $nama_penanggungjawab, $no_hp_pj)
+{
+
+   $conn = open_connection();
+   $sqlsekolah = "INSERT INTO sekolah 
+               (id_sekolah,id_user,nama_sekolah,alamat_sekolah,lat_sekolah,long_sekolah,nama_penanggungjawab,no_hp_pj) 
+               VALUES ('" . $id_sekolah . "','" . $iduser . "','" . $nama_sekolah . "','" . $alamat_sekolah . "','" . $lat_sekolah . "','" . $long_sekolah . "','" . $nama_penanggungjawab . "','" . $no_hp_pj . "')";
+
+   $result = mysqli_query($conn, $sqlsekolah);
+   close_connection($conn);
+   return $result;
+}
