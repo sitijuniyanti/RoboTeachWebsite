@@ -19,6 +19,7 @@ if (isset($_GET['id_sekolah'])) {
    $no_hp_pj = (isset($_POST['no_hp_pj'])) ? $_POST['no_hp_pj'] : '';
    $username = (isset($_POST['username'])) ? $_POST['username'] : '';
    $password = (isset($_POST['password'])) ? $_POST['password'] : '';
+   $sekolah = $_POST;
    $errCount = 0;
    $errMsg = [];
 
