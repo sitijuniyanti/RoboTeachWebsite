@@ -10,9 +10,9 @@ if (isset($_GET['idpengajar'])) {
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    echo "ada post";
 } else {
-   // set_flash_message('warning', 'Edit data pengajar', 'Tentukan data pengajar yang akan di edit');
-   // redirect_url('admin/pengajar');
-   // die();
+   set_flash_message('warning', 'Edit data pengajar', 'Tentukan data pengajar yang akan di edit');
+   redirect_url('admin/pengajar');
+   die();
 }
 
 

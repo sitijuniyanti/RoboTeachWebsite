@@ -2,13 +2,14 @@
 require_once view_path('admin/admin.php');
 require_once helper_path('form-helper.php');
 require_once function_path('sekolah-function.php');
-require_once function_path('user-function.php');
+// require_once function_path('user-function.php');
 
 $sekolah = [];
 if (isset($_GET['id_sekolah'])) {
    $id_sekolah = $_GET['id_sekolah'];
    $sekolah = data_sekolah("SELECT * FROM sekolah INNER JOIN user ON sekolah.id_user=user.id_user WHERE id_sekolah='$id_sekolah'")[0];
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   $old_id_sekolah = (isset($_POST['old_id_sekolah'])) ? $_POST['old_id_sekolah'] : '';
    $id_sekolah = (isset($_POST['id_sekolah'])) ? $_POST['id_sekolah'] : '';
    $nama_sekolah = (isset($_POST['nama_sekolah'])) ? $_POST['nama_sekolah'] : '';
    $alamat_sekolah = (isset($_POST['alamat_sekolah'])) ? $_POST['alamat_sekolah'] : '';
@@ -94,12 +95,11 @@ if (isset($_GET['id_sekolah'])) {
 <head>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title><?= SITE_NAME ?> - Tambah Sekolah</title>
+   <title><?= SITE_NAME ?> - Ubah Sekolah</title>
    <?php include_once  view_path('part/head.php'); ?>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-   <?php echo var_dump($sekolah); ?>
    <!-- wrapper start -->
    <div class="wrapper">
       <!-- header start -->
@@ -116,12 +116,12 @@ if (isset($_GET['id_sekolah'])) {
          <section class="content-header">
             <section class="content-header">
                <h1>
-                  Tambah Data Sekolah
+                  Ubah Data Sekolah
                </h1>
                <ol class="breadcrumb">
                   <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                   <li><a href="#">Data Sekolah</a></li>
-                  <li class="active">Tambah Data</li>
+                  <li class="active">Ubah Data</li>
                </ol>
             </section>
 
@@ -138,12 +138,12 @@ if (isset($_GET['id_sekolah'])) {
                      <!-- general form elements -->
                      <div class="box box-primary">
                         <div class="box-header with-border">
-                           <h3 class="box-title">Form Tambah Data Sekolah</h3>
+                           <h3 class="box-title">Form Ubah Data Sekolah</h3>
                         </div>
 
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal" name="form" action="<?= base_url('admin/sekolah/add') ?>" method="POST">
+                        <form class="form-horizontal" name="form" action="<?= base_url('admin/sekolah/edit') ?>" method="POST">
                            <div class="box-body">
                               <?php
                               require_once view_path('part/flash-message.php');
@@ -176,7 +176,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('alamat_sekolah') ? 'has-error' : null ?> ">
-                                       <textarea type="text" value="<?= set_value('alamat_sekolah', $sekolah['alamat']) ?>" id="alamat" name="alamat_sekolah" class="form-control" placeholder="Alamat"> </textarea>
+                                       <textarea type="text" name=alamat_sekolah id="alamat" class="form-control" placeholder="Alamat"><?= set_value('alamat_sekolah', $sekolah['alamat_sekolah']) ?></textarea>
                                        <span class="help-block"><?= show_input_error('alamat_sekolah') ?></span>
                                     </div>
                                  </div>
@@ -187,7 +187,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('nama_penanggungjawab') ? 'has-error' : null ?> ">
-                                       <input type="text" value="<?= set_value('nama_penanggungjawab') ?>" id="nama_pj" name="nama_penanggungjawab" class="form-control" placeholder="Nama Penanggung Jawab">
+                                       <input type="text" value="<?= set_value('nama_penanggungjawab', $sekolah['nama_penanggungjawab']) ?>" id="nama_pj" name="nama_penanggungjawab" class="form-control" placeholder="Nama Penanggung Jawab">
                                        <span class="help-block"><?= show_input_error('nama_penanggungjawab') ?></span>
                                     </div>
                                  </div>
@@ -198,7 +198,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('no_hp_pj') ? 'has-error' : null ?> ">
-                                       <input type="text" value="<?= set_value('no_hp_pj') ?>" id="nohppj" name="no_hp_pj" class="form-control" placeholder="Nomor Handphone">
+                                       <input type="text" value="<?= set_value('no_hp_pj', $sekolah['no_hp_pj']) ?>" id="nohppj" name="no_hp_pj" class="form-control" placeholder="Nomor Handphone">
                                        <span class="help-block"><?= show_input_error('no_hp_pj') ?></span>
                                     </div>
                                  </div>
@@ -211,7 +211,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('lat_sekolah') ? 'has-error' : null ?> ">
-                                       <input type="text" value="<?= set_value('lat_sekolah') ?>" id="latitude" name="lat_sekolah" class="form-control" placeholder="">
+                                       <input type="text" value="<?= set_value('lat_sekolah', $sekolah['lat_sekolah']) ?>" id="latitude" name="lat_sekolah" class="form-control" placeholder="">
                                        <span class="help-block"><?= show_input_error('lat_sekolah') ?></span>
                                     </div>
                                  </div>
@@ -222,7 +222,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('long_sekolah') ? 'has-error' : null ?> ">
-                                       <input type="text" value="<?= set_value('long_sekolah') ?>" id="longitude" name="long_sekolah" class="form-control" placeholder="">
+                                       <input type="text" value="<?= set_value('long_sekolah', $sekolah['long_sekolah']) ?>" id="longitude" name="long_sekolah" class="form-control" placeholder="">
                                        <span class="help-block"><?= show_input_error('long_sekolah') ?></span>
                                     </div>
                                  </div>
@@ -233,7 +233,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('username') ? 'has-error' : null ?> ">
-                                       <input type="text" value="<?= set_value('username') ?>" id="username" name="username" class="form-control" placeholder="Username">
+                                       <input type="text" value="<?= set_value('username', $sekolah['username']) ?>" id="username" name="username" class="form-control" placeholder="Username">
                                        <span class="help-block"><?= show_input_error('username') ?></span>
                                     </div>
                                  </div>
@@ -244,7 +244,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('password') ? 'has-error' : null ?> ">
-                                       <input type="password" value="<?= set_value('password') ?>" id="password" name="password" class="form-control" placeholder="Password">
+                                       <input type="password" value="<?= set_value('password', $sekolah['password']) ?>" id="password" name="password" class="form-control" placeholder="Password">
                                        <span class="help-block"><?= show_input_error('password') ?></span>
                                     </div>
                                  </div>
