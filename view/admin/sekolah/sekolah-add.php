@@ -13,41 +13,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $long_sekolah = (isset($_POST['long_sekolah'])) ? $_POST['long_sekolah'] : '';
    $nama_penanggungjawab = (isset($_POST['nama_penanggungjawab'])) ? $_POST['nama_penanggungjawab'] : '';
    $no_hp_pj = (isset($_POST['no_hp_pj'])) ? $_POST['no_hp_pj'] : '';
+   $username = (isset($_POST['username'])) ? $_POST['username'] : '';
+   $password = (isset($_POST['password'])) ? $_POST['password'] : '';
    $errCount = 0;
    $errMsg = [];
 
-   //validasi id pengajar
-   if (trim($id_pengajar) == false) {
-      $errMsg['id_pengajar'] = "Id pengajar tidak boleh kosong";
+   //VALIDASI
+   if (trim($id_sekolah) == false) {
+      $errMsg['id_sekolah'] = "Id sekolah tidak boleh kosong";
       $errCount += 1;
    }
-   //validasi status
-   if (trim($status) == false) {
-      $errMsg['status'] = "Status tidak boleh kosong";
-      $errCount += 1;
-   }
-
-   if (trim($status) == false) {
-      $errMsg['status'] = "Status tidak boleh kosong";
+   //validasi nama sekolah
+   if (trim($nama_sekolah) == false) {
+      $errMsg['nama_sekolah'] = "Nama Sekolah tidak boleh kosong";
       $errCount += 1;
    }
 
+   if (trim($alamat_sekolah) == false) {
+      $errMsg['alamat_sekolah'] = "Alamat Sekolah tidak boleh kosong";
+      $errCount += 1;
+   }
 
-   //cek tambah data pengajar jika
+   if (trim($nama_penanggungjawab) == false) {
+      $errMsg['nama_penanggungjawab'] = "Nama penanggung jawab tidak boleh kosong";
+      $errCount += 1;
+   }
+
+   if (trim($no_hp_pj) == false) {
+      $errMsg['no_hp_pj'] = "Nomor Handphone tidak boleh kosong";
+      $errCount += 1;
+   }
+
+   if (trim($lat_sekolah) == false) {
+      $errMsg['lat_sekolah'] = "Latitude Sekolah tidak boleh kosong";
+      $errCount += 1;
+   }
+
+   if (trim($long_sekolah) == false) {
+      $errMsg['long_sekolah'] = "Longitude Sekolah tidak boleh kosong";
+      $errCount += 1;
+   }
+
+   if (trim($username) == false) {
+      $errMsg['username'] = "Username Sekolah tidak boleh kosong";
+      $errCount += 1;
+   }
+
+   if (trim($password) == false) {
+      $errMsg['password'] = "Password Sekolah tidak boleh kosong";
+      $errCount += 1;
+   }
+
+
+
+
+   //cek tambah data sekolah jika
    if ($errCount == 0) {
       $id_user = user_sekolah($username, $password, 'SEKOLAH');
-      $result = add_pengajar($id_pengajar, $status, $email, $id_user, $token);
+      $result = add_sekolah($id_sekolah, $nama_sekolah, $alamat_sekolah, $lat_sekolah, $long_sekolah, $nama_penanggungjawab, $no_hp_pj, $id_user);
       if ($result == TRUE) {
-         //panggil fungsi email disini
-         if (kirim_email($email, $token)) {
-            set_flash_message('success', 'Data Pengajar', 'Berhasil di Tambahkan. serta token sudah dikirm ke via email pengajar');
-         } else {
-            set_flash_message('warning', 'Data Pengajar', 'Berhasil di Tambahkan. tetapi token tidak dikirm ke via email pengajar');
-         }
-         redirect_url('admin/pengajar');
+         set_flash_message('success', 'Data Sekolah', 'Berhasil di Tambahkan');
+         redirect_url('admin/sekolah');
          die();
       } else {
-         set_flash_message('error', 'Data Pengajar', 'Gagal di Tambahkan!');
+         set_flash_message('error', 'Data Sekolah', 'Gagal di Tambahkan!');
       }
    } else {
       set_input_error($errMsg);
@@ -110,16 +139,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal" name="form" action="" method="POST">
+                        <form class="form-horizontal" name="form" action="<?= base_url('admin/sekolah/add') ?>" method="POST">
                            <div class="box-body">
                               <?php
                               require_once view_path('part/flash-message.php');
                               ?>
+
                               <div class="form-group">
                                  <label type="text" class="col-sm-2 control-label">Id Sekolah</label>
 
+
                                  <div class="col-sm-8">
-                                    <input type="text" id="idsekolah" name="id_sekolah" class="form-control" placeholder="Id Sekolah">
+                                    <div class="form-group has-feedback <?= input_error('id_sekolah') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('id_sekolah') ?>" id="idsekolah" name="id_sekolah" class="form-control" placeholder="Id Sekolah">
+                                       <span class="help-block"><?= show_input_error('id_sekolah') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -127,7 +161,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Nama Sekolah</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="namasekolah" name="nama_sekolah" class="form-control" placeholder="Nama Sekolah">
+                                    <div class="form-group has-feedback <?= input_error('nama_sekolah') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('nama_sekolah') ?>" id="namasekolah" name="nama_sekolah" class="form-control" placeholder="Nama Sekolah">
+                                       <span class="help-block"><?= show_input_error('nama_sekolah') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -136,7 +173,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Alamat</label>
 
                                  <div class="col-sm-8">
-                                    <textarea type="text" id="alamat" name="alamat_sekolah" class="form-control" placeholder="Alamat"> </textarea>
+                                    <div class="form-group has-feedback <?= input_error('alamat_sekolah') ? 'has-error' : null ?> ">
+                                       <textarea type="text" value="<?= set_value('alamat_sekolah') ?>" id="alamat" name="alamat_sekolah" class="form-control" placeholder="Alamat"> </textarea>
+                                       <span class="help-block"><?= show_input_error('alamat_sekolah') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -144,7 +184,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Nama Penanggung Jawab</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="nama_pj" name="nama_penanggungjawab" class="form-control" placeholder="Nama Penanggung Jawab">
+                                    <div class="form-group has-feedback <?= input_error('nama_penanggungjawab') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('nama_penanggungjawab') ?>" id="nama_pj" name="nama_penanggungjawab" class="form-control" placeholder="Nama Penanggung Jawab">
+                                       <span class="help-block"><?= show_input_error('nama_penanggungjawab') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -152,7 +195,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Nomor Handphone</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="nohppj" name="no_hp_pj" class="form-control" placeholder="Nomor Handphone">
+                                    <div class="form-group has-feedback <?= input_error('no_hp_pj') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('no_hp_pj') ?>" id="nohppj" name="no_hp_pj" class="form-control" placeholder="Nomor Handphone">
+                                       <span class="help-block"><?= show_input_error('no_hp_pj') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -162,7 +208,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Latitude</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="latitude" name="lat_sekolah" class="form-control" placeholder="">
+                                    <div class="form-group has-feedback <?= input_error('lat_sekolah') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('lat_sekolah') ?>" id="latitude" name="lat_sekolah" class="form-control" placeholder="">
+                                       <span class="help-block"><?= show_input_error('lat_sekolah') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -170,7 +219,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Longitude</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="longitude" name="long_sekolah" class="form-control" placeholder="">
+                                    <div class="form-group has-feedback <?= input_error('long_sekolah') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('long_sekolah') ?>" id="longitude" name="long_sekolah" class="form-control" placeholder="">
+                                       <span class="help-block"><?= show_input_error('long_sekolah') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -178,7 +230,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Username</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+                                    <div class="form-group has-feedback <?= input_error('username') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('username') ?>" id="username" name="username" class="form-control" placeholder="Username">
+                                       <span class="help-block"><?= show_input_error('username') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -186,11 +241,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Password</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="password" name="password" class="form-control" placeholder="Password">
+                                    <div class="form-group has-feedback <?= input_error('password') ? 'has-error' : null ?> ">
+                                       <input type="password" value="<?= set_value('password') ?>" id="password" name="password" class="form-control" placeholder="Password">
+                                       <span class="help-block"><?= show_input_error('password') ?></span>
+                                    </div>
                                  </div>
                               </div>
-
-
 
                            </div>
                            <!-- /.box-body -->

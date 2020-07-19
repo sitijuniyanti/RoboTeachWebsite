@@ -51,6 +51,7 @@ $datasekolah  = data_sekolah();
                      </div>
                      <!-- /.box-header -->
                      <div class="box-body">
+                        <?php require_once view_path('part/flash-message.php'); ?>
                         <div class="table-responsive-md ">
                            <table id="tabelsekolah" class="table table-hover table-bordered table-striped"">
                               <thead>

@@ -24,9 +24,20 @@ function user_update($id_user, $username, $password)
   return $result;
 }
 
-function user_sekolah($username, $password, $hakakses)
+function user_sekolah($username, $password, $level)
 {
   $sqluser = "INSERT INTO user
     (username,password,level)
-    VALUES ('" . $username . "','" . md5($password) . "','" . $hakakses . "')";
+    VALUES ('" . $username . "','" . md5($password) . "','" . $$level . "')";
+
+  $conn = open_connection();
+  if (mysqli_query($conn, $sqluser)) {
+    $last_id = mysqli_insert_id($conn);
+    close_connection($conn);
+    return $last_id;
+  } else {
+    $error = mysqli_error($conn);
+    close_connection($conn);
+    return $error;
+  }
 }

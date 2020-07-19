@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $errCount += 1;
    }
 
-   if (trim($status) == false) {
-      $errMsg['status'] = "Status tidak boleh kosong";
+   if (trim($email) == false) {
+      $errMsg['email'] = "Email tidak boleh kosong";
       $errCount += 1;
    }
 
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal" name="form" action="" method="POST">
+                        <form class="form-horizontal" name="form" action="<?= base_url('admin/pengajar/add') ?>" method="POST">
                            <div class="box-body">
                               <?php
                               require_once view_path('part/flash-message.php');
@@ -112,7 +112,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label type="text" class="col-sm-2 control-label">Id Pengajar</label>
 
                                  <div class="col-sm-8">
-                                    <input type="text" id="idpengajar" name="id_pengajar" class="form-control" placeholder="Id Pengajar">
+                                    <div class="form-group has-feedback <?= input_error('id_pengajar') ? 'has-error' : null ?> ">
+                                       <input type="text" value="<?= set_value('id_pengajar') ?>" id="idpengajar" name="id_pengajar" class="form-control" placeholder="Id Pengajar">
+                                       <span class="help-block"><?= show_input_error('id_pengajar') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -120,11 +123,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               <div class="form-group">
                                  <label class="col-sm-2 control-label">Status</label>
                                  <div class="col-sm-8">
-                                    <select class="form-control select2" style="width: 100%;" name="status">
-                                       <option selected="selected">-</option>
-                                       <option value="Tetap">Tetap</option>
-                                       <option value="Freelance">Freelance</option>
-                                    </select>
+                                    <div class="form-group has-feedback <?= input_error('status') ? 'has-error' : null ?> ">
+                                       <select class="form-control select2" style="width: 100%;" name="status" value="<?= set_value('status') ?>">
+                                          <option selected="selected"></option>
+                                          <option value="Tetap">Tetap</option>
+                                          <option value="Freelance">Freelance</option>
+                                       </select>
+                                       <span class="help-block"><?= show_input_error('status') ?></span>
+                                    </div>
                                  </div>
                               </div>
 
@@ -133,16 +139,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                  <label class="col-sm-2 control-label">Email</label>
 
                                  <div class="col-sm-8">
-                                    <input id="email" name="email" class="form-control" placeholder="Email">
+                                    <div class="form-group has-feedback <?= input_error('email') ? 'has-error' : null ?> ">
+                                       <input id="email" name="email" class="form-control" placeholder="Email" value="<?= set_value('email') ?>">
+                                       <span class="help-block"><?= show_input_error('email') ?></span>
+                                    </div>
                                  </div>
+
+
                               </div>
-
-
-                           </div>
-                           <div class="box-footer">
-                              <label class="col-sm-2 control-label"></label>
-                              <button type="submit" name="simpan" class="btn btn-primary">Simpan Data</button>
-                           </div>
+                              <div class="box-footer">
+                                 <label class="col-sm-2 control-label"></label>
+                                 <button type="submit" name="simpan" class="btn btn-primary">Simpan Data</button>
+                              </div>
                         </form>
                      </div>
                   </div>

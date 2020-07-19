@@ -13,3 +13,14 @@ function data_jadwal($query = null)
    close_connection($conn);
    return $result;
 }
+
+function add_jadwal($id_sekolah, $hari, $tanggal, $waktu_mulai, $waktu_selesai)
+{
+   $conn = open_connection();
+   $sqljadwal = "INSERT INTO jadwal 
+    (id_sekolah,hari,tanggal,waktu_mulai,waktu_selesai) 
+    VALUES ('" . $id_sekolah . "','" . $hari . "','" . $tanggal . "','" . $waktu_mulai . "','" . $waktu_selesai . "')";
+   $result = mysqli_query($conn, $sqljadwal);
+   close_connection($conn);
+   return $result;
+}
