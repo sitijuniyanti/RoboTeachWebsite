@@ -77,7 +77,7 @@ $datasekolah  = data_sekolah();
                                        <td><?php echo $row['nama_penanggungjawab'] ?></td>
                                        <td><?php echo $row['no_hp_pj'] ?></td>
                                        <td>
-                                          <a href=" index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar'] ?>">
+                                          <a href=" <?= base_url('admin/sekolah/edit?id_sekolah=' . $row['id_sekolah']) ?>">
                               <button type="button" class="btn btn-warning" name="btnubah">
                                  <i class="fa fa-pencil"></i>
                               </button>

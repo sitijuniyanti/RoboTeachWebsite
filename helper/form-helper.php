@@ -2,10 +2,14 @@
 
 function set_value($inputName, $value = null)
 {
+   $result = '';
    if (isset($_REQUEST[$inputName])) {
-      $value = $_REQUEST[$inputName];
+      $result = $_REQUEST[$inputName];
    }
-   return $value;
+   if ($value != null) {
+      $result = $value;
+   }
+   return $result;
 }
 
 function set_input_error($errMsg)
