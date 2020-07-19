@@ -9,6 +9,7 @@ if (isset($_GET['id_sekolah'])) {
    $id_sekolah = $_GET['id_sekolah'];
    $sekolah = data_sekolah("SELECT * FROM sekolah INNER JOIN user ON sekolah.id_user=user.id_user WHERE id_sekolah='$id_sekolah'")[0];
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   $sekolah = $_POST;
    $old_id_sekolah = (isset($_POST['old_id_sekolah'])) ? $_POST['old_id_sekolah'] : '';
    $id_sekolah = (isset($_POST['id_sekolah'])) ? $_POST['id_sekolah'] : '';
    $nama_sekolah = (isset($_POST['nama_sekolah'])) ? $_POST['nama_sekolah'] : '';
@@ -19,7 +20,6 @@ if (isset($_GET['id_sekolah'])) {
    $no_hp_pj = (isset($_POST['no_hp_pj'])) ? $_POST['no_hp_pj'] : '';
    $username = (isset($_POST['username'])) ? $_POST['username'] : '';
    $password = (isset($_POST['password'])) ? $_POST['password'] : '';
-   $sekolah = $_POST;
    $errCount = 0;
    $errMsg = [];
 
@@ -69,7 +69,7 @@ if (isset($_GET['id_sekolah'])) {
       $errCount += 1;
    }
    //cek tambah data sekolah jika
-   if ($errCount == 100000) {
+   if ($errCount == 0) {
       $id_user = user_sekolah($username, $password, 'SEKOLAH');
       $result = add_sekolah($id_sekolah, $nama_sekolah, $alamat_sekolah, $lat_sekolah, $long_sekolah, $nama_penanggungjawab, $no_hp_pj, $id_user);
       if ($result == TRUE) {
