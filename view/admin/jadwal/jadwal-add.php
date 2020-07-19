@@ -60,6 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?= SITE_NAME ?> - Beranda</title>
   <?php include_once  view_path('part/head.php'); ?>
+  <!-- karena ini spesifik library/link tambahan. maka tempatkan di bawah :require_once view_path 'part/head.php' -->
+  <link rel="stylesheet" href="<?= assets_url('bootstrap-daterangepicker/daterangepicker.css') ?>">
+  <link rel="stylesheet" href="<?= assets_url('bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>">
+  <link rel="stylesheet" href="<?= assets_url('select2/dist/css/select2.min.css') ?>">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -207,15 +211,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </div>
   <!-- wrapper end -->
 
-  <script src="<?= assets_url('moment/min/moment.min.js') ?>"></script>
-  <script src="<?= assets_url('bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
-  <script src="<?= assets_url('bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
-  <script src="<?= assets_url('select2/dist/js/select2.full.min.js') ?>"></script>
 
   <?php
   require_once view_path('part/scripts.php');
   ?>
-
+  <!-- karena ini spesifik library/link tambahan. maka tempatkan di bawah :require_once view_path 'part/scripts.php' -->
+  <script src="<?= assets_url('moment/min/moment.min.js') ?>"></script>
+  <script src="<?= assets_url('bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
+  <script src="<?= assets_url('bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
+  <script src="<?= assets_url('select2/dist/js/select2.full.min.js') ?>"></script>
   <script>
     $(document).ready(function() {
       $('.select2').select2();
