@@ -72,11 +72,11 @@ if (isset($_GET['id_sekolah'])) {
       $id_user = user_sekolah($username, $password, 'SEKOLAH');
       $result = add_sekolah($id_sekolah, $nama_sekolah, $alamat_sekolah, $lat_sekolah, $long_sekolah, $nama_penanggungjawab, $no_hp_pj, $id_user);
       if ($result == TRUE) {
-         set_flash_message('success', 'Data Sekolah', 'Berhasil di Tambahkan');
+         set_flash_message('success', 'Data Sekolah', 'Berhasil di Ubah');
          redirect_url('admin/sekolah');
          die();
       } else {
-         set_flash_message('error', 'Data Sekolah', 'Gagal di Tambahkan!');
+         set_flash_message('error', 'Data Sekolah', 'Gagal di Ubah!');
       }
    } else {
       set_input_error($errMsg);
