@@ -10,6 +10,7 @@ if (isset($_GET['id_sekolah'])) {
    $sekolah = data_sekolah("SELECT * FROM sekolah INNER JOIN user ON sekolah.id_user=user.id_user WHERE id_sekolah='$id_sekolah'")[0];
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $sekolah = $_POST;
+   echo $nama_penanggungjawab;
    $old_id_sekolah = (isset($_POST['old_id_sekolah'])) ? $_POST['old_id_sekolah'] : '';
    $id_sekolah = (isset($_POST['id_sekolah'])) ? $_POST['id_sekolah'] : '';
    $nama_sekolah = (isset($_POST['nama_sekolah'])) ? $_POST['nama_sekolah'] : '';
@@ -70,8 +71,8 @@ if (isset($_GET['id_sekolah'])) {
    }
    //cek tambah data sekolah jika
    if ($errCount == 0) {
-      $id_user = user_sekolah($username, $password, 'SEKOLAH');
-      $result = add_sekolah($id_sekolah, $nama_sekolah, $alamat_sekolah, $lat_sekolah, $long_sekolah, $nama_penanggungjawab, $no_hp_pj, $id_user);
+      // $id_user = user_sekolah($username, $password, 'SEKOLAH');
+      $result = edit_sekolah($old_id_sekolah, $id_sekolah, $nama_sekolah, $alamat_sekolah, $lat_sekolah, $long_sekolah, $nama_penanggungjawab, $no_hp_pj, $username, $password);
       if ($result == TRUE) {
          set_flash_message('success', 'Data Sekolah', 'Berhasil di Ubah');
          redirect_url('admin/sekolah');
@@ -101,6 +102,7 @@ if (isset($_GET['id_sekolah'])) {
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
+
    <!-- wrapper start -->
    <div class="wrapper">
       <!-- header start -->
@@ -141,6 +143,7 @@ if (isset($_GET['id_sekolah'])) {
                         <div class="box-header with-border">
                            <h3 class="box-title">Form Ubah Data Sekolah</h3>
                         </div>
+
 
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -188,7 +191,7 @@ if (isset($_GET['id_sekolah'])) {
 
                                  <div class="col-sm-8">
                                     <div class="form-group has-feedback <?= input_error('nama_penanggungjawab') ? 'has-error' : null ?> ">
-                                       <input type="text" value="<?= set_value('nama_penanggungjawab', $sekolah['nama_penanggungjawab']) ?>" id="nama_pj" name="nama_penanggungjawab" class="form-control" placeholder="Nama Penanggung Jawab">
+                                       <input type="text" value="<?= set_value('nama_penanggungjawab', $sekolah['nama_penanggungjawab']) ?>" id="nama_penanggungjawab" name="nama_penanggungjawab" class="form-control" placeholder="Nama Penanggung Jawab">
                                        <span class="help-block"><?= show_input_error('nama_penanggungjawab') ?></span>
                                     </div>
                                  </div>

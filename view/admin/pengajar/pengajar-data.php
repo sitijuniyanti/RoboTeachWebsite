@@ -90,8 +90,8 @@ $datapengajar  = mysqli_fetch_all(data_pengajar(), MYSQLI_ASSOC);
                                        <td><?php echo $row['email'] ?></td>
                                        <td><?php echo $row['tahun_join'] ?></td>
 
-                                       <td><a href="<?= base_url("admin/penagajar/edit?idpengajar=" . $row['id_pengajar']) ?>"><button type="button" class="btn btn-warning" name="btnubah"> <i class="fa fa-pencil"></i></button></a>
-                                          <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis'] ?>">
+                                       <td>
+                                          <a onclick="return confirm('Apakah Yakin Menghapus Data Pengajar?')" href="<?= base_url('admin/pengajar/delete?id_pengajar=' . $row['id_pengajar']) ?>">
                                              <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> </button></a>
                                        </td>
                                     </tr>

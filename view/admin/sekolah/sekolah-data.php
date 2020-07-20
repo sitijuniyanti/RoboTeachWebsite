@@ -82,8 +82,8 @@ $datasekolah  = data_sekolah();
                                  <i class="fa fa-pencil"></i>
                               </button>
                               </a>
-                              <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis'] ?>">
-                                 <button type="button" class="btn btn-danger" name="">
+                              <a onclick="return confirm('Apakah Yakin Menghapus Data Sekolah?')" href="<?= base_url('admin/sekolah/delete?id_sekolah=' . $row['id_sekolah']) ?>">
+                                 <button type="button" class="btn btn-danger" name="hapus_sekolah">
                                     <i class="fa fa-trash"></i>
                                  </button>
                               </a>

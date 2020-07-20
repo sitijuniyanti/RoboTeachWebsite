@@ -135,3 +135,13 @@ function update_token($id_user, $token)
    close_connection($conn);
    return $result;
 }
+
+function delete_pengajar($id_pengajar)
+{
+   $conn = open_connection();
+   $sqlpengajar = "DELETE FROM pengajar WHERE id_pengajar = '" . $id_pengajar . "' ";
+
+   $result = mysqli_query($conn, $sqlpengajar);
+   close_connection($conn);
+   return $result;
+}

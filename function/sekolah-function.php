@@ -51,3 +51,13 @@ function edit_sekolah($old_id_sekolah, $id_sekolah, $nama_sekolah, $alamat_sekol
    close_connection($conn);
    return $result;
 }
+
+function delete_sekolah($id_sekolah)
+{
+   $conn = open_connection();
+   $sqlsekolah = "DELETE FROM sekolah WHERE id_sekolah = '" . $id_sekolah . "' ";
+
+   $result = mysqli_query($conn, $sqlsekolah);
+   close_connection($conn);
+   return $result;
+}

@@ -24,3 +24,13 @@ function add_jadwal($id_sekolah, $hari, $tanggal, $waktu_mulai, $waktu_selesai)
    close_connection($conn);
    return $result;
 }
+
+function delete_jadwal($id_jadwal)
+{
+   $conn = open_connection();
+   $sqljadwal = "DELETE FROM jadwal WHERE id_jadwal = '" . $id_jadwal . "' ";
+
+   $result = mysqli_query($conn, $sqljadwal);
+   close_connection($conn);
+   return $result;
+}

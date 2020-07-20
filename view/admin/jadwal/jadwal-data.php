@@ -80,11 +80,11 @@ $datajadwal = data_jadwal();
                                        <td>
                                        <a href=" ../../Notif/send_notification.php?id_jadwal=<?php echo $row['id_jadwal'] ?>"> <button type="button" class="btn btn-bell-plus" name="btnpushnotif"><i class="fa fa-bell"></i></button>
                               </a>
-                              <a href=" index.php?hal=ubahPengajar&id_pengajar=<?php echo $row['id_pengajar'] ?>">
+                              <a href=" <?= base_url('admin/jadwal/edit?id_jadwal=' . $row['id_jadwal']) ?>">
                                  <button type="button" class="btn btn-warning" name="btnubah"><i class="fa fa-pencil"></i></button>
                               </a>
 
-                              <a onclick="return confirm('Anda Yakin...?')" href="siswa/hapus_siswa.php?nis=<?php echo $row['nis'] ?>">
+                              <a onclick="return confirm('Apakah Yakin Menghapus Data Jadwal?')" href="<?= base_url('admin/jadwal/delete?id_jadwal=' . $row['id_jadwal']) ?>">
                                  <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> </button></a>
                               </td>
                               </tr>
