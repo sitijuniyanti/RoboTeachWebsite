@@ -30,11 +30,18 @@ function kirim_email($email, $token)
    require_once lib_path('PHPMailer/class.smtp.php');
    require_once config_path('email.php');
    $mail             = new PHPMailer();
-   $body             =
-      "<body style='margin: 10px;'>
-            <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'><a href='https://www.roboteach.com/token/" . $token . "'>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
-            </div>
-        </body>";
+   $link = "https://www.roboteach.com/token/" . $token;
+
+   ob_start();
+   require_once lib_path('template-email.php');
+   $body = ob_get_contents();
+   ob_end_clean();
+
+   // $body             =
+   //    "<body style='margin: 10px;'>
+   //          <div style='width: 640px; font-family: Arial, Helvetica, sans-serif; font-size: 11px;'><a href='https://www.roboteach.com/token/" . $token . "'>klik link : LAKUKAN AKTIVASI </a> untuk melakukan proses aktivasi
+   //          </div>
+   //      </body>";
 
    $mail->IsSMTP();
    $mail->SMTPAuth   = $akunemail['SMTPAuth'];                  // enable SMTP authentication
@@ -73,7 +80,7 @@ function verifikasi_token($token)
 
 function jadwal_by_id_pengajar($id_pengajar)
 {
-   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal,
+   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_jadwal_pengajar, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal,
     waktu_mulai, waktu_selesai
     FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah INNER JOIN jadwal_pengajar
     ON jadwal.id_jadwal=jadwal_pengajar.id_jadwal 
@@ -83,7 +90,8 @@ function jadwal_by_id_pengajar($id_pengajar)
    $data = array();
    if (mysqli_num_rows($result) > 0) {
       while ($row = mysqli_fetch_assoc($result)) {
-         $temp['id_jadwal']      = $row['id_jadwal'];
+         $temp['id_jadwal']       = $row['id_jadwal'];
+         $temp['id_jadwal_pengajar']      = $row['id_jadwal_pengajar'];
          $temp['id_pengajar']    = $row['id_pengajar'];
          $temp['nama_sekolah']   = $row['nama_sekolah'];
          $temp['alamat_sekolah'] = $row['alamat_sekolah'];
@@ -100,7 +108,8 @@ function jadwal_by_id_pengajar($id_pengajar)
 
 function jadwal_by_id_jadwal($id_jadwal)
 {
-   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, nama_sekolah, alamat_sekolah, hari, tanggal, waktu_mulai, waktu_selesai,
+   $sql = "SELECT jadwal.id_jadwal, jadwal_pengajar.id_pengajar, jadwal_pengajar.id_jadwal_pengajar,
+    nama_sekolah, alamat_sekolah, hari, tanggal, waktu_mulai, waktu_selesai,
    sekolah.lat_sekolah, sekolah.long_sekolah
     FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah INNER JOIN jadwal_pengajar
     ON jadwal.id_jadwal=jadwal_pengajar.id_jadwal 
@@ -110,8 +119,9 @@ function jadwal_by_id_jadwal($id_jadwal)
    $data = array();
    if (mysqli_num_rows($result) > 0) {
       while ($row = mysqli_fetch_assoc($result)) {
-         $temp['id_jadwal']      = $row['id_jadwal'];
+         $temp['id_jadwal']         = $row['id_jadwal'];
          $temp['id_pengajar']    = $row['id_pengajar'];
+         $temp['id_jadwal_pengajar']      = $row['id_jadwal_pengajar'];
          $temp['nama_sekolah']   = $row['nama_sekolah'];
          $temp['alamat_sekolah'] = $row['alamat_sekolah'];
          $temp['hari']           = $row['hari'];

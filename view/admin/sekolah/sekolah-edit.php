@@ -10,7 +10,6 @@ if (isset($_GET['id_sekolah'])) {
    $sekolah = data_sekolah("SELECT * FROM sekolah INNER JOIN user ON sekolah.id_user=user.id_user WHERE id_sekolah='$id_sekolah'")[0];
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $sekolah = $_POST;
-   echo $nama_penanggungjawab;
    $old_id_sekolah = (isset($_POST['old_id_sekolah'])) ? $_POST['old_id_sekolah'] : '';
    $id_sekolah = (isset($_POST['id_sekolah'])) ? $_POST['id_sekolah'] : '';
    $nama_sekolah = (isset($_POST['nama_sekolah'])) ? $_POST['nama_sekolah'] : '';

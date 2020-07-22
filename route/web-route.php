@@ -19,4 +19,6 @@ $route = array(
    'admin/jadwal/edit' => 'admin/jadwal/jadwal-edit.php',
    'admin/jadwal/delete' => 'admin/jadwal/jadwal-delete.php',
    'admin/jadwal-pengajar' => 'admin/jadwal-pengajar/jadwal-pengajar-data.php',
+   'admin/peralatan' => 'admin/peralatan/peralatan-data.php',
+   'admin/jadwal-pengajar/detail' => 'admin/jadwal-pengajar/jadwal-pengajar-detail.php'
 );

@@ -8,15 +8,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $result = verifikasi_token($token);
    if (mysqli_num_rows($result) > 0) {
       $d = mysqli_fetch_assoc($result);
-      $data['id_pengajar'] = $d['id_pengajar'];
-      $data['id_user'] = $d['id_user'];
+      if ($d['token'] != '') {
+         $dummy['id_pengajar'] = $d['id_pengajar'];
+         $dummy['id_user'] = $d['id_user'];
+         $data[] = $dummy;
+         $message = "Berhasil";
+      } else {
+         $message = "Token sudah kadaluwarsa";
+      }
    } else {
       $message = "Token sudah Kedaluwarsa";
    }
 
    if (count($data) > 0) {
-      echo '{ "message" : ' . $message . ' ,"results":' . json_encode($data) . '}';
+      echo '{ "message" : ' . json_encode($message) . ' ,"results":' . json_encode($data) . '}';
    } else {
-      echo '{ "message" : ' . $message . ' }';
+      echo '{ "message" : ' . json_encode($message) . ' ,"results":' . json_encode($data) . '}';
    }
 }

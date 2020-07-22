@@ -28,7 +28,7 @@
 
          <li>
             <a href="<?= base_url('admin/sekolah') ?>">
-               <i class="fa fa-users"></i> <span>Data Sekolah</span>
+               <i class="fa graduation-cap"></i> <span>Data Sekolah</span>
             </a>
          </li>
 
@@ -41,14 +41,21 @@
             </a>
             <ul class="treeview-menu">
                <li><a href="<?= base_url('admin/jadwal') ?>"><i class="fa fa-circle-o"></i> Data Jadwal</a></li>
-               <li><a href="index2.html"><i class="fa fa-circle-o"></i> Data Jadwal Pengajar</a></li>
+               <li><a href="<?= base_url('admin/jadwal-pengajar') ?>"><i class="fa fa-circle-o"></i> Data Jadwal Pengajar</a></li>
             </ul>
          </li>
 
-         <li>
-            <a href="index.php?hal=siswa">
-               <i class="fa fa-users"></i> <span>Data Peralatan</span>
+         <li class="treeview">
+            <a href="#">
+               <i class="fa fa-dashboard"></i> <span>Data Peralatan</span>
+               <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+               </span>
             </a>
+            <ul class="treeview-menu">
+               <li><a href="<?= base_url('admin/peminjaman-alat') ?>"><i class="fa fa-circle-o"></i> Data Peminjaman Alat</a></li>
+               <li><a href="<?= base_url('admin/alat') ?>"><i class="fa fa-circle-o"></i> Data Alat</a></li>
+            </ul>
          </li>
 
          <li>

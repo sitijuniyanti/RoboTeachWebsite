@@ -2,10 +2,13 @@
 require_once view_path('admin/admin.php');
 require_once helper_path('form-helper.php');
 require_once function_path('jadwal-function.php');
+require_once function_path('sekolah-function.php');
 
 // require_once function_path('user-function.php');
 
-$sekolah = [];
+$jadwal = [];
+$jadwal = null;
+$datasekolah = data_sekolah();
 if (isset($_GET['id_jadwal'])) {
   $id_jadwal = $_GET['id_jadwal'];
   $jadwal = data_jadwal("SELECT * FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah WHERE id_jadwal='$id_jadwal'")[0];
@@ -43,7 +46,7 @@ if (isset($_GET['id_jadwal'])) {
 
   //cek tambah jadwal jika
   if ($errCount == 0) {
-    $result = add_jadwal($id_sekolah, $hari, $tanggal, $waktu_mulai, $waktu_selesai);
+    $result = edit_jadwal($old_id_jadwal, $id_sekolah, $nama_sekolah, $hari, $tanggal, $waktu_mulai, $waktu_selesai);
     if ($result == TRUE) {
       set_flash_message('success', 'Data Jadwal', 'Berhasil di Tambahkan');
       redirect_url('admin/jadwal');
@@ -66,6 +69,10 @@ if (isset($_GET['id_jadwal'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?= SITE_NAME ?> - Ubah Jadwal</title>
   <?php include_once  view_path('part/head.php'); ?>
+  <!-- karena ini spesifik library/link tambahan. maka tempatkan di bawah :require_once view_path 'part/head.php' -->
+  <link rel="stylesheet" href="<?= assets_url('bootstrap-daterangepicker/daterangepicker.css') ?>">
+  <link rel="stylesheet" href="<?= assets_url('bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>">
+  <link rel="stylesheet" href="<?= assets_url('select2/dist/css/select2.min.css') ?>">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -74,6 +81,7 @@ if (isset($_GET['id_jadwal'])) {
   <div class="wrapper">
     <!-- header start -->
     <?php include_once view_path('admin/part/header.php'); ?>
+
     <!-- header end -->
 
     <!--sidebar start -->
@@ -127,9 +135,17 @@ if (isset($_GET['id_jadwal'])) {
                       <div class="col-sm-8">
                         <div class="form-group has-feedback <?= input_error('id_sekolah') ? 'has-error' : null ?> ">
                           <select value="" class="form-control select2" style="width: 100%;" name="id_sekolah" id="id_sekolah">
-                            <option value="<?= set_value('id_sekolah', $jadwal['id_sekolah'], $jadwal['nama_sekolah']) ?>" selected="selected">Pilih Nama Sekolah</option>
-                            <?php foreach ($datasekolah as $row) { ?>
-                              <option value="<?php echo $row['id_sekolah'] ?>"><?php echo $row['id_sekolah'] ?> - <?php echo $row['nama_sekolah'] ?></option>
+                            <option value="" selected="selected">Pilih Nama Sekolah</option>
+                            <?php foreach ($datasekolah as $row) {
+                              $selected = "selected";
+                              if ($row['id_sekolah'] == $jadwal['id_sekolah']) {
+                                $selected = "selected";
+                              } else {
+                                $selected = "";
+                              }
+                            ?>
+
+                              <option <?= $selected ?> value="<?php echo $row['id_sekolah'] ?>"><?php echo $row['id_sekolah'] ?> - <?php echo $row['nama_sekolah'] ?></option>
                             <?php } ?>
                           </select>
                           <span class="help-block"><?= show_input_error('id_sekolah') ?></span>
@@ -144,6 +160,7 @@ if (isset($_GET['id_jadwal'])) {
                         <div class="form-group has-feedback <?= input_error('hari') ? 'has-error' : null ?> ">
                           <select class="form-control select2" style="width: 100%;" name="hari" id="hari" value="<?= set_value('hari', $jadwal['hari']) ?>">
                             <option value="" selected="selected">Pilih Hari</option>
+                            <option selected value="<?php echo $jadwal['hari'] ?>"><?php echo ucwords($jadwal['hari']) ?></option>
                             <option value="senin">Senin</option>
                             <option value="selasa">Selasa</option>
                             <option value="rabu">Rabu</option>
@@ -165,7 +182,7 @@ if (isset($_GET['id_jadwal'])) {
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control pull-right" id="datepicker" name="tanggal" value="<?= set_value('tanggal') ?>">
+                            <input type="text" class="form-control pull-right" id="datepicker" name="tanggal" value="<?= date('Y-m-d', strtotime($jadwal['tanggal'])) ?>">
 
                           </div>
                           <span class="help-block"><?= show_input_error('tanggal') ?></span>
@@ -176,7 +193,7 @@ if (isset($_GET['id_jadwal'])) {
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Waktu Mulai - Selesai</label>
                       <div class="col-sm-8">
-                        <div class="form-group has-feedback <?= input_error('waktu_mulai_selesai',  $jadwal['waktu_mulai'], $jadwal['waktu_selesai']) ? 'has-error' : null ?> ">
+                        <div class="form-group has-feedback <?= input_error('waktu_mulai_selesai') ? 'has-error' : null ?> ">
                           <div class="input-group">
                             <div class="input-group-addon">
                               <i class="fa fa-clock-o"></i>
@@ -232,14 +249,17 @@ if (isset($_GET['id_jadwal'])) {
       $('.select2').select2();
       $('#datepicker').datepicker({
         format: 'yyyy-mm-dd',
-        autoclose: true
+        autoclose: true,
+        defaultDate: '<?php echo $jadwal['tanggal']; ?>',
+        setDate: '<?php echo $jadwal['tanggal']; ?>'
       });
 
       $('#reservationtime').daterangepicker({
         timePicker: true,
         timePickerIncrement: 30,
         locale: {
-          format: 'MM/DD/YYYY hh:mm A'
+          format: 'MM/DD/YYYY hh:mm A',
+
         }
       });
 
