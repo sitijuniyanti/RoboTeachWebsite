@@ -6,6 +6,7 @@ require_once helper_path('form-helper.php');
 
 $datasekolah  = mysqli_fetch_all(data_peminjaman_alat(), MYSQLI_ASSOC);
 // $id_peminjaman_alat = $_POST['id_peminjaman_alat'];
+echo var_dump(data_peminjaman_alat());
 ?>
 
 
