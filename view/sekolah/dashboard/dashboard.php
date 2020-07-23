@@ -1,5 +1,5 @@
 <?php
-require_once view_path('admin/sekolah.php');
+require_once view_path('admin/admin.php');
 ?>
 <!DOCTYPE html>
 <html>
