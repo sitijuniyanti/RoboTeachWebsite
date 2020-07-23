@@ -5,8 +5,7 @@ require_once function_path('alat-function.php');
 // require_once function_path('user-function.php');
 
 $alat = [];
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_GET['id_alat'])) {
   $id_alat = $_GET['id_alat'];
   $alat = data_alat("SELECT * FROM alat WHERE id_alat='$id_alat'")[0];
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
