@@ -2,7 +2,6 @@
 require_once view_path('admin/admin.php');
 require_once lib_path('format-date.php');
 require_once function_path('jadwal-function.php');
-require_once lib_path('send_notification.php');
 
 $datajadwal = data_jadwal();
 
