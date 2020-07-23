@@ -3,7 +3,9 @@ require_once view_path('admin/admin.php');
 require_once function_path('peminjaman-alat-function.php');
 require_once helper_path('form-helper.php');
 
+
 $datasekolah  = mysqli_fetch_all(data_peminjaman_alat(), MYSQLI_ASSOC);
+// $id_peminjaman_alat = $_POST['id_peminjaman_alat'];
 ?>
 
 
@@ -50,9 +52,7 @@ $datasekolah  = mysqli_fetch_all(data_peminjaman_alat(), MYSQLI_ASSOC);
               <!-- /.box -->
               <div class="box">
                 <div class="box-header">
-                  <a href="<?= base_url('admin/peminjaman-alat/add') ?>">
-                    <input type="button" value="Tambah" class="btn btn-primary" name="">
-                  </a>
+
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -79,7 +79,7 @@ $datasekolah  = mysqli_fetch_all(data_peminjaman_alat(), MYSQLI_ASSOC);
                             <td><?php echo $row['tanggal'] ?></td>
 
                             <td>
-                              <a href=" <?= base_url('admin/peminjaman-alat/detail?id_sekolah=' . $row['id_sekolah']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
+                              <a href=" <?= base_url('admin/peminjaman-alat/detail?id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
                                   <i class="fas fa-info-square"></i>Detail</button>
                               </a>
                             </td>

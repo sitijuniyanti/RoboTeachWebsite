@@ -3,7 +3,8 @@ function data_peminjaman_alat($query = null)
 {
   if ($query == null) {
     $query = "SELECT sekolah.id_sekolah, sekolah.nama_sekolah, jadwal.hari, jadwal.tanggal FROM sekolah 
-    INNER JOIN jadwal ON sekolah.id_sekolah = jadwal.id_sekolah ";
+    INNER JOIN jadwal ON sekolah.id_sekolah = jadwal.id_sekolah INNER JOIN peminjaman_alat 
+    ON jadwal.id_jadwal = peminjaman_alat.id_jadwal";
   }
   $conn = open_connection();
   $result = mysqli_query($conn, $query);
@@ -14,10 +15,13 @@ function data_peminjaman_alat($query = null)
   return $result;
 }
 
-function data_sekolah_id_sekolah($id_sekolah)
+function data_sekolah_id_peminjaman($id_peminjaman_alat)
 {
   $conn = open_connection();
-  $query = "SELECT * FROM pengajar WHERE id_sekolah='" . $id_sekolah . "'";
+  $query = "SELECT sekolah.id_sekolah, sekolah.nama_sekolah, jadwal.hari, jadwal.tanggal FROM sekolah 
+  INNER JOIN jadwal ON sekolah.id_sekolah = jadwal.id_sekolah INNER JOIN peminjaman_alat
+  ON jadwal.id_jadwal=peminjaman_alat.id_jadwal
+  WHERE peminjaman_alat.id_peminjaman_alat='" . $id_peminjaman_alat . "'";
   $result = mysqli_query($conn, $query);
   if ($result) {
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -26,14 +30,14 @@ function data_sekolah_id_sekolah($id_sekolah)
   return $result;
 }
 
-function detail_peminjaman_alat($id_sekolah)
+function detail_peminjaman_alat($id_peminjaman_alat)
 {
   $conn = open_connection();
   $query = "SELECT sekolah.id_sekolah, sekolah.nama_sekolah, jadwal.hari, jadwal.tanggal, alat.id_alat, 
   alat.nama_alat, peminjaman_alat.jumlah, peminjaman_alat.tanggal, peminjaman_alat.status
   FROM sekolah INNER JOIN jadwal ON sekolah.id_sekolah = jadwal.id_sekolah INNER JOIN peminjaman_alat 
   ON jadwal.id_jadwal = peminjaman_alat.id_jadwal INNER JOIN alat ON peminjaman_alat.id_alat = alat.id_alat
-  WHERE jadwal_pengajar.id_pengajar='" . $id_sekolah . "'";
+  WHERE sekolah.id_sekolah='" . $id_sekolah . "'";
   $result = mysqli_query($conn, $query);
   if ($result) {
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);

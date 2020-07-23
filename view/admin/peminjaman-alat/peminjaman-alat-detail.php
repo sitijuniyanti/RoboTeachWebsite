@@ -3,9 +3,11 @@ require_once view_path('admin/admin.php');
 require_once function_path('peminjaman-alat-function.php');
 require_once helper_path('form-helper.php');
 
-$id_sekolah = $_GET['id_sekolah'];
-$result = data_sekolah_id_sekolah($id_sekolah)[0];
-$datapeminjamanalat = detail_peminjaman_alat($id_sekolah);
+$id_peminjaman_alat = $_GET['id_peminjaman_alat'];
+$result = data_sekolah_id_peminjaman($id_peminjaman_alat)[0];
+$datapeminjamanalat = detail_peminjaman_alat($id_peminjaman_alat);
+
+echo var_dump(data_sekolah_id_peminjaman($id_sekolah));
 
 ?>
 
@@ -40,7 +42,7 @@ $datapeminjamanalat = detail_peminjaman_alat($id_sekolah);
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Data Peminjaman Alat/a></li>
+            <li><a href="#">Data Peminjaman Alat</a></li>
             <li><a href="#">Detail Data Peminjaman Alat</a></li>
           </ol>
         </section>
@@ -68,12 +70,14 @@ $datapeminjamanalat = detail_peminjaman_alat($id_sekolah);
 
                   <p class="text-muted text-center"><?= $result['id_sekolah']; ?></p>
 
-                  <h3 class="profile-username text-center">Pengajar <?= $result['status']; ?></h3>
+                  <h3 class="profile-username text-center"><?= $result['hari']; ?></h3>
+                  <h3 class="profile-username text-center"><?= $result['tanggal']; ?></h3>
 
                   <div class="text-center">
                     <a href="<?= base_url('admin/peminjaman-alat/add') ?>">
                       <input type="button" value="Tambah" class="btn btn-primary" name="">
                     </a>
+                    <br>
                   </div>
 
 
@@ -101,7 +105,7 @@ $datapeminjamanalat = detail_peminjaman_alat($id_sekolah);
                                      
                                         <td>
                                       
-                      <a href=" <?= base_url('admin/alat/edit?id_alat=' . $row['id_alat']) ?>">
+                      <a href=" <?= base_url('admin/peminjaman-alat/edit?id_sekolah=' . $row['id_sekolah']) ?>">
                       <button type="button" class="btn btn-warning" name="btnubah">
                         <i class="fa fa-pencil"></i>
                       </button>
@@ -120,7 +124,7 @@ $datapeminjamanalat = detail_peminjaman_alat($id_sekolah);
                     </table>
                   </div>
 
-                  <a href=" <?= base_url('admin/jadwal-pengajar') ?>" class="btn btn-primary btn-block"><b>Kembali</b></a>
+                  <a href=" <?= base_url('admin/peminjaman-alat') ?>" class="btn btn-primary btn-block"><b>Kembali</b></a>
                 </div>
                 <div class=" box-footer">
 
