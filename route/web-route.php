@@ -15,12 +15,14 @@ $route = array(
    'admin/sekolah/edit' => 'admin/sekolah/sekolah-edit.php',
    'admin/sekolah/delete' => 'admin/sekolah/sekolah-delete.php',
    'admin/jadwal' => 'admin/jadwal/jadwal-data.php',
+   'admin/jadwal/send/notif' => 'admin/jadwal/jadwal-send-notif.php',
    'admin/jadwal/add' => 'admin/jadwal/jadwal-add.php',
    'admin/jadwal/edit' => 'admin/jadwal/jadwal-edit.php',
    'admin/jadwal/delete' => 'admin/jadwal/jadwal-delete.php',
 
    'admin/jadwal-pengajar' => 'admin/jadwal-pengajar/jadwal-pengajar-data.php',
    'admin/jadwal-pengajar/detail' => 'admin/jadwal-pengajar/jadwal-pengajar-detail.php',
+
 
    'admin/alat' => 'admin/alat/alat-data.php',
    'admin/alat/add' => 'admin/alat/alat-add.php',

@@ -81,7 +81,7 @@ $datajadwal = data_jadwal();
                                        <td><?= format_date_ID($row['tanggal']); ?></td>
                                        <td><?= $row['waktu_mulai'] . ' s/d ' . $row['waktu_selesai']; ?></td> 
                                        <td>
-                                       <a href=" ../../Notif/send_notification.php?id_jadwal=<?php echo $row['id_jadwal'] ?>"> <button type="button" class="btn btn-bell-plus" name="btnpushnotif"><i class="fa fa-bell"></i></button>
+                                       <a href=" <?= base_url('admin/jadwal/send/notif?id_jadwal=' . $row['id_jadwal']) ?>"> <button type="button" class="btn btn-bell-plus" name="btnpushnotif"><i class="fa fa-bell"></i></button>
                               </a>
                               <a href=" <?= base_url('admin/jadwal/edit?id_jadwal=' . $row['id_jadwal']) ?>">
                                  <button type="button" class="btn btn-warning" name="btnubah"><i class="fa fa-pencil"></i></button>
