@@ -14,6 +14,20 @@ function data_pengajar($query = null)
    return $result;
 }
 
+function select_pengajar($query = null)
+{
+   if ($query == null) {
+      $query = "SELECT * FROM pengajar";
+   }
+   $conn = open_connection();
+   $result = mysqli_query($conn, $query);
+   if ($result) {
+      $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+   }
+   close_connection($conn);
+   return $result;
+}
+
 function add_pengajar($id, $status, $email, $iduser, $token)
 {
    $conn = open_connection();

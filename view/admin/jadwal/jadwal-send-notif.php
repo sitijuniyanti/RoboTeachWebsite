@@ -13,7 +13,7 @@ if (isset($_GET['id_jadwal'])) {
                       ON pengajar.id_pengajar= jadwal_pengajar.id_pengajar WHERE jadwal_pengajar.id_jadwal='" . $idjadwal . "'";
 
    $data_sekolah = data_sekolah($sql_jadwal_sekolah)[0];
-   $data_pengajar = data_pengajar($sql_jadwal_pengajar)[0];
+   $data_pengajar = data_jadwal_pengajar($sql_jadwal_pengajar)[0];
 
    $message = $data_pengajar['nama_panggilan'] . ", Hari ini tanggal " . $data_sekolah['tanggal'] . " ada jadwal di " . $data_sekolah['nama_sekolah'] . " " . $data_sekolah['alamat_sekolah'] .
       " jam " . $data_sekolah['waktu_mulai'] . "-" . $data_sekolah['waktu_selesai'];
