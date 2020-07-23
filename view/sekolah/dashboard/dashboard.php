@@ -1,5 +1,5 @@
 <?php
-require_once view_path('admin/admin.php');
+require_once view_path('sekolah/sekolah.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,11 +15,11 @@ require_once view_path('admin/admin.php');
    <!-- wrapper start -->
    <div class="wrapper">
       <!-- header start -->
-      <?php include_once view_path('admin/part/header.php'); ?>
+      <?php include_once view_path('sekolah/part/header.php'); ?>
       <!-- header end -->
 
       <!--sidebar start -->
-      <?php include_once view_path('admin/part/sidebar.php'); ?>
+      <?php include_once view_path('sekolah/part/sidebar.php'); ?>
       <!--sidebar end -->
 
       <!-- content start -->
@@ -104,7 +104,7 @@ require_once view_path('admin/admin.php');
       <!-- content end -->
 
       <!-- footer start -->
-      <?php require_once view_path('admin/part/footer.php'); ?>
+      <?php require_once view_path('sekolah/part/footer.php'); ?>
       <!-- footer end -->
 
       <!-- Control Sidebar -->

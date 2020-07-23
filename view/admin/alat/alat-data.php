@@ -3,7 +3,7 @@ require_once view_path('admin/admin.php');
 require_once function_path('alat-function.php');
 require_once helper_path('form-helper.php');
 
-$dataalat  = mysqli_fetch_all(data_alat(), MYSQLI_ASSOC);
+$dataalat  = data_alat();
 ?>
 
 
