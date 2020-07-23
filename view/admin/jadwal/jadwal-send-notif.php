@@ -1,6 +1,6 @@
 <?php
 require_once view_path('admin/admin.php');
-require_once function_path('jadwal-function.php');
+require_once function_path('jadwal-pengajar-function.php');
 require_once function_path('sekolah-function.php');
 // $Anti, Hari ini tanggal  ada jadwal di $SD Assalam $Alamat jam $13:00 - jam $14:00 
 
