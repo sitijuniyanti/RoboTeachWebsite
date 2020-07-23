@@ -18,7 +18,23 @@ $route = array(
    'admin/jadwal/add' => 'admin/jadwal/jadwal-add.php',
    'admin/jadwal/edit' => 'admin/jadwal/jadwal-edit.php',
    'admin/jadwal/delete' => 'admin/jadwal/jadwal-delete.php',
+
    'admin/jadwal-pengajar' => 'admin/jadwal-pengajar/jadwal-pengajar-data.php',
-   'admin/peralatan' => 'admin/peralatan/peralatan-data.php',
-   'admin/jadwal-pengajar/detail' => 'admin/jadwal-pengajar/jadwal-pengajar-detail.php'
+   'admin/jadwal-pengajar/detail' => 'admin/jadwal-pengajar/jadwal-pengajar-detail.php',
+
+   'admin/alat' => 'admin/alat/alat-data.php',
+   'admin/alat/add' => 'admin/alat/alat-add.php',
+   'admin/alat/edit' => 'admin/alat/alat-edit.php',
+   'admin/alat/delete' => 'admin/alat/alat-delete.php',
+
+   'admin/peminjaman-alat' => 'admin/peminjaman-alat/peminjaman-alat-data.php',
+   'admin/peminjaman-alat/add' => 'admin/peminjaman-alat/peminjaman-alat-add.php',
+   'admin/peminjaman-alat/edit' => 'admin/peminjaman-alat/peminjaman-alat-edit.php',
+   'admin/peminjaman-alat/delete' => 'admin/peminjaman-alat/peminjaman-alat-delete.php',
+   'admin/peminjaman-alat/detail' => 'admin/peminjaman-alat/peminjaman-alat-detail.php',
+
+
+   'sekolah' => 'sekolah/dashboard/dashboard.php',
+   'sekolah/dashboard' => 'sekolah/dashboard/dashboard.php',
+
 );
