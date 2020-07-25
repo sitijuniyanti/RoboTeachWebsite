@@ -7,21 +7,17 @@ require_once function_path('jadwal-function.php');
 require_once function_path('alat-function.php');
 
 // $datasekolah = detail_peminjaman_alat();
+$id_jadwal = $_GET['id_jadwal'];
 $datasekolah = data_jadwal();
 $dataalat = data_alat();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $id_sekolah = (isset($_POST['id_sekolah'])) ? $_POST['id_sekolah'] : '';
+  $id_jadwal = (isset($_POST['id_jadwal'])) ? $_POST['id_jadwal'] : '';
   $id_alat = (isset($_POST['id_alat'])) ? $_POST['id_alat'] : '';
   $jumlah = (isset($_POST['jumlah'])) ? $_POST['jumlah'] : '';
   $tanggal = (isset($_POST['tanggal'])) ? $_POST['tanggal'] : '';
   $errCount = 0;
   $errMsg = [];
-
   //VALIDASI
-  if (trim($id_sekolah) == false) {
-    $errMsg['id_sekolah'] = "Data sekolah tidak boleh kosong";
-    $errCount += 1;
-  }
 
   if (trim($id_alat) == false) {
     $errMsg['id_alat'] = "Data alat tidak boleh kosong";
@@ -31,6 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (trim($jumlah) == false) {
     $errMsg['jumlah'] = "Jumlah tidak boleh kosong";
     $errCount += 1;
+  } else if (trim($id_alat) && trim($jumlah)) {
+    $stok =  alat_check_stok($id_alat);
+    if (intval($jumlah) > intval($stok)) {
+      $errMsg['jumlah'] = "Jumlah alat pinjam melebihi stok";
+      $errCount += 1;
+    }
   }
 
   if (trim($tanggal) == false) {
@@ -38,17 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errCount += 1;
   }
 
-
+  echo $id_jadwal . " " . $id_alat . " " . $jumlah . " " . $tanggal . "    =>";
 
   //cek tambah jadwal jika
   if ($errCount == 0) {
-    $result = add_peminjaman_alat($id_sekolah, $id_alat, $jumlah, $tanggal);
-    if ($result == TRUE) {
+    $result = add_peminjaman_alat($id_jadwal, $id_alat, $jumlah, $tanggal, 'DIPINJAM');
+    if ($result) {
       set_flash_message('success', 'Data Peminjaman Alat', 'Berhasil di Tambahkan');
-      redirect_url('admin/peminjaman-alat');
+      redirect_url('admin/peminjaman-alat/detail?id_jadwal=' . $id_jadwal);
       die();
     } else {
-      set_flash_message('error', 'Data Peminjaman Alat', 'Gagal di Tambahkan!');
+      set_flash_message('error', 'Data Peminjaman Alat', 'Gagal di Tambahkan!' . $result);
     }
   } else {
     set_input_error($errMsg);
@@ -113,37 +115,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" name="form" action="<?= base_url('admin/peminjaman-alat/add') ?>" method="POST">
+                <form class="form-horizontal" name="form" action="<?= base_url('admin/peminjaman-alat/add?id_jadwal=' . $id_jadwal) ?>" method="POST">
                   <div class="box-body">
                     <?php
                     require_once view_path('part/flash-message.php');
                     ?>
-                    <div class="form-group">
-                      <label type="text" class="col-sm-2 control-label">Nama Sekolah</label>
-                      <div class="col-sm-8">
-                        <div class="form-group has-feedback <?= input_error('id_sekolah') ? 'has-error' : null ?> ">
-                          <select value="<?= set_value('id_sekolah') ?>" class="form-control select2" style="width: 100%;" name="id_sekolah" id="id_sekolah">
-                            <option value="" selected="selected">Pilih Nama Sekolah</option>
-                            <?php foreach ($datasekolah as $row) { ?>
-                              <option value="<?php echo $row['id_jadwal'] ?>"><?php echo $row['id_sekolah'] ?> - <?php echo $row['nama_sekolah'] ?>
-                                - <?php echo $row['hari'] ?> - <?php echo $row['tanggal'] ?></option>
-                            <?php } ?>
-                          </select>
-                          <span class="help-block"><?= show_input_error('id_sekolah') ?></span>
-                        </div>
-
-                      </div>
-                    </div>
-
+                    <input type="hidden" name="id_jadwal" value="<?= $id_jadwal ?>" />
                     <div class="form-group">
                       <label type="text" class="col-sm-2 control-label">Alat</label>
                       <div class="col-sm-8">
                         <div class="form-group has-feedback <?= input_error('id_alat') ? 'has-error' : null ?> ">
-                          <select value="<?= set_value('id_alat') ?>" class="form-control select2" style="width: 100%;" name="id_alat" id="id_alat">
+                          <select class="form-control select2" style="width: 100%;" name="id_alat" id="id_alat">
                             <option value="" selected="selected">Pilih Alat</option>
-                            <?php foreach ($dataalat as $row) { ?>
-                              <option value="<?php echo $row['id_alat'] ?>"><?php echo $row['id_alat'] ?> - <?php echo $row['nama_alat'] ?>
-                                - <?php echo $row['stok'] ?></option>
+                            <?php foreach ($dataalat as $row) {
+                              $i_seleceted = (set_value('id_alat') == $row['id_alat']) ? "selected" : null;
+                            ?>
+                              <option <?= $i_seleceted ?> value="<?php echo $row['id_alat'] ?>"><?php echo $row['id_alat'] ?> - <?php echo $row['nama_alat'] ?></option>
                             <?php } ?>
                           </select>
                           <span class="help-block"><?= show_input_error('id_alat') ?></span>

@@ -13,6 +13,20 @@ function data_alat($query = null)
   return $result;
 }
 
+function alat_check_stok($id_alat)
+{
+  $conn = open_connection();
+  $query = "SELECT stok FROM alat WHERE id_alat='$id_alat'";
+  $result = mysqli_query($conn, $query);
+  if (!$result) {
+    $result = mysqli_error($conn);
+  } else {
+    $result = mysqli_fetch_assoc($result);
+  }
+  close_connection($conn);
+  return $result['stok'];
+}
+
 function add_alat($id_alat, $nama_alat, $stok)
 
 {

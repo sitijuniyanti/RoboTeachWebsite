@@ -1,11 +1,16 @@
 <?php
 require_once view_path('admin/admin.php');
 require_once function_path('peminjaman-alat-function.php');
+require_once function_path('jadwal-function.php');
 require_once helper_path('form-helper.php');
 
-$id_peminjaman_alat = $_GET['id_peminjaman_alat'];
-$result = data_sekolah_id_peminjaman($id_peminjaman_alat)[0];
-$datapeminjamanalat = detail_peminjaman_alat($id_peminjaman_alat);
+$id_jadwal = $_GET['id_jadwal'];
+$alat_data = alat_peminjaman_sekolah($id_jadwal);
+$query_jadwal_sekolah = "SELECT nama_sekolah,sekolah.id_sekolah, hari, tanggal 
+FROM sekolah INNER JOIN jadwal ON sekolah.id_sekolah = jadwal.id_sekolah WHERE jadwal.id_jadwal ='$id_jadwal'";
+$jadwal_sekolah  = data_jadwal($query_jadwal_sekolah)[0];
+
+//$datapeminjamanalat = detail_peminjaman_alat($id_jadwal);
 
 ?>
 
@@ -61,25 +66,28 @@ $datapeminjamanalat = detail_peminjaman_alat($id_peminjaman_alat);
                 <!-- /.box-header -->
                 <!-- form start -->
 
+
                 <div class="box-body box-profile">
                   <img class="profile-user-img img-responsive img-circle" src="<?= assets_url('img/usersekolah.png') ?>" alt="User profile picture">
 
-                  <h3 class="profile-username text-center"><?= $result['nama_sekolah']; ?></h3>
+                  <h3 class="profile-username text-center"><?= $jadwal_sekolah['nama_sekolah']; ?></h3>
 
-                  <p class="text-muted text-center"><?= $result['id_sekolah']; ?></p>
+                  <p class="text-muted text-center"><?= $jadwal_sekolah['id_sekolah']; ?></p>
 
-                  <h3 class="profile-username text-center"><?= $result['hari']; ?></h3>
-                  <h3 class="profile-username text-center"><?= $result['tanggal']; ?></h3>
+                  <h3 class="profile-username text-center"><?= $jadwal_sekolah['hari']; ?></h3>
+                  <h3 class="profile-username text-center"><?= $jadwal_sekolah['tanggal']; ?></h3>
 
                   <div class="text-center">
-                    <a href="<?= base_url('admin/peminjaman-alat/add') ?>">
+                    <a href="<?= base_url('admin/peminjaman-alat/add?id_jadwal=' . $id_jadwal) ?>">
                       <input type="button" value="Tambah" class="btn btn-primary" name="">
                     </a>
                     <br>
                   </div>
 
 
-
+                  <?php
+                  require_once view_path('part/flash-message.php');
+                  ?>
                   <div class="table-responsive-md ">
                     <table id="tabeljadwal" class="table table-hover table-bordered table-striped"">
                               <thead>
@@ -93,7 +101,7 @@ $datapeminjamanalat = detail_peminjaman_alat($id_peminjaman_alat);
                                  </tr>
                               </thead>
                               <tbody>
-                                 <?php foreach ($datapeminjamanalat as $row) : ?>
+                                 <?php foreach ($alat_data as $row) : ?>
                                     <tr>
                                        <td><?= $row['id_alat']; ?></td>
                                        <td><?= $row['nama_alat']; ?></td>
@@ -103,13 +111,13 @@ $datapeminjamanalat = detail_peminjaman_alat($id_peminjaman_alat);
                                      
                                         <td>
                                       
-                      <a href=" <?= base_url('admin/peminjaman-alat/edit?id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>">
+                      <a href=" <?= base_url('admin/peminjaman-alat/edit?id_jadwal=' . $row['id_jadwal']) ?>">
                       <button type="button" class="btn btn-warning" name="btnubah">
                         <i class="fa fa-pencil"></i>
                       </button>
                       </a>
 
-                      <a onclick="return confirm('Apakah Yakin Menghapus Data Alat?')" href="<?= base_url('admin/alat/delete?id_alat=' . $row['id_alat']) ?>">
+                      <a onclick="return confirm('Apakah Yakin Menghapus Data Alat?')" href="<?= base_url('admin/peminjaman-alat/delete?id_jadwal=' . $row['id_jadwal'] . '&id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>">
                         <button type="button" class="btn btn-danger" name="hapus_alat">
                           <i class="fa fa-trash"></i>
                         </button>

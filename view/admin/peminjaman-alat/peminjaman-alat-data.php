@@ -1,9 +1,10 @@
 <?php
 require_once view_path('admin/admin.php');
+require_once function_path('jadwal-function.php');
 require_once function_path('peminjaman-alat-function.php');
 require_once helper_path('form-helper.php');
 
-$datasekolah  = data_peminjaman_alat();
+$datasekolah  = data_jadwal();
 
 ?>
 
@@ -71,13 +72,13 @@ $datasekolah  = data_peminjaman_alat();
                         <?php
                         foreach ($datasekolah as $row) : ?>
                           <tr>
-                            <td><?php echo $row['id_sekolah'] ?></td>
-                            <td><?php echo $row['nama_sekolah'] ?></td>
-                            <td><?php echo $row['hari'] ?></td>
-                            <td><?php echo $row['tanggal'] ?></td>
+                            <td><?= $row['id_sekolah'] ?></td>
+                            <td><?= $row['nama_sekolah'] ?></td>
+                            <td><?= $row['hari'] ?></td>
+                            <td><?= $row['tanggal'] ?></td>
 
                             <td>
-                              <a href="<?= base_url('admin/peminjaman-alat/detail?id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
+                              <a href="<?= base_url('admin/peminjaman-alat/detail?id_jadwal=' . $row['id_jadwal']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
                                   <i class="fas fa-info-square"></i>Detail</button>
                               </a>
                             </td>

@@ -16,13 +16,10 @@ function data_peminjaman_alat($query = null)
   return $result;
 }
 
-function data_sekolah_id_peminjaman($id_peminjaman_alat)
+function alat_peminjaman_sekolah($id_jadwal)
 {
   $conn = open_connection();
-  $query = "SELECT peminjaman_alat.id_peminjaman_alat, sekolah.id_sekolah, sekolah.nama_sekolah, jadwal.hari, jadwal.tanggal FROM sekolah 
-  INNER JOIN jadwal ON sekolah.id_sekolah = jadwal.id_sekolah INNER JOIN peminjaman_alat
-  ON jadwal.id_jadwal=peminjaman_alat.id_jadwal INNER JOIN alat ON peminjaman_alat.id_alat = alat.id_alat
-  WHERE peminjaman_alat.id_peminjaman_alat='" . $id_peminjaman_alat . "'";
+  $query = "SELECT * FROM peminjaman_alat INNER JOIN alat ON peminjaman_alat.id_alat = alat.id_alat WHERE peminjaman_alat.id_jadwal = '$id_jadwal'";
   $result = mysqli_query($conn, $query);
   if ($result) {
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -64,15 +61,22 @@ function tampil_sekolah_alat($query = null)
   return $result;
 }
 
-function add_peminjaman_alat($id_jadwal, $id_alat, $jumlah, $tanggal)
+function add_peminjaman_alat($id_jadwal, $id_alat, $jumlah, $tanggal, $status)
 {
   $conn = open_connection();
   $sqljadwal = "INSERT INTO peminjaman_alat 
-    (id_jadwal,id_alat,jumlah,tanggal) 
-    VALUES ('" . $id_jadwal . "','" . $id_alat . "','" . $jumlah . "','" . $tanggal . "')";
+    (id_jadwal,id_alat,jumlah,tanggal,status) 
+    VALUES ('$id_jadwal','$id_alat','$jumlah','$tanggal','$status')";
   $result = mysqli_query($conn, $sqljadwal);
+  $query_alat = "UPDATE alat SET stok=stok-$jumlah WHERE id_alat='$id_alat'";
+  $result_alat = mysqli_query($conn, $query_alat);
+
   if (!$result) {
-    echo mysqli_error($conn);
+    $result = mysqli_error($conn);
+  }
+
+  if (!$result_alat) {
+    $result = mysqli_error($conn);
   }
   close_connection($conn);
   return $result;
@@ -88,6 +92,32 @@ function edit_peminjaman_alat($old_id_peminjaman_alat, $id_sekolah, $nama_sekola
    WHERE sekolah.id_sekolah = jadwal.id_sekolah AND jadwal.id_jadwal= peminjaman_alat.id_jadwal 
    AND peminjaman_alat.id_alat = alat.id_alat AND peminjaman_alat.id_peminjaman_alat='" . $old_id_peminjaman_alat . "'";
   $result = mysqli_query($conn, $sqlsekolah);
+  close_connection($conn);
+  return $result;
+}
+
+function check_satus_peminjaman_alat($id_peminjaman_alat)
+{
+  $conn = open_connection();
+  $query = "SELECT status FROM peminjaman_alat WHERE id_peminjaman_alat ='$id_peminjaman_alat' AND status ='DIKEMBALIKAN'";
+  $result = mysqli_query($conn, $query);
+  if ($result) {
+    $result = mysqli_fetch_assoc($result);
+  } else {
+    $result = mysqli_error($conn);
+  }
+  close_connection($conn);
+  return $result;
+}
+
+function hapus_peminjaman_alat($id_peminjaman_alat)
+{
+  $conn = open_connection();
+  $query = "DELETE FROM peminjaman_alat WHERE id_peminjaman_alat ='$id_peminjaman_alat'";
+  $result = mysqli_query($conn, $query);
+  if (!$result) {
+    $result = mysqli_error($conn);
+  }
   close_connection($conn);
   return $result;
 }

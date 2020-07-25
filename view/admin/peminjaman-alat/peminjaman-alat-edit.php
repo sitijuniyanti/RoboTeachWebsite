@@ -7,14 +7,12 @@ require_once function_path('jadwal-function.php');
 require_once function_path('alat-function.php');
 
 // $datasekolah = detail_peminjaman_alat();
-$peminjaman_alat = [];
-$peminjaman_alat = null;
-$datasekolah = data_jadwal();
 $dataalat = data_alat();
 if (isset($_GET['id_peminjaman_alat'])) {
   $id_peminjaman_alat = $_GET['id_peminjaman_alat'];
   $peminjaman_alat = data_jadwal("SELECT * FROM jadwal INNER JOIN sekolah ON jadwal.id_sekolah=sekolah.id_sekolah 
   INNER JOIN peminjaman_alat ON jadwal.id_jadwal=peminjaman_alat.id_jadwal WHERE id_peminjaman_alat='$id_peminjaman_alat'")[0];
+  echo var_dump($datasekolah);
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $peminjaman_alat = $_POST;
   $old_id_peminjaman_alat = (isset($_POST['old_id_peminjaman_alat'])) ? $_POST['old_id_peminjaman_alat'] : '';
@@ -133,31 +131,6 @@ if (isset($_GET['id_peminjaman_alat'])) {
                     ?>
 
                     <input type="hidden" value="<?= $peminjaman_alat['id_jadwal'] ?>" name="old_id_peminjaman_alat">
-                    <div class="form-group">
-                      <label type="text" class="col-sm-2 control-label">Nama Sekolah</label>
-                      <div class="col-sm-8">
-                        <div class="form-group has-feedback <?= input_error('id_sekolah') ? 'has-error' : null ?> ">
-                          <select value="" class="form-control select2" style="width: 100%;" name="id_sekolah" id="id_sekolah">
-                            <option value="">Pilih Nama Sekolah</option>
-
-                            <?php foreach ($datasekolah as $row) {
-                              $selected = "selected";
-                              if ($row['id_jadwal'] == $peminjaman_alat['id_jadwal']) {
-                                $selected = "selected";
-                              } else {
-                                $selected = "";
-                              }
-                            ?>
-                              <option value="<?php echo $row['id_jadwal'] ?>"><?php echo $row['id_sekolah'] ?> - <?php echo $row['nama_sekolah'] ?>
-                                - <?php echo $row['hari'] ?> - <?php echo $row['tanggal'] ?></option>
-                            <?php } ?>
-                          </select>
-                          <span class="help-block"><?= show_input_error('id_sekolah') ?></span>
-                        </div>
-
-                      </div>
-                    </div>
-
                     <div class="form-group">
                       <label type="text" class="col-sm-2 control-label">Alat</label>
                       <div class="col-sm-8">
