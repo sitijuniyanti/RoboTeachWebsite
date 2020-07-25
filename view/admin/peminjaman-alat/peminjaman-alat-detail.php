@@ -7,8 +7,6 @@ $id_peminjaman_alat = $_GET['id_peminjaman_alat'];
 $result = data_sekolah_id_peminjaman($id_peminjaman_alat)[0];
 $datapeminjamanalat = detail_peminjaman_alat($id_peminjaman_alat);
 
-echo var_dump(data_sekolah_id_peminjaman($id_sekolah));
-
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +103,7 @@ echo var_dump(data_sekolah_id_peminjaman($id_sekolah));
                                      
                                         <td>
                                       
-                      <a href=" <?= base_url('admin/peminjaman-alat/edit?id_sekolah=' . $row['id_sekolah']) ?>">
+                      <a href=" <?= base_url('admin/peminjaman-alat/edit?id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>">
                       <button type="button" class="btn btn-warning" name="btnubah">
                         <i class="fa fa-pencil"></i>
                       </button>

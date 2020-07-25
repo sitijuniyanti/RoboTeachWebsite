@@ -3,10 +3,8 @@ require_once view_path('admin/admin.php');
 require_once function_path('peminjaman-alat-function.php');
 require_once helper_path('form-helper.php');
 
+$datasekolah  = data_peminjaman_alat();
 
-$datasekolah  = mysqli_fetch_all(data_peminjaman_alat(), MYSQLI_ASSOC);
-// $id_peminjaman_alat = $_POST['id_peminjaman_alat'];
-echo var_dump(data_peminjaman_alat());
 ?>
 
 
@@ -71,8 +69,7 @@ echo var_dump(data_peminjaman_alat());
                       </thead>
                       <tbody>
                         <?php
-                        foreach ($datasekolah as $row) {
-                        ?>
+                        foreach ($datasekolah as $row) : ?>
                           <tr>
                             <td><?php echo $row['id_sekolah'] ?></td>
                             <td><?php echo $row['nama_sekolah'] ?></td>
@@ -80,12 +77,12 @@ echo var_dump(data_peminjaman_alat());
                             <td><?php echo $row['tanggal'] ?></td>
 
                             <td>
-                              <a href=" <?= base_url('admin/peminjaman-alat/detail?id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
+                              <a href="<?= base_url('admin/peminjaman-alat/detail?id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
                                   <i class="fas fa-info-square"></i>Detail</button>
                               </a>
                             </td>
                           </tr>
-                        <?php  } ?>
+                        <?php endforeach; ?>
                         </tfoot>
                   </table>
                 </div>
