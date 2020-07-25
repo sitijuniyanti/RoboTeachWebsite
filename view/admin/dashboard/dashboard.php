@@ -1,5 +1,6 @@
 <?php
 require_once view_path('admin/admin.php');
+require_once function_path('dashboard-function.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,7 @@ require_once view_path('admin/admin.php');
                   <!-- small box -->
                   <div class="small-box bg-aqua">
                      <div class="inner">
-                        <h3>20</h3>
+                        <h3><?= jumlah_pengajar() ?></h3>
 
                         <p>Data Pengajar</p>
                      </div>
@@ -64,7 +65,7 @@ require_once view_path('admin/admin.php');
                   <!-- small box -->
                   <div class="small-box bg-green">
                      <div class="inner">
-                        <h3>20</h3>
+                        <h3><?= jumlah_sekolah() ?></h3>
 
                         <p>Data Sekolah</p>
                      </div>
@@ -79,7 +80,7 @@ require_once view_path('admin/admin.php');
                   <!-- small box -->
                   <div class="small-box bg-yellow">
                      <div class="inner">
-                        <h3>100</h3>
+                        <h3><?= jumlah_peralatan() ?></h3>
 
                         <p>Data Peralatan</p>
                      </div>
