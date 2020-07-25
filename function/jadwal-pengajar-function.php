@@ -60,3 +60,18 @@ function detail_jadwal_pengajar($id_pengajar)
   close_connection($conn);
   return $result;
 }
+
+function tampil_biaya($id_pengajar)
+{
+  $conn = open_connection();
+  $query = "SELECT jadwal.hari, jadwal.tanggal, sekolah.nama_sekolah, sekolah.nama_sekolah, jadwal_pengajar.jarak,
+   jadwal_pengajar.total FROM jadwal INNER JOIN sekolah 
+   ON sekolah.id_sekolah=jadwal.id_sekolah INNER JOIN jadwal_pengajar 
+   ON jadwal_pengajar.id_jadwal= jadwal.id_jadwal WHERE jadwal_pengajar.id_pengajar='" . $id_pengajar . "'";
+  $result = mysqli_query($conn, $query);
+  if ($result) {
+    $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  }
+  close_connection($conn);
+  return $result;
+}

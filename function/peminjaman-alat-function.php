@@ -77,3 +77,17 @@ function add_peminjaman_alat($id_jadwal, $id_alat, $jumlah, $tanggal)
   close_connection($conn);
   return $result;
 }
+
+function edit_peminjaman_alat($old_id_peminjaman_alat, $id_sekolah, $nama_sekolah, $hari, $tanggal, $id_alat, $nama_alat, $jumlah, $tanggal_peminjaman)
+{
+  $conn = open_connection();
+  $sqlsekolah = "UPDATE jadwal, sekolah, alat, peminjaman_alat SET
+   jadwal.id_sekolah= '" . $id_sekolah . "', sekolah.nama_sekolah = '" . $nama_sekolah . "', jadwal.hari='" . $hari . "', 
+   jadwal.tanggal='" . $tanggal . "', alat.id_alat = '" . $id_alat . "', peminjaman_alat.nama_alat='" . $nama_alat . "',
+   peminjaman_alat.jumlah='" . $jumlah . "', peminjaman_alat.tanggal='" . $tanggal_peminjaman . "'
+   WHERE sekolah.id_sekolah = jadwal.id_sekolah AND jadwal.id_jadwal= peminjaman_alat.id_jadwal 
+   AND peminjaman_alat.id_alat = alat.id_alat AND peminjaman_alat.id_peminjaman_alat='" . $old_id_peminjaman_alat . "'";
+  $result = mysqli_query($conn, $sqlsekolah);
+  close_connection($conn);
+  return $result;
+}
