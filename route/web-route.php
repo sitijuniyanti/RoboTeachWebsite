@@ -34,6 +34,7 @@ $route = array(
    'admin/peminjaman-alat/edit' => 'admin/peminjaman-alat/peminjaman-alat-edit.php',
    'admin/peminjaman-alat/delete' => 'admin/peminjaman-alat/peminjaman-alat-delete.php',
    'admin/peminjaman-alat/detail' => 'admin/peminjaman-alat/peminjaman-alat-detail.php',
+   'admin/monitoring-pengajar' => 'admin/monitoring-pengajar/monitoring-pengajar.php',
 
 
    'sekolah' => 'sekolah/dashboard/dashboard.php',
