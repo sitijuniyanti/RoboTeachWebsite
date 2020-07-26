@@ -169,3 +169,15 @@ function delete_pengajar($id_pengajar)
    close_connection($conn);
    return $result;
 }
+
+function update_pengajar($id_pengajar, $nama_lengkap, $no_hp, $email)
+{
+   $conn = open_connection();
+   $query = "UPDATE pengajar SET nama_lengkap='$nama_lengkap', no_hp='$no_hp',email='$email' WHERE id_pengajar='$email' WHERE id_pengajar='$id_pengajar'";
+   $result = mysqli_query($conn, $query);
+   if (!$result) {
+      $result = mysqli_error($conn);
+   }
+   close_connection($conn);
+   return $result;
+}

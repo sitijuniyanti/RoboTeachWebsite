@@ -7,6 +7,7 @@ $route = [
    'rest-api/pengajar/jadwal' => 'pengajar/jadwal-pengajar.php',
    'rest-api/sekolah/longlat' => 'sekolah/sekolah-longlat.php',
    'rest-api/pengajar/jarak' => 'pengajar/jarak-pengajar.php',
+   'rest-api/pengajar/ubah' => 'pengajar/update-pengajar.php',
    'rest-api/pengajar/daftar' => 'pengajar/daftar-pengajar.php',
    'rest-api/pengajar/biaya' => 'pengajar/biaya-pengajar.php'
 ];
