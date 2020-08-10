@@ -34,10 +34,12 @@ function get_biaya($id_jadwal_pengajar)
   return $hasil;
 }
 
-function data_jadwal_pengajar_id_pengajar($id_pengajar)
+function data_jadwal_pengajar_id_sekolah($id_sekolah)
 {
   $conn = open_connection();
-  $query = "SELECT * FROM pengajar WHERE id_pengajar='" . $id_pengajar . "'";
+  $query = "SELECT sekolah.id_sekolah, sekolah.nama_sekolah, sekolah.alamat_sekolah,
+            jadwal.hari, jadwal.tanggal FROM sekolah INNER JOIN jadwal ON 
+            sekolah.id_sekolah=jadwal.id_sekolah WHERE jadwal.id_sekolah='" . $id_sekolah . "'";
   $result = mysqli_query($conn, $query);
   if ($result) {
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -46,13 +48,17 @@ function data_jadwal_pengajar_id_pengajar($id_pengajar)
   return $result;
 }
 
-function detail_jadwal_pengajar($id_pengajar)
+function detail_jadwal_pengajar()
 {
   $conn = open_connection();
-  $query = "SELECT jadwal.hari, jadwal.tanggal, sekolah.nama_sekolah, jadwal_pengajar.jarak,
-   jadwal_pengajar.biaya_km, jadwal_pengajar.total FROM jadwal INNER JOIN sekolah 
-   ON sekolah.id_sekolah=jadwal.id_sekolah INNER JOIN jadwal_pengajar 
-   ON jadwal_pengajar.id_jadwal= jadwal.id_jadwal WHERE jadwal_pengajar.id_pengajar='" . $id_pengajar . "'";
+  // $query = "SELECT jadwal.hari, jadwal.tanggal, sekolah.nama_sekolah, jadwal_pengajar.jarak,
+  //  jadwal_pengajar.biaya_km, jadwal_pengajar.total FROM jadwal INNER JOIN sekolah 
+  //  ON sekolah.id_sekolah=jadwal.id_sekolah INNER JOIN jadwal_pengajar 
+  //  ON jadwal_pengajar.id_jadwal= jadwal.id_jadwal WHERE jadwal_pengajar.id_pengajar='" . $id_pengajar . "'";
+
+  $query = "SELECT pengajar.id_pengajar, pengajar.nama_lengkap, jadwal_pengajar.jarak,
+  jadwal_pengajar.biaya_km, jadwal_pengajar.total FROM pengajar INNER JOIN jadwal_pengajar 
+  ON jadwal_pengajar.id_pengajar= pengajar.id_pengajar";
   $result = mysqli_query($conn, $query);
   if ($result) {
     $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -74,4 +80,16 @@ function tampil_biaya($id_pengajar)
   }
   close_connection($conn);
   return $result;
+}
+
+function jumlah_pengajar_jadwal()
+{
+  $conn = open_connection();
+  $query = "SELECT COUNT(*) AS total FROM jadwal_pengajar WHERE id_jadwal";
+  $result = mysqli_query($conn, $query);
+  if ($result) {
+    $result = mysqli_fetch_assoc($result);
+  }
+  close_connection($conn);
+  return $result['total'];
 }

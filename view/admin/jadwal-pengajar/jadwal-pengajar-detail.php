@@ -3,9 +3,9 @@ require_once view_path('admin/admin.php');
 require_once function_path('jadwal-pengajar-function.php');
 require_once helper_path('form-helper.php');
 
-$id_pengajar = $_GET['id_pengajar'];
-$result = data_jadwal_pengajar_id_pengajar($id_pengajar)[0];
-$datajadwalpengajar = detail_jadwal_pengajar($id_pengajar);
+$id_sekolah = $_GET['id_sekolah'];
+$result = data_jadwal_pengajar_id_sekolah($id_sekolah)[0];
+$datajadwalpengajar = detail_jadwal_pengajar();
 
 ?>
 
@@ -64,11 +64,16 @@ $datajadwalpengajar = detail_jadwal_pengajar($id_pengajar);
                 <div class="box-body box-profile">
                   <img class="profile-user-img img-responsive img-circle" src="<?= assets_url('img/usersekolah.png') ?>" alt="User profile picture">
 
-                  <h3 class="profile-username text-center"><?= $result['nama_lengkap']; ?></h3>
+                  <h3 class="profile-username text-center"><?= $result['nama_sekolah']; ?></h3>
 
-                  <p class="text-muted text-center"><?= $result['id_pengajar']; ?></p>
+                  <p class="text-muted text-center"><?= $result['id_sekolah']; ?></p>
 
-                  <h3 class="profile-username text-center">Pengajar <?= $result['status']; ?></h3>
+                  <h3 class="profile-username text-center"><?= $result['alamat_sekolah']; ?></h3>
+
+
+                  <p class="text-muted text-center"><?= $result['hari']; ?></p>
+
+                  <h3 class="profile-username text-center"><?= $result['tanggal']; ?></h3>
 
 
 
@@ -76,39 +81,43 @@ $datajadwalpengajar = detail_jadwal_pengajar($id_pengajar);
                     <table id="tabeljadwal" class="table table-hover table-bordered table-striped"">
                               <thead>
                                  <tr>
-                                    <th>Hari</th>
-                                    <th>Tanggal</th>
-                                    <th>Nama Sekolah</th>                                    
-                                    <th>Jarak</th>
+                                    <th>Id Pengajar</th>
+                                    <th>Nama</th>
+                                    <th>Jarak</th>                                    
                                     <th>Biaya</th>
                                     <th>Total</th>
+                                    <th>Aksi</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <?php foreach ($datajadwalpengajar as $row) : ?>
                                     <tr>
-                                       <td><?= $row['hari']; ?></td>
-                                       <td><?= $row['tanggal']; ?></td>
-                                       <td><?= $row['nama_sekolah']; ?></td>
+                                       <td><?= $row['id_pengajar']; ?></td>
+                                       <td><?= $row['nama_lengkap']; ?></td>
                                        <td><?= $row['jarak']; ?></td>
                                        <td><?= $row['biaya_km']; ?></td>
                                        <td><?= $row['total']; ?></td>
+                                       <td>
 
-                        </tr>
-                      <?php endforeach; ?>
-                      </tbody>
-                      </table>
-                    </div>
+                      <a onclick=" return confirm('Apakah Yakin Menghapus Data Jadwal?')" href="<?= base_url('admin/jadwal/delete?id_jadwal=' . $row['id_jadwal']) ?>">
+                      <button type="button" class="btn btn-danger" name=""> <i class="fa fa-trash"></i> </button></a>
+                      </td>
 
-                        <a href=" <?= base_url('admin/jadwal-pengajar') ?>" class="btn btn-primary btn-block"><b>Kembali</b></a>
+                      </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                    </table>
                   </div>
-                  <div class=" box-footer">
 
-                  </div>
+                  <a href=" <?= base_url('admin/jadwal-pengajar') ?>" class="btn btn-primary btn-block"><b>Kembali</b></a>
+                </div>
+                <div class=" box-footer">
 
                 </div>
+
               </div>
             </div>
+          </div>
         </section>
 
       </section>

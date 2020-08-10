@@ -2,9 +2,10 @@
 require_once view_path('admin/admin.php');
 require_once helper_path('form-helper.php');
 require_once function_path('jadwal-pengajar-function.php');
+require_once function_path('jadwal-function.php');
 
 $datajadwalpengajar = data_jadwal_pengajar();
-
+$datajadwal = data_jadwal();
 ?>
 
 <!DOCTYPE html>
@@ -56,20 +57,23 @@ $datajadwalpengajar = data_jadwal_pengajar();
                   <table id="tabeljadwal" class="table table-hover table-bordered table-striped"">
                               <thead>
                                  <tr>
-                                    <th>Id Pengajar</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Status</th>                                    
+                                    <th>Id Sekolah</th>
+                                    <th>Nama Sekolah</th>
+                                    <th>Hari</th>                                    
+                                    <th>Tanggal</th>
                                     <th>Aksi</th>
+
                                  </tr>
                               </thead>
                               <tbody>
-                                 <?php foreach ($datajadwalpengajar as $row) : ?>
+                                 <?php foreach ($datajadwal as $row) : ?>
                                     <tr>
-                                       <td><?= $row['id_pengajar']; ?></td>
-                                       <td><?= $row['nama_lengkap']; ?></td>
-                                       <td><?= $row['status']; ?></td>
+                                       <td><?= $row['id_sekolah']; ?></td>
+                                       <td><?= $row['nama_sekolah']; ?></td>
+                                       <td><?= $row['hari']; ?></td>
+                                       <td><?= $row['tanggal']; ?></td>
                                        <td>
-                                       <a href=" <?= base_url('admin/jadwal-pengajar/detail?id_pengajar=' . $row['id_pengajar']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
+                                       <a href=" <?= base_url('admin/jadwal-pengajar/detail?id_sekolah=' . $row['id_sekolah']) ?>"> <button type=" button" class="btn btn-primary" name="btndetail">
                       <i class="fas fa-info-square"></i>Detail</button>
                     </a>
                     </td>

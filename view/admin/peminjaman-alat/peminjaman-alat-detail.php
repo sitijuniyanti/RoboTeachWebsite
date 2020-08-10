@@ -110,17 +110,12 @@ $jadwal_sekolah  = data_jadwal($query_jadwal_sekolah)[0];
                                        <td><?= $row['status']; ?></td>
                                      
                                         <td>
-                                      
-                      <a href=" <?= base_url('admin/peminjaman-alat/edit?id_jadwal=' . $row['id_jadwal']) ?>">
-                      <button type="button" class="btn btn-warning" name="btnubah">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                      </a>
+                      
 
-                      <a onclick="return confirm('Apakah Yakin Menghapus Data Alat?')" href="<?= base_url('admin/peminjaman-alat/delete?id_jadwal=' . $row['id_jadwal'] . '&id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>">
-                        <button type="button" class="btn btn-danger" name="hapus_alat">
-                          <i class="fa fa-trash"></i>
-                        </button>
+                      <a onclick=" return confirm('Apakah Yakin Menghapus Data Alat?')" href="<?= base_url('admin/peminjaman-alat/delete?id_jadwal=' . $row['id_jadwal'] . '&id_peminjaman_alat=' . $row['id_peminjaman_alat']) ?>">
+                      <button type="button" class="btn btn-danger" name="hapus_alat">
+                        <i class="fa fa-trash"></i>
+                      </button>
                       </a>
                       </td>
 

@@ -5,14 +5,17 @@ require_once function_path('alat-function.php');
 // require_once function_path('user-function.php');
 
 $alat = [];
+$alat = null;
 if (isset($_GET['id_alat'])) {
   $id_alat = $_GET['id_alat'];
   $alat = data_alat("SELECT * FROM alat WHERE id_alat='$id_alat'")[0];
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $id_alat = (isset($_POST['id_alat'])) ? $_POST['id_alat'] : '';
+  $old_id_alat = (isset($_POST['old_id_alat'])) ? $_POST['old_id_alat'] : '';
   $nama_alat = (isset($_POST['nama_alat'])) ? $_POST['nama_alat'] : '';
   $stok = (isset($_POST['stok'])) ? $_POST['stok'] : '';
 
+  echo var_dump(data_alat($id_alat));
   $errCount = 0;
   $errMsg = [];
 
@@ -33,7 +36,7 @@ if (isset($_GET['id_alat'])) {
   }
 
   if ($errCount == 0) {
-    $result = edit_alat($old_alat, $id_alat, $nama_alat, $stok);
+    $result = edit_alat($old_id_alat, $id_alat, $nama_alat, $stok);
     if ($result == TRUE) {
       set_flash_message('success', 'Data Alat', 'Berhasil di Tambahkan');
       redirect_url('admin/alat');
